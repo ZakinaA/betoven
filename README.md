@@ -17,7 +17,7 @@ git config --global user.name "votreusernameGithub"
 git config --global user.email "votremailducompteGithub"
 ```
 
-Framework choisir : 
+Framework choisi : 
 
 Bootstrap 5.2
 
