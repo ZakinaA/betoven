@@ -15,5 +15,4 @@ Liste des membres :
 ```
 git config --global user.name "votreusernameGithub" 
 git config --global user.email "votremailducompteGithub"
-
 ```
