@@ -16,3 +16,12 @@ Liste des membres :
 git config --global user.name "votreusernameGithub" 
 git config --global user.email "votremailducompteGithub"
 ```
+
+Framework choisir : 
+
+Bootstrap 5.2
+
+## Création branche :
+``` 
+#ID ISSUE - NOM
+```
