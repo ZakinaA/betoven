@@ -7,7 +7,9 @@
 Liste des membres : 
 
 ```
-....
+JLE.Git = Julien Lemoine
+BenjaminL6 = Benjamin Loiseau
+Rifeno = Ouael EL MUSAUI
 ```
 **En cas de problème sur le commmit avec Visual Studio Code** : 
 *Renseigner ces informations dans le terminal de Visual Studio Code*
