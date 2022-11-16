@@ -1,0 +1,10 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+    <div class="card card-body mt-4">
+        <h4>Prenom : </h4>{{compte.prenom}}
+        <h4>Nom : </h4>{{compte.nom}}
+        <h4>Adresse : </h4> {{compte.adresse}}
+    </div>
+{% endblock %}
