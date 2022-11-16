@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    body {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        background-color: #4a536b;
+        color: #000
+    }
+</style>
+<body>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9 mt-4">
+            <div class="card o-hidden border-0 shadow-lg my-5 rouded">
+                <div class="card-body p-0  rounded">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block rounded bg-light"><img src="./dist/img/eMusic_anybg.png" class="mt-4"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <div class="h5 text-gray-900 mb-4 fw-bold">Inscription</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Adresse mail</label>
+                                    <input type="email" class="form-control rounded-pill" id="exampleInputPassword1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nomInput" class="form-label">Nom</label>
+                                    <input type="text" class="form-control rounded-pill" id="nomInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="prenomInput" class="form-label">Prénom</label>
+                                    <input type="text" class="form-control rounded-pill" id="prenomInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Adresse (numéro et rue)</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control rounded-pill mb-2" id="exampleInputPassword1" placeholder="Numéro de rue">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control rounded-pill" id="exampleInputPassword1" placeholder="Nom de rue">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Code Postal</label>
+                                    <input type="text" class="form-control rounded-pill" id="codePostalInput" oninput="trouverVilleAvecCodePostalFunc()">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Ville</label>
+                                    <select class="form-select rounded-pill" id="villeSelect" required></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="passwordInput" class="form-label">Mot de passe</label>
+                                    <input type="password" class="form-control rounded-pill" id="passwordInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="verifPasswordInput" class="form-label">Vérification du mot de passe</label>
+                                    <input type="password" class="form-control rounded-pill " id="verifPasswordInput" oninput="verifPasswordFunc()">
+                                </div>
+                                <button class="btn rounded-pill w-100 text-white mt-2 mb-0" style="background-color: #ff9a8d;">Créer un compte</button>
+                                <p class="mt-2 mb-0">
+                                    Votre compte sera en attente de validation d'un administrateur.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function verifPasswordFunc() {
+        let passwordInput = $('#passwordInput').val();
+        let verifPasswordInput = $('#verifPasswordInput').val();
+
+        if(passwordInput != verifPasswordInput) {
+            $('#verifPasswordInput').removeClass('is-valid');
+            $('#verifPasswordInput').addClass('is-invalid');
+        } else {
+            $('#verifPasswordInput').removeClass('is-invalid');
+            $('#verifPasswordInput').addClass('is-valid');
+        }
+
+
+    };
+    function trouverVilleAvecCodePostalFunc() {
+        let codePostalInput = $('#codePostalInput').val();
+
+        $('#villeSelect').html('');
+        $.ajax({
+            type: "GET",
+            url: "https://apicarto.ign.fr/api/codes-postaux/communes/"+codePostalInput,
+            success: function (result) {
+                for(let villeOrder = 0; villeOrder < result.length; villeOrder++) {
+                    $('#villeSelect').append('<option value="">'+result[villeOrder]['nomCommune']+'</option>');
+                }
+            }
+        });
+    }
+</script>
+<script src="./dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

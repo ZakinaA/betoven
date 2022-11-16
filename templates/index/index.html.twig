@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        background-color: #4a536b;
+        color: #000
+    }
+
+</style>
+
+<body>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9 mt-4">
+            <div class="card o-hidden border-0 shadow-lg my-5 rouded">
+                <div class="card-body p-0  rounded">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block rounded bg-light"><img src="./dist/img/eMusic_anybg.png" class="mt-4"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <div class="h5 text-gray-900 mb-4 fw-bold">Connexion à votre espace membre</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Adresse mail</label>
+                                    <input type="email" class="form-control rounded-pill" id="exampleInputPassword1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                                    <input type="email" class="form-control rounded-pill" id="exampleInputPassword1">
+                                </div>
+                                <button class="btn rounded-pill w-100 text-dark" style="background-color: #aed6dc;">Me connecter</button>
+                                <a href="./inscription" class="btn rounded-pill w-100 text-dark mt-2 mb-0" style="background-color: #ff9a8d;">Créer un compte</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
