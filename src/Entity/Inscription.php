@@ -21,6 +21,10 @@ class Inscription
     #[ORM\JoinColumn(nullable: false)]
     private ?eleve $eleveInscription = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?cours $cours = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +50,18 @@ class Inscription
     public function setEleveInscription(?eleve $eleveInscription): self
     {
         $this->eleveInscription = $eleveInscription;
+
+        return $this;
+    }
+
+    public function getCours(): ?cours
+    {
+        return $this->cours;
+    }
+
+    public function setCours(?cours $cours): self
+    {
+        $this->cours = $cours;
 
         return $this;
     }

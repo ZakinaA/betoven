@@ -22,6 +22,13 @@ class Compte
     #[ORM\Column]
     private ?int $role = null;
 
+    #[ORM\Column]
+    private ?int $compteType = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?eleve $idUtilisateur = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +66,18 @@ class Compte
     public function setRole(int $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getCompteType(): ?int
+    {
+        return $this->compteType;
+    }
+
+    public function setCompteType(int $compteType): self
+    {
+        $this->compteType = $compteType;
 
         return $this;
     }
