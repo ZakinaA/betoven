@@ -7,6 +7,9 @@ routeIndex:
 routeInscription:
     path: /inscription
     controller: App\Controller\IndexController::inscriptionPage
+routeAdherentConsultationInformation:
+    path: /eleve/consulter/{id}
+    controller: App\Controller\EleveController::consulterInformation
 etudiantAjouter:
     path: /etudiant/ajouter
     controller: App\Controller\EtudiantController::ajouter

@@ -1,19 +1,65 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<style>
+    body {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        background-color: #ECEDED;
+        color: #000
+    }
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark text-dark py-4" style="background-color: #4a536b;">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <div class="dropup-center dropdown">
+                    <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% block nomCompte %}{% endblock %}
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Action two</a></li>
+                        <li><a class="dropdown-item" href="#">Action three</a></li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg bg-white">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                </li>
+                <li class="nav-item border-start">
+                    <a class="nav-link" href="#">Les instruments</a>
+                </li>
+                <li class="nav-item border-start">
+                    <a class="nav-link" href="#">Les cours</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    {% block body %}{% endblock %}
+</div>
+{% block footer %}{% endblock %}
+</body>
 </html>
