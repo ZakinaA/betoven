@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CompteRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CompteRepository::class)]
@@ -20,41 +19,23 @@ class Compte
     #[ORM\Column(length: 50)]
     private ?string $prenom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_naiss = null;
-
-    #[ORM\Column(length: 50)]
-    private ?string $motdepasse = null;
+    #[ORM\Column(length: 10)]
+    private ?string $numRue = null;
 
     #[ORM\Column(length: 10)]
-    private ?string $tel1 = null;
-
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $tel2 = null;
-
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $tel3 = null;
-
-    #[ORM\Column(length: 50)]
-    private ?string $adressemail = null;
-
-    #[ORM\Column]
-    private ?int $quotient_familial = null;
-
-    #[ORM\Column(length: 50)]
-    private ?string $adresse = null;
+    private ?string $copos = null;
 
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\Column(length: 6)]
-    private ?string $code_postal = null;
+    #[ORM\Column(length: 10)]
+    private ?string $tel = null;
 
-    #[ORM\Column]
-    private ?int $role = null;
+    #[ORM\Column(length: 50)]
+    private ?string $mail = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'idResponsable')]
-    private ?self $idResponsable = null;
+    #[ORM\Column(length: 50)]
+    private ?string $motDePasse = null;
 
     public function getId(): ?int
     {
@@ -85,98 +66,26 @@ class Compte
         return $this;
     }
 
-    public function getDateNaiss(): ?\DateTimeInterface
+    public function getNumRue(): ?string
     {
-        return $this->date_naiss;
+        return $this->numRue;
     }
 
-    public function setDateNaiss(\DateTimeInterface $date_naiss): self
+    public function setNumRue(string $numRue): self
     {
-        $this->date_naiss = $date_naiss;
+        $this->numRue = $numRue;
 
         return $this;
     }
 
-    public function getMotdepasse(): ?string
+    public function getCopos(): ?string
     {
-        return $this->motdepasse;
+        return $this->copos;
     }
 
-    public function setMotdepasse(string $motdepasse): self
+    public function setCopos(string $copos): self
     {
-        $this->motdepasse = $motdepasse;
-
-        return $this;
-    }
-
-    public function getTel1(): ?string
-    {
-        return $this->tel1;
-    }
-
-    public function setTel1(string $tel1): self
-    {
-        $this->tel1 = $tel1;
-
-        return $this;
-    }
-
-    public function getTel2(): ?string
-    {
-        return $this->tel2;
-    }
-
-    public function setTel2(?string $tel2): self
-    {
-        $this->tel2 = $tel2;
-
-        return $this;
-    }
-
-    public function getTel3(): ?string
-    {
-        return $this->tel3;
-    }
-
-    public function setTel3(?string $tel3): self
-    {
-        $this->tel3 = $tel3;
-
-        return $this;
-    }
-
-    public function getAdressemail(): ?string
-    {
-        return $this->adressemail;
-    }
-
-    public function setAdressemail(string $adressemail): self
-    {
-        $this->adressemail = $adressemail;
-
-        return $this;
-    }
-
-    public function getQuotientFamilial(): ?int
-    {
-        return $this->quotient_familial;
-    }
-
-    public function setQuotientFamilial(int $quotient_familial): self
-    {
-        $this->quotient_familial = $quotient_familial;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
+        $this->copos = $copos;
 
         return $this;
     }
@@ -193,38 +102,38 @@ class Compte
         return $this;
     }
 
-    public function getCodePostal(): ?string
+    public function getTel(): ?string
     {
-        return $this->code_postal;
+        return $this->tel;
     }
 
-    public function setCodePostal(string $code_postal): self
+    public function setTel(string $tel): self
     {
-        $this->code_postal = $code_postal;
+        $this->tel = $tel;
 
         return $this;
     }
 
-    public function getRole(): ?int
+    public function getMail(): ?string
     {
-        return $this->role;
+        return $this->mail;
     }
 
-    public function setRole(int $role): self
+    public function setMail(string $mail): self
     {
-        $this->role = $role;
+        $this->mail = $mail;
 
         return $this;
     }
 
-    public function getIdResponsable(): ?self
+    public function getMotDePasse(): ?string
     {
-        return $this->idResponsable;
+        return $this->motDePasse;
     }
 
-    public function setIdResponsable(?self $idResponsable): self
+    public function setMotDePasse(string $motDePasse): self
     {
-        $this->idResponsable = $idResponsable;
+        $this->motDePasse = $motDePasse;
 
         return $this;
     }
