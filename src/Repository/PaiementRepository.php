@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\PAIEMENT;
+use App\Entity\Paiement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method PAIEMENT[]    findAll()
  * @method PAIEMENT[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PAIEMENTRepository extends ServiceEntityRepository
+class PaiementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
