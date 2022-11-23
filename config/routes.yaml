@@ -8,5 +8,8 @@ routeInscription:
     path: /inscription
     controller: App\Controller\IndexController::inscriptionPage
 routeAdherentConsultationInformation:
-    path: /compte/consulter/{id}
-    controller: App\Controller\CompteController::consulterInformation
+    path: /eleve/consulter/{id}
+    controller: App\Controller\EleveController::consulterInformation
+etudiantAjouter:
+    path: /etudiant/ajouter
+    controller: App\Controller\EtudiantController::ajouter
