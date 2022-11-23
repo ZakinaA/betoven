@@ -35,9 +35,17 @@ class Cours
     #[ORM\OneToMany(mappedBy: 'cour', targetEntity: Inscription::class)]
     private Collection $inscriptions;
 
+    #[ORM\ManyToMany(targetEntity: Tranche::class, inversedBy: 'cours')]
+    private Collection $tranches;
+
+    #[ORM\ManyToMany(targetEntity: Jour::class, inversedBy: 'cours')]
+    private Collection $jours;
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
+        $this->tranches = new ArrayCollection();
+        $this->jours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,4 +139,52 @@ class Cours
 
         return $this;
     }    
+
+        /**
+     * @return Collection<int, Tranche>
+     */
+    public function getTranches(): Collection
+    {
+        return $this->tranches;
+    }
+
+    public function addTranch(Tranche $tranch): self
+    {
+        if (!$this->tranches->contains($tranch)) {
+            $this->tranches->add($tranch);
+        }
+
+        return $this;
+    }
+
+    public function removeTranch(Tranche $tranch): self
+    {
+        $this->tranches->removeElement($tranch);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Jour>
+     */
+    public function getJours(): Collection
+    {
+        return $this->jours;
+    }
+
+    public function addJour(Jour $jour): self
+    {
+        if (!$this->jours->contains($jour)) {
+            $this->jours->add($jour);
+        }
+
+        return $this;
+    }
+
+    public function removeJour(Jour $jour): self
+    {
+        $this->jours->removeElement($jour);
+
+        return $this;
+    }
 }
