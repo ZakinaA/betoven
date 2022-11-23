@@ -33,7 +33,7 @@ class CompteController extends AbstractController
         } else {
             $isEleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $id]);
             $responsableInfo = $doctrine->getRepository(Compte::class)->findOneBy(['id' => $isEleve->getResponsable()]);
-            $cours = $doctrine->getRepository(Inscription::class)->findAll();
+            $cours = $doctrine->getRepository(Inscription::class)->findCoursEleve($id);
 
 
         }
