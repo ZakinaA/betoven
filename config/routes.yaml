@@ -10,6 +10,12 @@ routeInscription:
 routeAdherentConsultationInformation:
     path: /eleve/consulter/{id}
     controller: App\Controller\EleveController::consulterInformation
-etudiantAjouter:
-    path: /etudiant/ajouter
-    controller: App\Controller\EtudiantController::ajouter
+instrumentAjouter:
+    path: /instrument/ajouter
+    controller: App\Controller\InstrumentController::ajouterInstrument 
+instrumentConsulter:
+    path: /instrument/consulter/{id}
+    controller: App\Controller\InstrumentController::consulterInstrument 
+instrumentLister:
+    path: /instrument/lister
+    controller: App\Controller\InstrumentController::listerInstrument 

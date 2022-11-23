@@ -1,0 +1,15 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+    <div class="card card-body mt-4">
+
+        <h4>Numéro de série : </h4>{{instrument.numSerie}}
+        <h4>Date/Prix achat : </h4>{{instrument.dateAchat.format('d/m/Y')}} {{instrument.prixAchat}}
+        <h4>Utilisation : </h4>{{instrument.utilisation}} 
+        <h4>Cheminage : </h4>{{instrument.cheminage}}
+
+
+    </div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

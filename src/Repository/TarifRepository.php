@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\TypeInstrument;
+use App\Entity\Tarif;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<TypeInstrument>
+ * @extends ServiceEntityRepository<Tarif>
  *
- * @method TypeInstrument|null find($id, $lockMode = null, $lockVersion = null)
- * @method TypeInstrument|null findOneBy(array $criteria, array $orderBy = null)
- * @method TypeInstrument[]    findAll()
- * @method TypeInstrument[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Tarif|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Tarif|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Tarif[]    findAll()
+ * @method Tarif[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TypeInstrumentRepository extends ServiceEntityRepository
+class TarifRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TypeInstrument::class);
+        parent::__construct($registry, Tarif::class);
     }
 
-    public function save(TypeInstrument $entity, bool $flush = false): void
+    public function save(Tarif $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TypeInstrumentRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(TypeInstrument $entity, bool $flush = false): void
+    public function remove(Tarif $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TypeInstrumentRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return TypeInstrument[] Returns an array of TypeInstrument objects
+//     * @return Tarif[] Returns an array of Tarif objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TypeInstrumentRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?TypeInstrument
+//    public function findOneBySomeField($value): ?Tarif
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')

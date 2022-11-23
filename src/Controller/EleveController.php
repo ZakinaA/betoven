@@ -27,7 +27,7 @@ class EleveController extends AbstractController
             );
         }
 
-        //var_dump($compte);
+        var_dump($eleve);
         //return new Response('Etudiant : '.$etudiant->getNom());
         return $this->render('eleve/consulter.html.twig', [
             'eleve' => $eleve,]);

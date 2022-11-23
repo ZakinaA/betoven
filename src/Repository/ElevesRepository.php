@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Eleve;
+use App\Entity\Eleves;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Eleve>
+ * @extends ServiceEntityRepository<Eleves>
  *
- * @method Eleve|null find($id, $lockMode = null, $lockVersion = null)
- * @method Eleve|null findOneBy(array $criteria, array $orderBy = null)
- * @method Eleve[]    findAll()
- * @method Eleve[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Eleves|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Eleves|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Eleves[]    findAll()
+ * @method Eleves[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EleveRepository extends ServiceEntityRepository
+class ElevesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Eleve::class);
+        parent::__construct($registry, Eleves::class);
     }
 
-    public function save(Eleve $entity, bool $flush = false): void
+    public function save(Eleves $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class EleveRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Eleve $entity, bool $flush = false): void
+    public function remove(Eleves $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class EleveRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Eleve[] Returns an array of Eleve objects
+//     * @return Eleves[] Returns an array of Eleves objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class EleveRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Eleve
+//    public function findOneBySomeField($value): ?Eleves
 //    {
 //        return $this->createQueryBuilder('e')
 //            ->andWhere('e.exampleField = :val')

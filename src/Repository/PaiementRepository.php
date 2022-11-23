@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Professionnel;
+use App\Entity\Paiement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Professionnel>
+ * @extends ServiceEntityRepository<PAIEMENT>
  *
- * @method Professionnel|null find($id, $lockMode = null, $lockVersion = null)
- * @method Professionnel|null findOneBy(array $criteria, array $orderBy = null)
- * @method Professionnel[]    findAll()
- * @method Professionnel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PAIEMENT|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PAIEMENT|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PAIEMENT[]    findAll()
+ * @method PAIEMENT[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProfessionnelRepository extends ServiceEntityRepository
+class PaiementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Professionnel::class);
+        parent::__construct($registry, PAIEMENT::class);
     }
 
-    public function save(Professionnel $entity, bool $flush = false): void
+    public function save(PAIEMENT $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ProfessionnelRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Professionnel $entity, bool $flush = false): void
+    public function remove(PAIEMENT $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ProfessionnelRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Professionnel[] Returns an array of Professionnel objects
+//     * @return PAIEMENT[] Returns an array of PAIEMENT objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ProfessionnelRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Professionnel
+//    public function findOneBySomeField($value): ?PAIEMENT
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
