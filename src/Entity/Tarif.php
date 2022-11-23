@@ -16,6 +16,9 @@ class Tarif
     #[ORM\Column(length: 10)]
     private ?string $montant = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tarifs')]
+    private ?Tranche $tranche = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class Tarif
     public function setMontant(string $montant): self
     {
         $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getTranche(): ?Tranche
+    {
+        return $this->tranche;
+    }
+
+    public function setTranche(?Tranche $tranche): self
+    {
+        $this->tranche = $tranche;
 
         return $this;
     }

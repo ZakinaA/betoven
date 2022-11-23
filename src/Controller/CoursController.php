@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cours;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,4 +16,19 @@ class CoursController extends AbstractController
             'controller_name' => 'CoursController',
         ]);
     }
+
+    public function consulterCours(ManagerRegistry $doctrine, int $id){
+
+        $cours = $doctrine->getRepository(Cours::class)->find($id);
+        
+        if (!$cours) {
+            throw $this->createNotFoundException(
+            'Aucun cours trouvé avec le numéro '.$id
+            );
+        }
+        //return new Response('cours : '.$cours->getNom());
+        return $this->render('cours/consulter.html.twig', [
+            'cours' => $cours,]);
+    }
+
 }

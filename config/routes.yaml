@@ -18,4 +18,7 @@ instrumentConsulter:
     controller: App\Controller\InstrumentController::consulterInstrument 
 instrumentLister:
     path: /instrument/lister
-    controller: App\Controller\InstrumentController::listerInstrument 
+    controller: App\Controller\InstrumentController::listerInstrument
+consulterCours:
+    path: /cours/consulter/{id}
+    controller: App\Controller\CoursController::consulterCours
