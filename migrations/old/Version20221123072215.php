@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221122180908 extends AbstractMigration
+final class Version20221123072215 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -27,9 +27,8 @@ final class Version20221122180908 extends AbstractMigration
         $this->addSql('CREATE TABLE eleves (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE inscription (id INT AUTO_INCREMENT NOT NULL, eleves_id INT NOT NULL, date_inscription DATE NOT NULL, INDEX IDX_5E90F6D6C2140342 (eleves_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE instrument (id INT AUTO_INCREMENT NOT NULL, num_serie VARCHAR(10) NOT NULL, date_achat DATE NOT NULL, prix_achat VARCHAR(10) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE jour (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(10) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE marque (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(20) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE paiement (id INT AUTO_INCREMENT NOT NULL, inscription_id INT NOT NULL, montant VARCHAR(10) NOT NULL, date_paiement DATE NOT NULL, INDEX IDX_B1DC7A1E5DAC5993 (inscription_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE paiement (id INT AUTO_INCREMENT NOT NULL, paiement_inscription_id INT NOT NULL, montant VARCHAR(10) NOT NULL, date_paiement DATE NOT NULL, INDEX IDX_B1DC7A1ECC8D54EE (paiement_inscription_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE professeur (id INT AUTO_INCREMENT NOT NULL, compte_id INT NOT NULL, UNIQUE INDEX UNIQ_17A55299F2C56620 (compte_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE responsable (id INT AUTO_INCREMENT NOT NULL, compte_id INT NOT NULL, UNIQUE INDEX UNIQ_52520D07F2C56620 (compte_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tarif (id INT AUTO_INCREMENT NOT NULL, montant VARCHAR(10) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -40,7 +39,7 @@ final class Version20221122180908 extends AbstractMigration
         $this->addSql('ALTER TABLE eleve ADD CONSTRAINT FK_ECA105F753C59D72 FOREIGN KEY (responsable_id) REFERENCES responsable (id)');
         $this->addSql('ALTER TABLE eleve ADD CONSTRAINT FK_ECA105F7F2C56620 FOREIGN KEY (compte_id) REFERENCES compte (id)');
         $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D6C2140342 FOREIGN KEY (eleves_id) REFERENCES eleve (id)');
-        $this->addSql('ALTER TABLE paiement ADD CONSTRAINT FK_B1DC7A1E5DAC5993 FOREIGN KEY (inscription_id) REFERENCES inscription (id)');
+        $this->addSql('ALTER TABLE paiement ADD CONSTRAINT FK_B1DC7A1ECC8D54EE FOREIGN KEY (paiement_inscription_id) REFERENCES inscription (id)');
         $this->addSql('ALTER TABLE professeur ADD CONSTRAINT FK_17A55299F2C56620 FOREIGN KEY (compte_id) REFERENCES compte (id)');
         $this->addSql('ALTER TABLE responsable ADD CONSTRAINT FK_52520D07F2C56620 FOREIGN KEY (compte_id) REFERENCES compte (id)');
     }
@@ -52,7 +51,7 @@ final class Version20221122180908 extends AbstractMigration
         $this->addSql('ALTER TABLE eleve DROP FOREIGN KEY FK_ECA105F753C59D72');
         $this->addSql('ALTER TABLE eleve DROP FOREIGN KEY FK_ECA105F7F2C56620');
         $this->addSql('ALTER TABLE inscription DROP FOREIGN KEY FK_5E90F6D6C2140342');
-        $this->addSql('ALTER TABLE paiement DROP FOREIGN KEY FK_B1DC7A1E5DAC5993');
+        $this->addSql('ALTER TABLE paiement DROP FOREIGN KEY FK_B1DC7A1ECC8D54EE');
         $this->addSql('ALTER TABLE professeur DROP FOREIGN KEY FK_17A55299F2C56620');
         $this->addSql('ALTER TABLE responsable DROP FOREIGN KEY FK_52520D07F2C56620');
         $this->addSql('DROP TABLE classe_instrument');
@@ -62,7 +61,6 @@ final class Version20221122180908 extends AbstractMigration
         $this->addSql('DROP TABLE eleves');
         $this->addSql('DROP TABLE inscription');
         $this->addSql('DROP TABLE instrument');
-        $this->addSql('DROP TABLE jour');
         $this->addSql('DROP TABLE marque');
         $this->addSql('DROP TABLE paiement');
         $this->addSql('DROP TABLE professeur');

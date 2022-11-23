@@ -19,3 +19,6 @@ instrumentConsulter:
 instrumentLister:
     path: /instrument/lister
     controller: App\Controller\InstrumentController::listerInstrument 
+classeInstrumentConsulter:
+    path: /classeInstrument/ajouter/
+    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 

@@ -25,10 +25,9 @@ class InstrumentController extends AbstractController
     
             // instanciation d'un objet Instrument
             $instrument = new Instrument();
-            $instrument->setNumSerie('25B15D');
-            $instrument->setDateAchat(new \DateTime(date('2000-04-20')));
-            $instrument->setPrixAchat(20);
-            $instrument->setUtilisation('Pro');
+            $instrument->setNumSerie('28M4GF');
+            $instrument->setDateAchat(new \DateTime(date('1999-07-14')));
+            $instrument->setPrixAchat(25);
     
             // Indique à Doctrine de persister l'objet
             $entityManager->persist($instrument);
