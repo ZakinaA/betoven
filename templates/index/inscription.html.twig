@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link href="./dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>

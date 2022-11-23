@@ -19,7 +19,7 @@ class Inscription
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?eleve $eleveInscription = null;
+    private ?Eleve $eleves = null;
 
     public function getId(): ?int
     {
@@ -38,14 +38,14 @@ class Inscription
         return $this;
     }
 
-    public function getEleveInscription(): ?eleve
+    public function getEleves(): ?Eleve
     {
-        return $this->eleveInscription;
+        return $this->eleves;
     }
 
-    public function setEleveInscription(?eleve $eleveInscription): self
+    public function setEleves(?Eleve $eleves): self
     {
-        $this->eleveInscription = $eleveInscription;
+        $this->eleves = $eleves;
 
         return $this;
     }
