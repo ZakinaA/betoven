@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Instrument;
+use Doctrine\Persistence\ManagerRegistry;
 
 class InstrumentController extends AbstractController
 {
@@ -15,4 +17,52 @@ class InstrumentController extends AbstractController
             'controller_name' => 'InstrumentController',
         ]);
     }
+
+    public function ajouterInstrument(ManagerRegistry $doctrine){
+		
+        // récupère le manager d'entités
+            $entityManager = $doctrine->getManager();
+    
+            // instanciation d'un objet Instrument
+            $instrument = new Instrument();
+            $instrument->setNumSerie('25B15D');
+            $instrument->setDateAchat(new \DateTime(date('2000-04-20')));
+            $instrument->setPrixAchat(20);
+            $instrument->setUtilisation('Pro');
+    
+            // Indique à Doctrine de persister l'objet
+            $entityManager->persist($instrument);
+    
+            // Exécue l'instruction sql permettant de persister lobjet, ici un INSERT INTO
+            $entityManager->flush();
+    
+            // renvoie vers la vue de consultation de l'étudiant en passant l'objet instrument en paramètre
+           return $this->render('instrument/consulter.html.twig', [
+                'instrument' => $instrument,]);
+            
+        }
+
+        public function consulterInstrument(ManagerRegistry $doctrine, int $id){
+
+            $instrument= $doctrine->getRepository(Instrument::class)->find($id);
+            
+            if (!$instrument) {
+                throw $this->createNotFoundException(
+                'Aucun instrument trouvé avec le numéro '.$id
+                );
+            }
+            //return new Response('Instrument : '.$instrument->getNom());
+            return $this->render('instrument/consulter.html.twig', [
+                'instrument' => $instrument,]);
+        }
+
+        public function listerInstrument(ManagerRegistry $doctrine){
+
+            $repository = $doctrine->getRepository(Instrument::class);
+    
+    $instruments= $repository->findAll();
+    return $this->render('instrument/lister.html.twig', [
+        'pInstruments' => $instruments,]);	
+        
+}
 }
