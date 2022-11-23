@@ -37,6 +37,9 @@ class Compte
     #[ORM\Column(length: 50)]
     private ?string $motDePasse = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $rue = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Compte
     public function setMotDePasse(string $motDePasse): self
     {
         $this->motDePasse = $motDePasse;
+
+        return $this;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(string $rue): self
+    {
+        $this->rue = $rue;
 
         return $this;
     }

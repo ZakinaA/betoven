@@ -1,0 +1,17 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+    <div class="card card-body mt-4">
+        <h4>Prenom : </h4>{{compte.Compte.prenom}}
+        {% if responsableInfo != null %} <h4>Nom du responsable : </h4>{{responsableInfo.prenom}} {{responsableInfo.nom}}{% endif %}
+        <h4>Nom : </h4>{{compte.Compte.nom}}
+        <h4>Adresse : </h4> {{compte.Compte.numRue}} {{compte.Compte.rue}} {{compte.Compte.copos}} {{compte.Compte.ville}}
+        <h2 class="mt-4">Mes instruments : </h2>
+        <h2 class="mt-4">Mes cours : </h4>
+
+        {% for courOrder in coursInfo %}
+        {{courOrder.id}}<hr>
+        {% endfor %}
+    </div><br>
+{% endblock %}
