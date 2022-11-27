@@ -2,39 +2,39 @@
 
 namespace App\Entity;
 
-use App\Repository\PAIEMENTRepository;
+use App\Repository\PaiementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PAIEMENTRepository::class)]
-class PAIEMENT
+#[ORM\Entity(repositoryClass: PaiementRepository::class)]
+class Paiement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $montant = null;
+    #[ORM\Column]
+    private ?float $montant = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datePaiement = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'paiements')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?inscription $paiementInscription = null;
+    private ?Inscription $inscription = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMontant(): ?string
+    public function getMontant(): ?float
     {
         return $this->montant;
     }
 
-    public function setMontant(string $montant): self
+    public function setMontant(float $montant): self
     {
         $this->montant = $montant;
 
@@ -53,14 +53,14 @@ class PAIEMENT
         return $this;
     }
 
-    public function getPaiementInscription(): ?inscription
+    public function getInscription(): ?Inscription
     {
-        return $this->paiementInscription;
+        return $this->inscription;
     }
 
-    public function setPaiementInscription(?inscription $paiementInscription): self
+    public function setInscription(?Inscription $inscription): self
     {
-        $this->paiementInscription = $paiementInscription;
+        $this->inscription = $inscription;
 
         return $this;
     }

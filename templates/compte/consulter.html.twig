@@ -1,0 +1,29 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+    <div class="card card-body mt-4">
+        <h4>Prenom : </h4>{{compte.prenom}}
+
+        <h4>Nom : </h4>{{compte.nom}}
+        <hr>
+        <h1>(Debug mode)</h1>
+
+        <h4>Type :</h4>
+        {% if compte.eleve != null %}
+            est eleve
+        {% endif %}
+        {% if compte.eleve != null and  compte.eleve.responsable != null %}
+        <h4>Prenom du responsable : </h4>{{compte.eleve.responsable.prenom}}
+        <h4>Nom du responsable : </h4>{{compte.eleve.responsable.nom}}
+        {% endif %}
+        Date inscription :
+        <h4>Cours :</h4>
+        {% for courOrder in inscription %}
+        <b>Date inscription :</b> {{courOrder.dateInscription|date('d/m/Y')}}
+            <b>Libelle cour :</b>  {{courOrder.cour.libelle}}
+            <br>
+        {% endfor %}
+        <hr>
+    </div><br>
+{% endblock %}
