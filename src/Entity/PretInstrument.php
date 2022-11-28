@@ -17,9 +17,13 @@ class PretInstrument
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datePret = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pretinstruments')]
+    #[ORM\ManyToOne(inversedBy: 'pretinstrumentseleve')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Eleve $eleve = null;
+
+    #[ORM\ManyToOne(inversedBy: 'pretsinstrument')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Instrument $instrument = null;
 
     public function getId(): ?int
     {
@@ -49,4 +53,17 @@ class PretInstrument
 
         return $this;
     }
+
+    public function getInstrument(): ?Instrument
+    {
+        return $this->instrument;
+    }
+
+    public function setInstrument(?Instrument $instrument): self
+    {
+        $this->instrument = $instrument;
+
+        return $this;
+    }
+
 }

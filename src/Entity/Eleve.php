@@ -22,16 +22,17 @@ class Eleve
     #[ORM\ManyToOne(inversedBy: 'enfants')]
     private ?Compte $responsable = null;
 
-    #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: Inscription::class, orphanRemoval: false)]
+    #[ORM\OneToMany(mappedBy: 'inscriptions', targetEntity: Inscription::class, orphanRemoval: false)]
     private Collection $inscriptions;
 
     #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: PretInstrument::class)]
-    private Collection $pretinstruments;
+    private Collection $pretinstrumentseleve;
+
 
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
-        $this->pretinstruments = new ArrayCollection();
+        $this->pretinstrumentseleve = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,27 +97,27 @@ class Eleve
     /**
      * @return Collection<int, PretInstrument>
      */
-    public function getPretinstruments(): Collection
+    public function getPretinstrumentseleve(): Collection
     {
-        return $this->pretinstruments;
+        return $this->pretinstrumentseleve;
     }
 
-    public function addPretinstrument(PretInstrument $pretinstrument): self
+    public function addPretinstrumentseleve(PretInstrument $pretinstrumentseleve): self
     {
-        if (!$this->pretinstruments->contains($pretinstrument)) {
-            $this->pretinstruments->add($pretinstrument);
-            $pretinstrument->setEleve($this);
+        if (!$this->pretinstrumentseleve->contains($pretinstrumentseleve)) {
+            $this->pretinstrumentseleve->add($pretinstrumentseleve);
+            $pretinstrumentseleve->setEleve($this);
         }
 
         return $this;
     }
 
-    public function removePretinstrument(PretInstrument $pretinstrument): self
+    public function removePretinstrumentseleve(PretInstrument $pretinstrumentseleve): self
     {
-        if ($this->pretinstruments->removeElement($pretinstrument)) {
+        if ($this->pretinstrumentseleve->removeElement($pretinstrumentseleve)) {
             // set the owning side to null (unless already changed)
-            if ($pretinstrument->getEleve() === $this) {
-                $pretinstrument->setEleve(null);
+            if ($pretinstrumentseleve->getEleve() === $this) {
+                $pretinstrumentseleve->setEleve(null);
             }
         }
 

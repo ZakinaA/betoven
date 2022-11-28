@@ -48,10 +48,13 @@
                     <a class="nav-link active" aria-current="page" href="#">Accueil</a>
                 </li>
                 <li class="nav-item border-start">
-                    <a class="nav-link" href="#">Les instruments</a>
+                    <a class="nav-link" href="{{ path('instrumentLister') }}">Les instruments</a>
                 </li>
                 <li class="nav-item border-start">
                     <a class="nav-link" href="#">Les cours</a>
+                </li>
+                <li class="nav-item border-start">
+                    <a class="nav-link" href="{{ path('routeAdherentConsultationInformation', { 'id': 2 }) }}">Information Loiseau Benjamin (mode dev)</a>
                 </li>
             </ul>
         </div>
