@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>       
+		<h5>PAGE DE CONSULTATION D'UN Eleve</h5>
+ <p>
+  <table >
+     <tr><td>Id : </td><td>{{eleve.id}} </td></tr>
+	<tr><td>Nom : </td><td>{{eleve.nom}}</td>
+	<td  rowspan="8" class="imgEtu">
+					{% set photo = 'img/eleve/'~ eleve.id ~'.jpg' %}
+					<span class="zoom"><img src="{{ asset(photo | trans )}}" title="{{ eleve.prenom ~ " " ~ eleve.nom }}" alt="{{ eleve.prenom ~ " " ~ eleve.nom }}"/></span></td></tr> </td>
+    <tr><td>Prénom : </td><td>{{eleve.prenom}}</td></tr></tr>
+	
+       <tr><td>Date de naissance : </td><td>{{eleve.dateNaiss|date("d/m/Y")}}</td></tr>	
+ </table>
+	
+	 
+    </body>
+</html>
