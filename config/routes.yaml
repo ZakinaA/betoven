@@ -21,4 +21,7 @@ classeInstrumentConsulter:
     controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 
 routeAdherentConsultationInformation:
     path: /compte/consulter/{id}
-    controller: App\Controller\CompteController::consulterInformation    
+    controller: App\Controller\CompteController::consulterInformation
+consulterCours:
+    path: /cours/consulter/{id}
+    controller: App\Controller\CoursController::consulterCours

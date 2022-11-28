@@ -35,7 +35,7 @@ class CompteController extends AbstractController
         }
 
 
-        //var_dump($eleveInscription);
+        //var_dump($compte);
         //return new Response('Etudiant : '.$etudiant->getNom());
         return $this->render('compte/consulter.html.twig', [
             'compte' => $compte, 'inscription' => $eleveInscription, 'pretsInstruments' => $findPretsInstrumentsEleve]);

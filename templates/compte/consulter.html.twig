@@ -11,11 +11,14 @@
 
         <h4>Type :</h4>
         {% if compte.eleve != null %}
-            est eleve
+            est eleve<br>
+        {% elseif compte.professeur != null %}
+            est professeur<br>
         {% endif %}
         {% if compte.eleve != null and  compte.eleve.responsable != null %}
         <h4>Prenom du responsable : </h4>{{compte.eleve.responsable.prenom}}
         <h4>Nom du responsable : </h4>{{compte.eleve.responsable.nom}}
+
         {% endif %}
         Date inscription :
         <h4>Cours :</h4>
