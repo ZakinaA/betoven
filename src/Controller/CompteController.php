@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\PretInstrument;
+
+use App\Form\InscriptionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Compte;
 use App\Entity\Inscription;
 use App\Entity\Paiement;
+use App\Entity\PretInstrument;
 use App\Entity\Eleve;
 use Doctrine\Persistence\ManagerRegistry;
 class CompteController extends AbstractController
@@ -39,6 +41,14 @@ class CompteController extends AbstractController
         //return new Response('Etudiant : '.$etudiant->getNom());
         return $this->render('compte/consulter.html.twig', [
             'compte' => $compte, 'inscription' => $eleveInscription, 'pretsInstruments' => $findPretsInstrumentsEleve]);
+    }
+
+    public function inscriptionPage()
+    {
+        $inscription = new compte();
+        $form = $this->createForm(InscriptionType::class, $inscription);
+        return $this->render('index/inscription.html.twig', array(
+            'form' => $form->createView(), ));
     }
 
 }

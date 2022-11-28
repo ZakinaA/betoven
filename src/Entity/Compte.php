@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 #[ORM\Entity(repositoryClass: CompteRepository::class)]
 class Compte
 {
@@ -48,11 +50,11 @@ class Compte
     #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
     private ?ProfesseurCours $professeur = null;
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->eleve = new ArrayCollection();
         $this->enfants = new ArrayCollection();
-    }
+    }*/
 
     public function getId(): ?int
     {

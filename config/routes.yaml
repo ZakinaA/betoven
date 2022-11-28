@@ -6,7 +6,7 @@ routeIndex:
     controller: App\Controller\IndexController::index
 routeInscription:
     path: /inscription
-    controller: App\Controller\IndexController::inscriptionPage
+    controller: App\Controller\CompteController::inscriptionPage
 instrumentAjouter:
     path: /instrument/ajouter
     controller: App\Controller\InstrumentController::ajouterInstrument 
