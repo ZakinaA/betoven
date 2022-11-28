@@ -7,7 +7,7 @@
 
         <h4>Nom : </h4>{{compte.nom}}
         <hr>
-        <h1>(Debug mode)</h1>
+        <h1>(Mise en forme non contractuel)</h1>
 
         <h4>Type :</h4>
         {% if compte.eleve != null %}
@@ -20,18 +20,20 @@
         <h4>Nom du responsable : </h4>{{compte.eleve.responsable.nom}}
 
         {% endif %}
-        Date inscription :
         <h4>Cours :</h4>
         {% for courOrder in inscription %}
         <b>Date inscription :</b> {{courOrder.date_inscription|date('d/m/Y')}}
             <b>Libelle cour :</b>  {{courOrder.libelle}}
             <br>
         {% endfor %}
-        <hr>
-        <h4>Pret instruments :</h4>
-        {% for pretInstrumentOrder in pretsInstruments %}
-            <b>num Serie : </b> {{pretInstrumentOrder.num_serie}}
-            <br>
-        {% endfor %}
+        {% if compte.eleve != null and  compte.eleve.responsable != null %}
+            <hr>
+            <h4>Pret instruments :</h4>
+            {% for pretInstrumentOrder in pretsInstruments %}
+                <b>Nom de l'instrument : </b> {{pretInstrumentOrder.libelleInstrument}}
+                <b>(num serie) : </b>{{pretInstrumentOrder.num_serie}}
+                <br>
+            {% endfor %}
+        {% endif %}
     </div><br>
 {% endblock %}

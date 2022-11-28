@@ -44,17 +44,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                <li class="nav-item {% if app.request.attributes.get('_route') == '_RouteName' %}active{% endif %}">
+                    <a class="nav-link" aria-current="page" href="#">Accueil</a>
                 </li>
                 <li class="nav-item border-start">
-                    <a class="nav-link" href="{{ path('instrumentLister') }}">Les instruments</a>
+                    <a class="nav-link {% if app.request.attributes.get('_route') == 'instrumentLister' %}active{% endif %}" href="{{ path('instrumentLister') }}">Les instruments</a>
+                </li>
+                <li class="nav-item border-start ">
+                    <a class="nav-link {% if app.request.attributes.get('_route') == 'listerCours' %}active{% endif %}" href="{{ path('listerCours') }}">Les cours</a>
+                </li>
+                <li class="nav-item border-start ">
+                    <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': 2 }) }}">Information Loiseau Benjamin (mode dev)</a>
                 </li>
                 <li class="nav-item border-start">
-                    <a class="nav-link" href="{{ path('listerCours') }}">Les cours</a>
-                </li>
-                <li class="nav-item border-start">
-                    <a class="nav-link" href="{{ path('routeAdherentConsultationInformation', { 'id': 2 }) }}">Information Loiseau Benjamin (mode dev)</a>
+                    <a class="nav-link  {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': 1 }) }}">Information LEMOINE Julien (mode dev)</a>
                 </li>
             </ul>
         </div>
