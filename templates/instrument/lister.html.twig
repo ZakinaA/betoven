@@ -7,9 +7,8 @@
         {% for i in pInstruments %}
 
 			<h4>Numéro de série : </h4><a href="{{ path('instrumentConsulter', { 'id': i.id }) }}">{{ i.numSerie }}</a>
-			<h4>Date/Prix achat : </h4>{{i.dateAchat.format('d/m/Y')}} {{i.prixAchat}}
-			<h4>Utilisation : </h4>{{i.utilisation}}
-            <h4>Cheminage : </h4>{{i.cheminage}}
+			<h4>Date d'achat : </h4>{{i.dateAchat.format('d/m/Y')}}
+            <h4>Prix achat : </h4>{{i.prixAchat}}€
 
         {% else %}
 		<tr>

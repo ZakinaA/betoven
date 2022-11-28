@@ -8,8 +8,20 @@ routeInscription:
     path: /inscription
     controller: App\Controller\IndexController::inscriptionPage
 routeAdherentConsultationInformation:
+    path: /eleve/consulter/{id}
+    controller: App\Controller\EleveController::consulterInformation
+instrumentAjouter:
+    path: /instrument/ajouter
+    controller: App\Controller\InstrumentController::ajouterInstrument 
+instrumentConsulter:
+    path: /instrument/consulter/{id}
+    controller: App\Controller\InstrumentController::consulterInstrument 
+instrumentLister:
+    path: /instrument/lister
+    controller: App\Controller\InstrumentController::listerInstrument 
+classeInstrumentConsulter:
+    path: /classeInstrument/ajouter/
+    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 
+routeAdherentConsultationInformation:
     path: /compte/consulter/{id}
-    controller: App\Controller\CompteController::consulterInformation
-etudiantAjouter:
-    path: /etudiant/ajouter
-    controller: App\Controller\EtudiantController::ajouter
+    controller: App\Controller\CompteController::consulterInformation    
