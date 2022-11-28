@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\CoursRepository;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
 class Cours
@@ -16,11 +16,7 @@ class Cours
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Professeur $professeur = null;
-
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
     #[ORM\Column]
@@ -35,34 +31,14 @@ class Cours
     #[ORM\OneToMany(mappedBy: 'cour', targetEntity: Inscription::class)]
     private Collection $inscriptions;
 
-    #[ORM\ManyToMany(targetEntity: Tranche::class, inversedBy: 'cours')]
-    private Collection $tranches;
-
-    #[ORM\ManyToMany(targetEntity: Jour::class, inversedBy: 'cours')]
-    private Collection $jours;
-
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
-        $this->tranches = new ArrayCollection();
-        $this->jours = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getProfesseur(): ?Professeur
-    {
-        return $this->professeur;
-    }
-
-    public function setProfesseur(?Professeur $professeur): self
-    {
-        $this->professeur = $professeur;
-
-        return $this;
     }
 
     public function getLibelle(): ?string
@@ -113,6 +89,9 @@ class Cours
         return $this;
     }
 
+    /**
+     * @return Collection<int, Inscription>
+     */
     public function getInscriptions(): Collection
     {
         return $this->inscriptions;
@@ -138,53 +117,7 @@ class Cours
         }
 
         return $this;
-    }    
-
-        /**
-     * @return Collection<int, Tranche>
-     */
-    public function getTranches(): Collection
-    {
-        return $this->tranches;
     }
 
-    public function addTranch(Tranche $tranch): self
-    {
-        if (!$this->tranches->contains($tranch)) {
-            $this->tranches->add($tranch);
-        }
 
-        return $this;
-    }
-
-    public function removeTranch(Tranche $tranch): self
-    {
-        $this->tranches->removeElement($tranch);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Jour>
-     */
-    public function getJours(): Collection
-    {
-        return $this->jours;
-    }
-
-    public function addJour(Jour $jour): self
-    {
-        if (!$this->jours->contains($jour)) {
-            $this->jours->add($jour);
-        }
-
-        return $this;
-    }
-
-    public function removeJour(Jour $jour): self
-    {
-        $this->jours->removeElement($jour);
-
-        return $this;
-    }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InscriptionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,15 +19,23 @@ class Inscription
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateInscription = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'inscriptions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Eleve $eleves = null;
+    private ?Eleve $eleve = null;
+
+    #[ORM\OneToMany(mappedBy: 'inscription', targetEntity: Paiement::class)]
+    private Collection $paiements;
+
 
     #[ORM\ManyToOne(inversedBy: 'inscriptions')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Cours $cour = null;
 
+    public function __construct()
+    {
+        $this->paiements = new ArrayCollection();
+    }
 
-    
     public function getId(): ?int
     {
         return $this->id;
@@ -43,14 +53,44 @@ class Inscription
         return $this;
     }
 
-    public function getEleves(): ?Eleve
+    public function getEleve(): ?Eleve
     {
-        return $this->eleves;
+        return $this->eleve;
     }
 
-    public function setEleves(?Eleve $eleves): self
+    public function setEleve(?Eleve $eleve): self
     {
-        $this->eleves = $eleves;
+        $this->eleve = $eleve;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Paiement>
+     */
+    public function getPaiements(): Collection
+    {
+        return $this->paiements;
+    }
+
+    public function addPaiement(Paiement $paiement): self
+    {
+        if (!$this->paiements->contains($paiement)) {
+            $this->paiements->add($paiement);
+            $paiement->setInscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaiement(Paiement $paiement): self
+    {
+        if ($this->paiements->removeElement($paiement)) {
+            // set the owning side to null (unless already changed)
+            if ($paiement->getInscription() === $this) {
+                $paiement->setInscription(null);
+            }
+        }
 
         return $this;
     }
@@ -67,33 +107,4 @@ class Inscription
         return $this;
     }
 
-        /**
-     * @return Collection<int, Inscription>
-     */
-    public function getInscriptions(): Collection
-    {
-        return $this->inscriptions;
-    }
-
-    public function addInscription(Inscription $inscription): self
-    {
-        if (!$this->inscriptions->contains($inscription)) {
-            $this->inscriptions->add($inscription);
-            $inscription->setCour($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInscription(Inscription $inscription): self
-    {
-        if ($this->inscriptions->removeElement($inscription)) {
-            // set the owning side to null (unless already changed)
-            if ($inscription->getCour() === $this) {
-                $inscription->setCour(null);
-            }
-        }
-
-        return $this;
-    }
 }

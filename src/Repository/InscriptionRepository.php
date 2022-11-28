@@ -39,25 +39,6 @@ class InscriptionRepository extends ServiceEntityRepository
         }
     }
 
-    
-
-    
-    public function findCoursEleve(int $eleveID): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            SELECT cours.id AS idCour, libelle, age_mini, heure_debut, heure_fin
-            FROM cours , inscription
-            WHERE cours.id = cour_id and eleves_id = :eleveID
-            ';
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['eleveID' => $eleveID]);
-
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAllAssociative();
-    }
-
 //    /**
 //     * @return Inscription[] Returns an array of Inscription objects
 //     */

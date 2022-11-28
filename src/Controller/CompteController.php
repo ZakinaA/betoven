@@ -6,10 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Compte;
-use App\Entity\Eleve;
-use App\Entity\Responsable;
 use App\Entity\Inscription;
-use App\Entity\Cours;
+use App\Entity\Paiement;
 use Doctrine\Persistence\ManagerRegistry;
 class CompteController extends AbstractController
 {
@@ -20,37 +18,24 @@ class CompteController extends AbstractController
             'controller_name' => 'CompteController',
         ]);
     }
-
     public function consulterInformation(ManagerRegistry $doctrine, int $id){
 
         $compte = $doctrine->getRepository(Compte::class)->find($id);
-         //$isResponsable = $doctrine->getRepository(Responsable::class)->findOneBy(['id' => $id]);
- 
-        if (!$compte) {            
+
+        if (!$compte) {
+
             throw $this->createNotFoundException(
                 'Aucun compte trouvé avec le numéro '.$id
             );
         } else {
-            $isEleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $id]);
-            $responsableInfo = $doctrine->getRepository(Compte::class)->findOneBy(['id' => $isEleve->getResponsable()]);
-            $cours = $doctrine->getRepository(Inscription::class)->findCoursEleve($id);
-
-
+            $inscription = $doctrine->getRepository(Inscription::class)->findBy(['eleve' => $id]);
         }
 
 
-        if($isEleve == null) {            
-            $isEleveType = 0;
-        } else {
-            $varCompte = $isEleve;
-            $isEleveType = 1;
-            
-        }
-
-        var_dump($cours);
-        //var_dump($isResponsable);
+        var_dump($inscription);
         //return new Response('Etudiant : '.$etudiant->getNom());
         return $this->render('compte/consulter.html.twig', [
-            'compte' => $varCompte, 'responsableInfo' => $responsableInfo, 'coursInfo' => $cours]);
+            'compte' => $compte, 'inscription' => $inscription]);
     }
+
 }
