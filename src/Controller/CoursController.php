@@ -27,10 +27,20 @@ class CoursController extends AbstractController
                 'Aucun cours trouvé avec le numéro '.$id
             );
         }
-        var_dump($cours);
+        //var_dump($cours);
         //return new Response('cours : '.$cours->getNom());
         return $this->render('cours/consulter.html.twig', [
             'cours' => $cours]);
     }
 
+
+    public function listerCours(ManagerRegistry $doctrine){
+
+        $listeCours = $doctrine->getRepository(Cours::class)->findAll();
+
+        //var_dump($instruments);
+        return $this->render('cours/lister.html.twig', [
+            'pCours' => $listeCours,]);
+
+    }
 }

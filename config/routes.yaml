@@ -25,3 +25,6 @@ routeAdherentConsultationInformation:
 consulterCours:
     path: /cours/consulter/{id}
     controller: App\Controller\CoursController::consulterCours
+listerCours:
+    path: /cours/lister
+    controller: App\Controller\CoursController::listerCours
