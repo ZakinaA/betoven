@@ -11,19 +11,27 @@
 
         <h4>Type :</h4>
         {% if compte.eleve != null %}
-            est eleve
+            est eleve<br>
+        {% elseif compte.professeur != null %}
+            est professeur<br>
         {% endif %}
         {% if compte.eleve != null and  compte.eleve.responsable != null %}
         <h4>Prenom du responsable : </h4>{{compte.eleve.responsable.prenom}}
         <h4>Nom du responsable : </h4>{{compte.eleve.responsable.nom}}
+
         {% endif %}
         Date inscription :
         <h4>Cours :</h4>
         {% for courOrder in inscription %}
-        <b>Date inscription :</b> {{courOrder.dateInscription|date('d/m/Y')}}
-            <b>Libelle cour :</b>  {{courOrder.cour.libelle}}
+        <b>Date inscription :</b> {{courOrder.date_inscription|date('d/m/Y')}}
+            <b>Libelle cour :</b>  {{courOrder.libelle}}
             <br>
         {% endfor %}
         <hr>
+        <h4>Pret instruments :</h4>
+        {% for pretInstrumentOrder in pretsInstruments %}
+            <b>num Serie : </b> {{pretInstrumentOrder.num_serie}}
+            <br>
+        {% endfor %}
     </div><br>
 {% endblock %}

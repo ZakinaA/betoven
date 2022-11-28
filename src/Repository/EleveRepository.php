@@ -39,7 +39,36 @@ class EleveRepository extends ServiceEntityRepository
         }
     }
 
-    
+
+    public function getCoursEleve(int $compteID): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT libelle, date_inscription FROM cours c, inscription i, eleve e
+            WHERE c.id = i.cour_id and i.eleve_id = e.id and compte_id = :compteID
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['compteID' => $compteID]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function findPretInsturment(int $compteID) : array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT num_serie FROM instrument i, pret_instrument p, eleve e
+            WHERE i.id = p.instrument_id and p.eleve_id = e.id and e.compte_id = :compteID
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['compteID' => $compteID]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 
 //    /**
 //     * @return Eleve[] Returns an array of Eleve objects

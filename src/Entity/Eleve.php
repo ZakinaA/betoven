@@ -22,12 +22,17 @@ class Eleve
     #[ORM\ManyToOne(inversedBy: 'enfants')]
     private ?Compte $responsable = null;
 
-    #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: Inscription::class, orphanRemoval: false)]
+    #[ORM\OneToMany(mappedBy: 'inscriptions', targetEntity: Inscription::class, orphanRemoval: false)]
     private Collection $inscriptions;
+
+    #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: PretInstrument::class)]
+    private Collection $pretinstrumentseleve;
+
 
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
+        $this->pretinstrumentseleve = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,6 +88,36 @@ class Eleve
             // set the owning side to null (unless already changed)
             if ($inscription->getEleve() === $this) {
                 $inscription->setEleve(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PretInstrument>
+     */
+    public function getPretinstrumentseleve(): Collection
+    {
+        return $this->pretinstrumentseleve;
+    }
+
+    public function addPretinstrumentseleve(PretInstrument $pretinstrumentseleve): self
+    {
+        if (!$this->pretinstrumentseleve->contains($pretinstrumentseleve)) {
+            $this->pretinstrumentseleve->add($pretinstrumentseleve);
+            $pretinstrumentseleve->setEleve($this);
+        }
+
+        return $this;
+    }
+
+    public function removePretinstrumentseleve(PretInstrument $pretinstrumentseleve): self
+    {
+        if ($this->pretinstrumentseleve->removeElement($pretinstrumentseleve)) {
+            // set the owning side to null (unless already changed)
+            if ($pretinstrumentseleve->getEleve() === $this) {
+                $pretinstrumentseleve->setEleve(null);
             }
         }
 

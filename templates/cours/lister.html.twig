@@ -1,0 +1,29 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+
+    <div class="table-responsive">
+        <table class="table table-striped bg-white mt-2">
+            <thead class="bg-black text-white">
+            <tr>
+                <th>Nom du cours</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in pCours %}
+                <tr>
+                    <td><a href="{{ path('consulterCours', { 'id': i.id }) }}" class="text-decoration-none">{{ i.libelle }}</a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Aucun cours n'a été trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

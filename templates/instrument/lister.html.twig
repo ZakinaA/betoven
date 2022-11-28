@@ -2,22 +2,31 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 {% block body %}
-    <div class="card card-body mt-4">
-
-        {% for i in pInstruments %}
-
-			<h4>Numéro de série : </h4><a href="{{ path('instrumentConsulter', { 'id': i.id }) }}">{{ i.numSerie }}</a>
-			<h4>Date/Prix achat : </h4>{{i.dateAchat.format('d/m/Y')}} {{i.prixAchat}}
-			<h4>Utilisation : </h4>{{i.utilisation}}
-            <h4>Cheminage : </h4>{{i.cheminage}}
-
-        {% else %}
-		<tr>
-		<td>Aucun instrument n'a été trouvé.</td>
-		</tr>
-        {% endfor %}
-
-
-    </div>
+	<div class="table-responsive">
+		<table class="table table-striped bg-white mt-2">
+			<thead class="bg-black text-white">
+			<tr>
+				<th>Nom de l'instrument</th>
+				<th>Date d'achat</th>
+				<th>Prix d'achat</th>
+				<th>Disponible pour le prêt</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for i in pInstruments %}
+				<tr>
+					<td><a href="{{ path('instrumentConsulter', { 'id': i.id }) }}">{{ i.numSerie }}</a></td>
+					<td>{{i.dateAchat.format('d/m/Y')}}</td>
+					<td>{{i.prixAchat}}€</td>
+					<td>Disponible</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td>Aucun instrument n'a été trouvé.</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}
 {% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

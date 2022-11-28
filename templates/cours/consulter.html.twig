@@ -1,14 +1,13 @@
-{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% block title %}{{ 'e-Music : Consultation du cour' }}{% endblock %}
 {% extends 'base.html.twig' %}
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 {% block body %}
     <div class="card card-body mt-4">
 
-        <h4>Numéro de série : </h4>{{instrument.numSerie}}
-        <h4>Date d'achat : </h4>{{instrument.dateAchat.format('d/m/Y')}}
-        <h4>Prix achat : </h4>{{instrument.prixAchat}}€
-
-
+        <h4>Libelle du cours : </h4>{{cours.libelle}}
+        <h4>Âge requis : </h4>{{cours.ageMini}} 
+        <h4>Heure de début : </h4>{{cours.heureDebut|date('H:i')}}
+        <h4>Heure de Fin : </h4>{{cours.heureDebut|date('H:i')}}
     </div>
 {% endblock %}
 {% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

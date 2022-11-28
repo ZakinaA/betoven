@@ -31,9 +31,15 @@ class Cours
     #[ORM\OneToMany(mappedBy: 'cour', targetEntity: Inscription::class)]
     private Collection $inscriptions;
 
+    #[ORM\ManyToOne(inversedBy: 'profCours')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ProfesseurCours $professeur = null;
+
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
+        $this->professeur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,5 +125,15 @@ class Cours
         return $this;
     }
 
+    public function getProfesseur(): ?ProfesseurCours
+    {
+        return $this->professeur;
+    }
 
+    public function setProfesseur(?ProfesseurCours $professeur): self
+    {
+        $this->professeur = $professeur;
+
+        return $this;
+    }
 }

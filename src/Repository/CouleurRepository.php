@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Compte;
+use App\Entity\Couleur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Compte>
+ * @extends ServiceEntityRepository<Couleur>
  *
- * @method Compte|null find($id, $lockMode = null, $lockVersion = null)
- * @method Compte|null findOneBy(array $criteria, array $orderBy = null)
- * @method Compte[]    findAll()
- * @method Compte[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Couleur|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Couleur|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Couleur[]    findAll()
+ * @method Couleur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompteRepository extends ServiceEntityRepository
+class CouleurRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Compte::class);
+        parent::__construct($registry, Couleur::class);
     }
 
-    public function save(Compte $entity, bool $flush = false): void
+    public function save(Couleur $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CompteRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Compte $entity, bool $flush = false): void
+    public function remove(Couleur $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,10 +39,8 @@ class CompteRepository extends ServiceEntityRepository
         }
     }
 
-
-
 //    /**
-//     * @return Compte[] Returns an array of Compte objects
+//     * @return Couleur[] Returns an array of Couleur objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -56,7 +54,7 @@ class CompteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Compte
+//    public function findOneBySomeField($value): ?Couleur
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

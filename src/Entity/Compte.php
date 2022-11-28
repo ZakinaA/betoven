@@ -45,6 +45,8 @@ class Compte
     #[ORM\OneToMany(mappedBy: 'responsable', targetEntity: Eleve::class)]
     private Collection $enfants;
 
+    #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
+    private ?ProfesseurCours $professeur = null;
 
     public function __construct()
     {
@@ -196,6 +198,23 @@ class Compte
                 $enfant->setResponsable(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfesseur(): ?ProfesseurCours
+    {
+        return $this->professeur;
+    }
+
+    public function setProfesseur(ProfesseurCours $professeur): self
+    {
+        // set the owning side of the relation if necessary
+        if ($professeur->getCompte() !== $this) {
+            $professeur->setCompte($this);
+        }
+
+        $this->professeur = $professeur;
 
         return $this;
     }
