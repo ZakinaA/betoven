@@ -60,8 +60,8 @@ class EleveRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT num_serie FROM instrument i, pret_instrument p, eleve e
-            WHERE i.id = p.instrument_id and p.eleve_id = e.id and e.compte_id = :compteID
+            SELECT t.libelle AS libelleInstrument, num_serie FROM instrument i, pret_instrument p, eleve e, type_instrument t
+            WHERE t.id = i.type_intrument_id and i.id = p.instrument_id and p.eleve_id = e.id and e.compte_id = :compteID
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['compteID' => $compteID]);
