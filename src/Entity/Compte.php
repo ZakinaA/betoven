@@ -48,6 +48,9 @@ class Compte
     #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
     private ?ProfesseurCours $professeur = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $rue = null;
+
     public function __construct()
     {
         $this->eleve = new ArrayCollection();
@@ -215,6 +218,18 @@ class Compte
         }
 
         $this->professeur = $professeur;
+
+        return $this;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(string $rue): self
+    {
+        $this->rue = $rue;
 
         return $this;
     }

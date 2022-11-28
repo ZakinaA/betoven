@@ -7,13 +7,19 @@
         <table class="table table-striped bg-white mt-2">
             <thead class="bg-black text-white">
             <tr>
-                <th>Nom du cours</th>
+                <th scope="col">Nom du cours</th>
+                <th scope="col">Professeur</th>
+                <th scope="col">Age minimum</th>
+                <th scope="col">Durée</th>
             </tr>
             </thead>
             <tbody>
-            {% for i in pCours %}
+            {% for c in pCours %}
                 <tr>
-                    <td><a href="{{ path('consulterCours', { 'id': i.id }) }}" class="text-decoration-none">{{ i.libelle }}</a></td>
+                    <td><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</a></td>
+                    <td>{{c.professeur.compte.nom|upper}} {{c.professeur.compte.prenom}}</td>
+                    <td>{{c.ageMini}} </td>
+                    <td>{{c.heureDebut|date('H:i')}} - {{c.heureFin|date('H:i')}}</td>
                 </tr>
             {% else %}
                 <tr>

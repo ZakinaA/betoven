@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Etudiant;
+use App\Entity\Compte;
+use App\Entity\Inscription;
+use App\Entity\ProfesseurCours;
 use Doctrine\Persistence\ManagerRegistry;
 class CoursController extends AbstractController
 {
@@ -19,7 +22,7 @@ class CoursController extends AbstractController
     }
 
     public function consulterCours(ManagerRegistry $doctrine, int $id){
-
+        $participants = $doctrine->getRepository(Inscription::class)->findByCour($id);
         $cours = $doctrine->getRepository(Cours::class)->find($id);
 
         if (!$cours) {
@@ -29,8 +32,11 @@ class CoursController extends AbstractController
         }
         //var_dump($cours);
         //return new Response('cours : '.$cours->getNom());
-        return $this->render('cours/consulter.html.twig', [
-            'cours' => $cours]);
+        return $this->render('cours/consulter.html.twig', 
+        [
+            'cours' => $cours,
+            'participants' => $participants,
+        ]);
     }
 
 
@@ -38,9 +44,8 @@ class CoursController extends AbstractController
 
         $listeCours = $doctrine->getRepository(Cours::class)->findAll();
 
-        //var_dump($instruments);
+        //var_dump($listeCours);
         return $this->render('cours/lister.html.twig', [
             'pCours' => $listeCours,]);
-
     }
 }

@@ -3,11 +3,37 @@
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 {% block body %}
     <div class="card card-body mt-4">
-
+        <h4>Professeur : </h4>{{cours.professeur.compte.nom|upper}} {{cours.professeur.compte.prenom}}
         <h4>Libelle du cours : </h4>{{cours.libelle}}
         <h4>Âge requis : </h4>{{cours.ageMini}} 
         <h4>Heure de début : </h4>{{cours.heureDebut|date('H:i')}}
         <h4>Heure de Fin : </h4>{{cours.heureDebut|date('H:i')}}
+    </div>
+        <div class="table-responsive">
+        <table class="table table-striped bg-white mt-2">
+            <thead class="bg-black text-white">
+            <tr>
+                <th scope="col">Participants</th>
+                <th scope="col">Rue</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Contact</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in participants %}
+                <tr>
+                    <td>{{p.eleve.compte.nom|upper}} {{p.eleve.compte.prenom}}</td>
+                    <td>{{p.eleve.compte.numRue}} {{p.eleve.compte.rue}}</td>
+                    <td>{{p.eleve.compte.copos}} - {{p.eleve.compte.ville}}</td>
+                    <td>{{p.eleve.compte.tel}} - {{p.eleve.compte.mail}}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Aucun participants n'a été trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
 {% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}
