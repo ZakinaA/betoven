@@ -22,3 +22,6 @@ instrumentLister:
 classeInstrumentConsulter:
     path: /classeInstrument/ajouter/
     controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 
+routeAdherentConsultationInformation:
+    path: /compte/consulter/{id}
+    controller: App\Controller\CompteController::consulterInformation    

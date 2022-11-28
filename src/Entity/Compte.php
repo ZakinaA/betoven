@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CompteRepository::class)]
@@ -19,23 +21,36 @@ class Compte
     #[ORM\Column(length: 50)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 3)]
     private ?string $numRue = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 50)]
     private ?string $copos = null;
 
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 50)]
     private ?string $tel = null;
 
     #[ORM\Column(length: 50)]
     private ?string $mail = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 70)]
     private ?string $motDePasse = null;
+
+    #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
+    private ?Eleve $eleve = null;
+
+    #[ORM\OneToMany(mappedBy: 'responsable', targetEntity: Eleve::class)]
+    private Collection $enfants;
+
+
+    public function __construct()
+    {
+        $this->eleve = new ArrayCollection();
+        $this->enfants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,4 +152,53 @@ class Compte
 
         return $this;
     }
+
+    public function getEleve(): ?Eleve
+    {
+        return $this->eleve;
+    }
+
+    public function setEleve(Eleve $eleve): self
+    {
+        // set the owning side of the relation if necessary
+        if ($eleve->getCompte() !== $this) {
+            $eleve->setCompte($this);
+        }
+
+        $this->eleve = $eleve;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Eleve>
+     */
+    public function getEnfants(): Collection
+    {
+        return $this->enfants;
+    }
+
+    public function addEnfant(Eleve $enfant): self
+    {
+        if (!$this->enfants->contains($enfant)) {
+            $this->enfants->add($enfant);
+            $enfant->setResponsable($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnfant(Eleve $enfant): self
+    {
+        if ($this->enfants->removeElement($enfant)) {
+            // set the owning side to null (unless already changed)
+            if ($enfant->getResponsable() === $this) {
+                $enfant->setResponsable(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

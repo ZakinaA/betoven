@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Paiement;
+use App\Entity\PretInstrument;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<PAIEMENT>
+ * @extends ServiceEntityRepository<PretInstrument>
  *
- * @method PAIEMENT|null find($id, $lockMode = null, $lockVersion = null)
- * @method PAIEMENT|null findOneBy(array $criteria, array $orderBy = null)
- * @method PAIEMENT[]    findAll()
- * @method PAIEMENT[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PretInstrument|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PretInstrument|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PretInstrument[]    findAll()
+ * @method PretInstrument[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PaiementRepository extends ServiceEntityRepository
+class PretInstrumentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PAIEMENT::class);
+        parent::__construct($registry, PretInstrument::class);
     }
 
-    public function save(PAIEMENT $entity, bool $flush = false): void
+    public function save(PretInstrument $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PaiementRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(PAIEMENT $entity, bool $flush = false): void
+    public function remove(PretInstrument $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class PaiementRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return PAIEMENT[] Returns an array of PAIEMENT objects
+//     * @return PretInstrument[] Returns an array of PretInstrument objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class PaiementRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?PAIEMENT
+//    public function findOneBySomeField($value): ?PretInstrument
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
