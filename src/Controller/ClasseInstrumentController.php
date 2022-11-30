@@ -10,7 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class ClasseInstrumentController extends AbstractController
 {
-    #[Route('/classe/instrument', name: 'app_classe_instrument')]
+    #[Route('/classeinstrument', name: 'app_classe_instrument')]
     public function index(): Response
     {
         return $this->render('classe_instrument/index.html.twig', [

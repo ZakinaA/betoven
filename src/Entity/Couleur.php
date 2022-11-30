@@ -21,9 +21,13 @@ class Couleur
     #[ORM\ManyToMany(targetEntity: Instrument::class, inversedBy: 'couleurs')]
     private Collection $instrument;
 
+    #[ORM\ManyToMany(targetEntity: Instrument::class, mappedBy: 'couleur')]
+    private Collection $instruments;
+
     public function __construct()
     {
         $this->instrument = new ArrayCollection();
+        $this->instruments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,5 +69,13 @@ class Couleur
         $this->instrument->removeElement($instrument);
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Instrument>
+     */
+    public function getInstruments(): Collection
+    {
+        return $this->instruments;
     }
 }

@@ -31,10 +31,21 @@ class Instrument
     #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: Accessoire::class)]
     private Collection $accessoires;
 
+    #[ORM\ManyToOne(inversedBy: 'instruments')]
+    private ?TypeInstrument $typeIntrument = null;
+
+    #[ORM\ManyToOne(inversedBy: 'instruments')]
+    private ?Marque $marque = null;
+
+    #[ORM\ManyToMany(targetEntity: couleur::class, inversedBy: 'instruments')]
+    private Collection $couleur;
+
+
     public function __construct()
     {
         $this->couleurs = new ArrayCollection();
         $this->accessoires = new ArrayCollection();
+        $this->couleur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,5 +144,37 @@ class Instrument
         }
 
         return $this;
+    }
+
+    public function getTypeIntrument(): ?TypeInstrument
+    {
+        return $this->typeIntrument;
+    }
+
+    public function setTypeIntrument(?TypeInstrument $typeIntrument): self
+    {
+        $this->typeIntrument = $typeIntrument;
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marque $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, couleur>
+     */
+    public function getCouleur(): Collection
+    {
+        return $this->couleur;
     }
 }

@@ -19,6 +19,24 @@ instrumentConsulter:
 instrumentLister:
     path: /instrument/lister
     controller: App\Controller\InstrumentController::listerInstrument 
-classeInstrumentConsulter:
+classeInstrumentAjouter:
     path: /classeInstrument/ajouter/
-    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 
+    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument
+couleurAjouter:
+    path: /couleur/ajouter/
+    controller: App\Controller\CouleurController::ajouterCouleur 
+couleurLister:
+    path: /couleur/lister/
+    controller: App\Controller\CouleurController::listerCouleur 
+marqueAjouter:
+    path: /marque/ajouter/
+    controller: App\Controller\MarqueController::ajouterMarque 
+typeInstrumentAjouter:
+    path: /typeInstrument/ajouter/
+    controller: App\Controller\TypeIntrumentController::ajouterTypeInstrument 
+accessoireAjouter:
+    path: /accessoire/ajouter/
+    controller: App\Controller\AccessoireController::ajouterAccessoire
+accessoireLister:
+    path: /accessoire/lister/
+    controller: App\Controller\AccessoireController::listerAccessoire
