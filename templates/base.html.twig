@@ -24,8 +24,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
                 <div class="dropup-center dropdown">
-                    <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% block nomCompte %}{% endblock %}
+                    <div class="dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.prenom }} {{ app.user.nom }}{% endif %}
                     </div>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Action</a></li>

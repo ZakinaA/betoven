@@ -57,11 +57,14 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $rue = null;
 
-    /*public function __construct()
+    #[ORM\Column]
+    private array $roles = [];
+
+    public function __construct()
     {
         $this->eleve = new ArrayCollection();
         $this->enfants = new ArrayCollection();
-    }*/
+    }
 
     public function getId(): ?int
     {
@@ -239,7 +242,24 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
      * @see UserInterface
      */
 
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = [];
+
+        return $this;
+    }
     /**
      * @see PasswordAuthenticatedUserInterface
      */
@@ -260,21 +280,7 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->mail;
     }
 
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
     /**
      * @see UserInterface
      */
