@@ -30,7 +30,7 @@ loginPage:
     controller: App\Controller\LoginController::index
 modifierInformationCompte:
     path: /compte/modifier
-    controller: App\Controller\CompteControllr::modifierInformation
+    controller: App\Controller\CompteController::modifierInformationCompte
 app_logout:
     path: /logout
     methods: GET

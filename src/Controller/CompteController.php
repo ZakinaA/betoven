@@ -43,12 +43,10 @@ class CompteController extends AbstractController
             'compte' => $compte, 'inscription' => $eleveInscription, 'pretsInstruments' => $findPretsInstrumentsEleve]);
     }
 
-    public function inscriptionPage()
+
+    public function modifierInformationCompte(ManagerRegistry $doctrine)
     {
-        $inscription = new compte();
-        $form = $this->createForm(InscriptionType::class, $inscription);
-        return $this->render('index/inscription.html.twig', array(
-            'form' => $form->createView(), ));
+        return $this->render('compte/modifier.html.twig', []);
     }
 
 }
