@@ -25,7 +25,12 @@ consulterCours:
 listerCours:
     path: /cours/lister
     controller: App\Controller\CoursController::listerCours
-
 loginPage:
     path: /accueil
     controller: App\Controller\LoginController::index
+modifierInformationCompte:
+    path: /compte/modifier
+    controller: App\Controller\CompteControllr::modifierInformation
+app_logout:
+    path: /logout
+    methods: GET
