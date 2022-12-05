@@ -45,6 +45,8 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('numRue',TextType::class, array('label' => false ,'row_attr' => ['class' => 'col-md-4'], 'attr' => array('class' => 'form-control rounded-pill', 'placeholder' => 'Numéro de rue')))
             ->add('rue',TextType::class, array('label' => false ,'row_attr' => ['class' => 'col-md-8'], 'attr' => array('class' => 'form-control rounded-pill', 'placeholder' => 'Nom de rue')))
+            ->add('ville',TextType::class, array('label' => false ,'row_attr' => ['class' => 'col-md-8'], 'attr' => array('class' => 'form-control rounded-pill', 'placeholder' => 'Ville')))
+            
             ->add('copos',TextType::class, array('label' => 'Code Postal' ,'label_attr' => ['class' => 'form-label'],'row_attr' => ['class' => 'mb-3'], 'attr' => array('id' => 'task-form','class' => 'form-control rounded-pill', 'oninput' => 'trouverVilleAvecCodePostalFunc()')))
             ->add('tel',TextType::class, array('label' => 'Numéro de téléphone' ,'label_attr' => ['class' => 'form-label'],'row_attr' => ['class' => 'mb-3'], 'attr' => array('class' => 'form-control rounded-pill')))
 
