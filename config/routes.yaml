@@ -10,32 +10,9 @@ routeInscription:
 routeAdherentConsultationInformation:
     path: /eleve/consulter/{id}
     controller: App\Controller\EleveController::consulterInformation
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+routeInscription:
+    path: /inscription
+    controller: App\Controller\CompteController::inscriptionPage
 instrumentAjouter:
     path: /instrument/ajouter
     controller: App\Controller\InstrumentController::ajouterInstrument 
@@ -45,6 +22,27 @@ instrumentConsulter:
 instrumentLister:
     path: /instrument/lister
     controller: App\Controller\InstrumentController::listerInstrument 
+classeInstrumentConsulter:
+    path: /classeInstrument/ajouter/
+    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 
+routeAdherentConsultationInformation:
+    path: /compte/consulter/{id}
+    controller: App\Controller\CompteController::consulterInformation
+consulterCours:
+    path: /cours/consulter/{id}
+    controller: App\Controller\CoursController::consulterCours
+listerCours:
+    path: /cours/lister
+    controller: App\Controller\CoursController::listerCours
+loginPage:
+    path: /accueil
+    controller: App\Controller\LoginController::index
+modifierInformationCompte:
+    path: /compte/modifier
+    controller: App\Controller\CompteController::modifierInformationCompte
+app_logout:
+    path: /logout
+    methods: GET
 classeInstrumentAjouter:
     path: /classeInstrument/ajouter/
     controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument
