@@ -6,8 +6,7 @@
         <h4>Professeur : </h4>{{cours.professeur.compte.nom|upper}} {{cours.professeur.compte.prenom}}
         <h4>Libelle du cours : </h4>{{cours.libelle}}
         <h4>Âge requis : </h4>{{cours.ageMini}} 
-        <h4>Heure de début : </h4>{{cours.heureDebut|date('H:i')}}
-        <h4>Heure de Fin : </h4>{{cours.heureDebut|date('H:i')}}
+        <h4>Date : </h4>{{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}}
     </div>
         <div class="table-responsive">
         <table class="table table-striped bg-white mt-2">

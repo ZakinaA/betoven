@@ -6,16 +6,16 @@ routeInscription:
     controller: App\Controller\CompteController::inscriptionPage
 instrumentAjouter:
     path: /instrument/ajouter
-    controller: App\Controller\InstrumentController::ajouterInstrument 
+    controller: App\Controller\InstrumentController::ajouterInstrument
 instrumentConsulter:
     path: /instrument/consulter/{id}
-    controller: App\Controller\InstrumentController::consulterInstrument 
+    controller: App\Controller\InstrumentController::consulterInstrument
 instrumentLister:
     path: /instrument/lister
-    controller: App\Controller\InstrumentController::listerInstrument 
+    controller: App\Controller\InstrumentController::listerInstrument
 classeInstrumentConsulter:
     path: /classeInstrument/ajouter/
-    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 
+    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument
 routeAdherentConsultationInformation:
     path: /compte/consulter/{id}
     controller: App\Controller\CompteController::consulterInformation
@@ -34,10 +34,6 @@ modifierInformationCompte:
 app_logout:
     path: /logout
     methods: GET
-=======
-route_accueil:
-    path: /accueil
-    controller: App\Controller\EleveController::index
 eleveAjouter:
     path: /eleve/ajouter
     controller: App\Controller\EleveController::ajouter
@@ -74,15 +70,6 @@ coursConsulter:
 coursLister:
     path: /cours/lister/{id}
     controller: App\Controller\CoursController::listercours
-instrumentAjouter:
-    path: /instrument/ajouter
-    controller: App\Controller\InstrumentController::ajouter
-instrumentConsulter:
-    path: /instrument/consulter/{id}
-    controller: App\Controller\InstrumentController::consulterinstrument
-instrumentLister:
-    path: /instrument/lister/{id}
-    controller: App\Controller\InstrumentController::listerinstrument
 professeurAjouter:
     path: /professeur/ajouter
     controller: App\Controller\ProfesseurController::ajouter

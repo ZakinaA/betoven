@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\COURS;
+use App\Entity\Cours;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<COURS>
+ * @extends ServiceEntityRepository<Cours>
  *
- * @method COURS|null find($id, $lockMode = null, $lockVersion = null)
- * @method COURS|null findOneBy(array $criteria, array $orderBy = null)
- * @method COURS[]    findAll()
- * @method COURS[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Cours|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Cours|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Cours[]    findAll()
+ * @method Cours[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class COURSRepository extends ServiceEntityRepository
+class CoursRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, COURS::class);
+        parent::__construct($registry, Cours::class);
     }
 
-    public function save(COURS $entity, bool $flush = false): void
+    public function save(Cours $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class COURSRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(COURS $entity, bool $flush = false): void
+    public function remove(Cours $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class COURSRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return COURS[] Returns an array of COURS objects
+//     * @return Cours[] Returns an array of Cours objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class COURSRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?COURS
+//    public function findOneBySomeField($value): ?Cours
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

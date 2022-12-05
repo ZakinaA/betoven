@@ -10,7 +10,7 @@
                 <th scope="col">Nom du cours</th>
                 <th scope="col">Professeur</th>
                 <th scope="col">Age minimum</th>
-                <th scope="col">Durée</th>
+                <th scope="col">Date</th>
             </tr>
             </thead>
             <tbody>
@@ -19,7 +19,7 @@
                     <td><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</a></td>
                     <td>{{c.professeur.compte.nom|upper}} {{c.professeur.compte.prenom}}</td>
                     <td>{{c.ageMini}} </td>
-                    <td>{{c.heureDebut|date('H:i')}} - {{c.heureFin|date('H:i')}}</td>
+                    <td>{{c.date|date('d/m/Y')}} | {{c.heureDebut|date('H:i')}} - {{c.heureFin|date('H:i')}}</td>
                 </tr>
             {% else %}
                 <tr>
