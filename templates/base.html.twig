@@ -16,23 +16,28 @@
 
 </style>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark text-dark py-4" style="background-color: #4a536b;">
+<nav class="navbar navbar-expand-lg navbar-dark text-dark py-4" style="background: #EF4800;color: #000">
     <div class="container-fluid">
+        <a class="navbar-brand text-dark fw-bold" href="#">e-Music</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="dropup-center dropdown">
-                    <div class="dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown-toggle text-dark fw-bold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.prenom }} {{ app.user.nom }} <span class="badge bg-info rounded text-dark">Eleve</span>{% endif %}
                     </div>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item {% if app.request.attributes.get('_route') == 'modifierInformationCompte' %}active{% endif %}" href="{{ path('modifierInformationCompte') }}">Modifier mes informations</a></li>
-                        <li><a class="dropdown-item" href="#">Action two</a></li>
                         <li><a class="dropdown-item" href="{{ path('app_logout') }}">Me déconnecter</a></li>
                     </ul>
                 </div>
+                {% else %}
+                    <a href="{{ path('loginPage') }}" class="btn rounded-pill me-2 text-white mt-2 mb-0" style="background: rgba(0,0,0,0.3);">Me connecter</a>
+                    <a href="{{ path('routeInscription') }}" class="btn rounded-pill  text-white mt-2 mb-0" style="background: rgba(0,0,0,0.3);">Créer un compte</a>
+                {% endif %}
             </ul>
         </div>
     </div>

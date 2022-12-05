@@ -26,8 +26,11 @@ listerCours:
     path: /cours/lister
     controller: App\Controller\CoursController::listerCours
 loginPage:
-    path: /accueil
+    path: /login
     controller: App\Controller\LoginController::index
+accueilPage:
+    path: /accueil
+    controller: App\Controller\IndexController::accueil
 modifierInformationCompte:
     path: /compte/modifier
     controller: App\Controller\CompteController::modifierInformationCompte

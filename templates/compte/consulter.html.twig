@@ -2,6 +2,82 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 {% block body %}
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-none border-0 text-dark">
+                <div class="card-header py-4" style="background: #EF4800;color: #000">
+                    <h4 class="mb-0">
+                        {{compte.prenom}} {{compte.nom}}
+                        <span class="badge bg-info rounded text-dark  float-end">Eleve</span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped mb-0">
+                        <tbody>
+                        {% if compte.eleve != null and  compte.eleve.responsable != null %}
+                        <tr>
+                            <td class="align-middle">Responsable </td>
+                            <td class="align-middle">{{compte.eleve.responsable.prenom}} {{compte.eleve.responsable.nom}}</td>
+                        </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-none border-0">
+                <div class="card-header py-4" style="background: #EF4800;color: #000">
+                    <h4 class="mb-0">
+                        Mes cours
+                        <span class="badge bg-info rounded text-dark float-end">{{ inscription|length }}</span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                    {% for courOrder in inscription %}
+                        <a href="{{ path('coursConsulter', { 'id': courOrder.courID }) }}" class="list-group-item list-group-item-action bg-light" aria-current="true">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-0">{{courOrder.libelle}}</h5>
+                                <p class="badge bg-info">{{courOrder.date_inscription|date('d/m/Y')}}</<p>
+                            </div>
+                            <!--<p class="mb-1">Some placeholder content in a paragraph.</p>
+                            <small>And some small print.</small>-->
+                        </a>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            {% if compte.eleve != null and  compte.eleve.responsable != null %}
+                <div class="card shadow-none border-0">
+                    <div class="card-header py-4" style="background: #EF4800;color: #000">
+                        <h4 class="mb-0">
+                            Mes prêts d'instruments
+                            <span class="badge bg-info rounded text-dark float-end">{{ pretsInstruments|length }}</span>
+                        </h4>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            {% for pretInstrumentOrder in pretsInstruments %}
+                                <a href="{{ path('instrumentConsulter', { 'id': pretInstrumentOrder.instrumentID }) }}" class="list-group-item list-group-item-action bg-light" aria-current="true">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-0">{{pretInstrumentOrder.libelleInstrument}} #{{pretInstrumentOrder.num_serie}}</h5>
+                                        <p class="badge bg-info">Date de prêt : N/A</<p>
+                                    </div>
+                                    <!--<p class="mb-1">Some placeholder content in a paragraph.</p>
+                                    <small>And some small print.</small>-->
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <br><br><br>
     <div class="card card-body mt-4">
         <h4>Prenom : </h4>{{compte.prenom}}
 
