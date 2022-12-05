@@ -21,3 +21,4 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /deploy.bat
+/migrations/old/
