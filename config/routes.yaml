@@ -1,12 +1,9 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
-routeIndex:
-    path: /accueil
-    controller: App\Controller\IndexController::index
 routeInscription:
     path: /inscription
-    controller: App\Controller\IndexController::inscriptionPage
+    controller: App\Controller\CompteController::inscriptionPage
 instrumentAjouter:
     path: /instrument/ajouter
     controller: App\Controller\InstrumentController::ajouterInstrument 
@@ -28,3 +25,12 @@ consulterCours:
 listerCours:
     path: /cours/lister
     controller: App\Controller\CoursController::listerCours
+loginPage:
+    path: /accueil
+    controller: App\Controller\LoginController::index
+modifierInformationCompte:
+    path: /compte/modifier
+    controller: App\Controller\CompteController::modifierInformationCompte
+app_logout:
+    path: /logout
+    methods: GET
