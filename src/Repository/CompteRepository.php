@@ -5,7 +5,9 @@ namespace App\Repository;
 use App\Entity\Compte;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @extends ServiceEntityRepository<Compte>
  *
@@ -39,6 +41,20 @@ class CompteRepository extends ServiceEntityRepository
         }
     }
 
+
+    /**
+     * Used to upgrade (rehash) the user's password automatically over time.
+     */
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
+    {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        $user->setPassword($newHashedPassword);
+
+        $this->save($user, true);
+    }
 //    /**
 //     * @return Compte[] Returns an array of Compte objects
 //     */
