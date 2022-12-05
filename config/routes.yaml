@@ -82,3 +82,6 @@ professeurConsulter:
 professeurLister:
     path: /professeur/lister/{id}
     controller: App\Controller\ProfesseurController::listerprofesseur
+adminIndexPage:
+    path: /admin/index
+    controller: App\Controller\AdminController::indexAdmin
