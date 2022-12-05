@@ -1,0 +1,40 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body shadow-none mt-2">
+            <h4 class="fw-bold">Modifier mes informations personnelles</h4>
+            <div class="mb-3">
+                <label for="username">Adresse mail</label>
+                <input type="email" class="form-control rounded-pill"  id="username" name="_username" value="{{ app.user.mail }}">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Nom & prenom</label>
+                <div class="row">
+                    <div class="col-md-6"><input type="text" class="form-control rounded-pill" id="password"  name="_password" value="{{ app.user.prenom }}"></div>
+                    <div class="col-md-6"><input type="text" class="form-control rounded-pill" id="password"  name="_password" value="{{ app.user.nom }}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-body shadow-none mt-2">
+            <h4 class="fw-bold">Modifier mon mot de passe</h4>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control rounded-pill" id="password"  name="_password">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Vérification mot de passe</label>
+                <input type="password" class="form-control rounded-pill" id="password"  name="_password">
+            </div>
+        </div>
+        <div class="card card-body shadow-none mt-2">
+            <h4>Mes inscriptions</h4>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

@@ -1,6 +1,3 @@
-{# templates/index/inscription.html.twig #}
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,9 +29,15 @@
                                 <div class="text-center">
                                     <div class="h5 text-gray-900 mb-4 fw-bold">Inscription</div>
                                 </div>
-                                {{ form_start(form) }}
-                                {{ form_widget(form) }}
-                                {{ form_end(form) }}
+                                {{ form_start(registrationForm) }}
+                                {{ form_row(registrationForm.mail) }}
+                                {{ form_row(registrationForm.plainPassword, {
+                                    label: 'Password'
+                                }) }}
+
+
+                                {{ form_row(registrationForm.nom) }}
+                                {{ form_row(registrationForm.prenom) }}
                                 <!--<div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Adresse mail</label>
                                     <input type="email" class="form-control rounded-pill" id="exampleInputPassword1">
@@ -50,35 +53,26 @@
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Adresse (numéro et rue)</label>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control rounded-pill mb-2" id="exampleInputPassword1" placeholder="Numéro de rue">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control rounded-pill" id="exampleInputPassword1" placeholder="Nom de rue">
-                                        </div>
+                                        {{ form_row(registrationForm.numRue) }}
+                                        {{ form_row(registrationForm.rue) }}
                                     </div>
 
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Code Postal</label>
-                                    <input type="text" class="form-control rounded-pill" id="codePostalInput" oninput="trouverVilleAvecCodePostalFunc()">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Ville</label>
-                                    <select class="form-select rounded-pill" id="villeSelect" required></select>
-                                </div>
-                                <div class="mb-3">
+                                {{ form_row(registrationForm.copos) }}
+                                {{ form_row(registrationForm.tel) }}
+                                <!--<div class="mb-3">
                                     <label for="passwordInput" class="form-label">Mot de passe</label>
                                     <input type="password" class="form-control rounded-pill" id="passwordInput">
                                 </div>
                                 <div class="mb-3">
                                     <label for="verifPasswordInput" class="form-label">Vérification du mot de passe</label>
                                     <input type="password" class="form-control rounded-pill " id="verifPasswordInput" oninput="verifPasswordFunc()">
-                                </div>
-                                <button class="btn rounded-pill w-100 text-white mt-2 mb-0" style="background-color: #ff9a8d;">Créer un compte</button>
+                                </div>-->
+                                <button type="submit" class="btn rounded-pill w-100 text-white mt-2 mb-0" style="background-color: #ff9a8d;">Créer un compte</button>
                                 <p class="mt-2 mb-0">
                                     Votre compte sera en attente de validation d'un administrateur.
                                 </p>
+                                {{ form_end(registrationForm) }}
                             </div>
                         </div>
                     </div>
@@ -103,15 +97,15 @@
 
     };
     function trouverVilleAvecCodePostalFunc() {
-        let codePostalInput = $('#codePostalInput').val();
+        let codePostalInput = $('#registration_form_copos').val();
 
-        $('#villeSelect').html('');
+        $('#registration_form_ville').html('');
         $.ajax({
             type: "GET",
             url: "https://apicarto.ign.fr/api/codes-postaux/communes/"+codePostalInput,
             success: function (result) {
                 for(let villeOrder = 0; villeOrder < result.length; villeOrder++) {
-                    $('#villeSelect').append('<option value="">'+result[villeOrder]['nomCommune']+'</option>');
+                    $('#registration_form_ville').append('<option value="'+result[villeOrder]['nomCommune']+'">'+result[villeOrder]['nomCommune']+'</option>');
                 }
             }
         });

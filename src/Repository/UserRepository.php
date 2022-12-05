@@ -2,28 +2,29 @@
 
 namespace App\Repository;
 
-use App\Entity\Compte;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+
 /**
- * @extends ServiceEntityRepository<Compte>
+ * @extends ServiceEntityRepository<User>
  *
- * @method Compte|null find($id, $lockMode = null, $lockVersion = null)
- * @method Compte|null findOneBy(array $criteria, array $orderBy = null)
- * @method Compte[]    findAll()
- * @method Compte[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompteRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Compte::class);
+        parent::__construct($registry, User::class);
     }
 
-    public function save(Compte $entity, bool $flush = false): void
+    public function save(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -32,7 +33,7 @@ class CompteRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Compte $entity, bool $flush = false): void
+    public function remove(User $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +41,6 @@ class CompteRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
@@ -55,25 +55,26 @@ class CompteRepository extends ServiceEntityRepository
 
         $this->save($user, true);
     }
+
 //    /**
-//     * @return Compte[] Returns an array of Compte objects
+//     * @return User[] Returns an array of User objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
+//            ->orderBy('u.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Compte
+//    public function findOneBySomeField($value): ?User
 //    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
