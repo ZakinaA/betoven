@@ -18,9 +18,6 @@ class Cours
 
     #[ORM\Column]
     private ?int $agemini = null;
-    
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
     private ?int $agemaxi = null;
@@ -77,18 +74,6 @@ class Cours
     public function setNbplaces(int $nbplaces): self
     {
         $this->nbplaces = $nbplaces;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }

@@ -34,3 +34,39 @@ modifierInformationCompte:
 app_logout:
     path: /logout
     methods: GET
+eleveAjouter:
+    path: /eleve/ajouter
+    controller: App\Controller\EleveController::ajouter
+eleveConsulter:
+    path: /eleve/consulter/{id}
+    controller: App\Controller\EleveController::consulterEleve
+etudiantLister:
+    path: /eleve/lister/{id}
+    controller: App\Controller\EleveController::listerEleve
+responsableAjouter:
+    path: /responsable/ajouter
+    controller: App\Controller\ResponsableController::ajouter
+responsableConsulter:
+    path: /responsable/consulter/{id}
+    controller: App\Controller\ResponsableController::consulterResponsable
+responsableLister:
+    path: /responsable/lister/{id}
+    controller: App\Controller\ResponsableController::listerResponsable
+coursAjouter:
+    path: /cours/ajouter
+    controller: App\Controller\CoursController::ajouter
+coursConsulter:
+    path: /cours/consulter/{id}
+    controller: App\Controller\CoursController::consultercours
+coursLister:
+    path: /cours/lister/{id}
+    controller: App\Controller\CoursController::listercours
+professeurAjouter:
+    path: /professeur/ajouter
+    controller: App\Controller\ProfesseurController::ajouter
+professeurConsulter:
+    path: /professeur/consulter/{id}
+    controller: App\Controller\ProfesseurController::consulterprofesseur
+professeurLister:
+    path: /professeur/lister/{id}
+    controller: App\Controller\ProfesseurController::listerprofesseur

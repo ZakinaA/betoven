@@ -4,9 +4,33 @@
 {% block body %}
     <div class="card card-body mt-4">
 
+        <h4>Instrument : </h4>{{instrument.typeIntrument.libelle}}
+        <h4>Classe de l'instrument : </h4>
+                    {% for ci in classeInstrument %}
+                    {{ci.libelle}}</br>
+                        {% endfor %}
         <h4>Numéro de série : </h4>{{instrument.numSerie}}
         <h4>Date d'achat : </h4>{{instrument.dateAchat.format('d/m/Y')}}
         <h4>Prix achat : </h4>{{instrument.prixAchat}}€
+        <h4>Marque : </h4>{{instrument.marque.libelle}}
+        <h4>Couleur :</h4>
+                    {% for c in couleursInstrument %}
+                    {{c.libelle}}</br>
+                        {% endfor %}
+        <h4>Accessoires :</h4>                
+                    {% for a in accessoireInstrument %}
+                    {{a.libelle}}</br>
+                        {% endfor %}
+        <h4>Prêts élève:</h4>                
+                    {% for p in pretInstrument %}
+                Nom/Prénom élève : {{p.nom}} {{p.prenom}}</br>                                     
+                Date de prêt : {{p.date_pret|date('d/m/Y')}}</br>
+                        {% endfor %}
+
+ 
+
+
+
 
 
     </div>
