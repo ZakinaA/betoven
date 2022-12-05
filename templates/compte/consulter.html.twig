@@ -8,7 +8,7 @@
                 <div class="card-header py-4" style="background: #EF4800;color: #000">
                     <h4 class="mb-0">
                         {{compte.prenom}} {{compte.nom}}
-                        <span class="badge bg-info rounded text-dark  float-end">Eleve</span>
+                        <span class="badge rounded text-dark  float-end" style="background: rgba(0,0,0,0.3);">Eleve</span>
                     </h4>
                 </div>
                 <div class="card-body">
@@ -30,7 +30,7 @@
                 <div class="card-header py-4" style="background: #EF4800;color: #000">
                     <h4 class="mb-0">
                         Mes cours
-                        <span class="badge bg-info rounded text-dark float-end">{{ inscription|length }}</span>
+                        <span class="badge rounded text-dark float-end" style="background: rgba(0,0,0,0.3);">{{ inscription|length }}</span>
                     </h4>
                 </div>
                 <div class="card-body">
@@ -39,7 +39,7 @@
                         <a href="{{ path('coursConsulter', { 'id': courOrder.courID }) }}" class="list-group-item list-group-item-action bg-light" aria-current="true">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-0">{{courOrder.libelle}}</h5>
-                                <p class="badge bg-info">{{courOrder.date_inscription|date('d/m/Y')}}</<p>
+                                <p class="badge" style="background: #EF4800;color: #000">{{courOrder.date_inscription|date('d/m/Y')}}</<p>
                             </div>
                             <!--<p class="mb-1">Some placeholder content in a paragraph.</p>
                             <small>And some small print.</small>-->
@@ -55,7 +55,7 @@
                     <div class="card-header py-4" style="background: #EF4800;color: #000">
                         <h4 class="mb-0">
                             Mes prêts d'instruments
-                            <span class="badge bg-info rounded text-dark float-end">{{ pretsInstruments|length }}</span>
+                            <span class="badge rounded text-dark float-end" style="background: rgba(0,0,0,0.3);">{{ pretsInstruments|length }}</span>
                         </h4>
 
                     </div>
@@ -65,7 +65,7 @@
                                 <a href="{{ path('instrumentConsulter', { 'id': pretInstrumentOrder.instrumentID }) }}" class="list-group-item list-group-item-action bg-light" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-0">{{pretInstrumentOrder.libelleInstrument}} #{{pretInstrumentOrder.num_serie}}</h5>
-                                        <p class="badge bg-info">Date de prêt : N/A</<p>
+                                        <p class="badge" style="background: #EF4800;color: #000">Date de prêt : N/A</<p>
                                     </div>
                                     <!--<p class="mb-1">Some placeholder content in a paragraph.</p>
                                     <small>And some small print.</small>-->
