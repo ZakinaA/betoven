@@ -59,6 +59,11 @@
                 <li class="nav-item border-start">
                     <a class="nav-link  {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': 1 }) }}">Information LEMOINE Julien (mode dev)</a>
                 </li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li class="nav-item border-start ">
+                    <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': app.user.id }) }}">Mes informations</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>
