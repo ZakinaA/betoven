@@ -34,10 +34,6 @@ modifierInformationCompte:
 app_logout:
     path: /logout
     methods: GET
-=======
-route_accueil:
-    path: /accueil
-    controller: App\Controller\EleveController::index
 eleveAjouter:
     path: /eleve/ajouter
     controller: App\Controller\EleveController::ajouter
@@ -56,15 +52,6 @@ responsableConsulter:
 responsableLister:
     path: /responsable/lister/{id}
     controller: App\Controller\ResponsableController::listerResponsable
-inscriptionAjouter:
-    path: /inscription/ajouter
-    controller: App\Controller\InscriptionController::ajouter
-inscriptionConsulter:
-    path: /inscription/consulter/{id}
-    controller: App\Controller\InscriptionController::consulterInscription
-inscriptionLister:
-    path: /inscription/lister/{id}
-    controller: App\Controller\InscriptionController::listerInscription
 coursAjouter:
     path: /cours/ajouter
     controller: App\Controller\CoursController::ajouter
@@ -74,15 +61,6 @@ coursConsulter:
 coursLister:
     path: /cours/lister/{id}
     controller: App\Controller\CoursController::listercours
-instrumentAjouter:
-    path: /instrument/ajouter
-    controller: App\Controller\InstrumentController::ajouter
-instrumentConsulter:
-    path: /instrument/consulter/{id}
-    controller: App\Controller\InstrumentController::consulterinstrument
-instrumentLister:
-    path: /instrument/lister/{id}
-    controller: App\Controller\InstrumentController::listerinstrument
 professeurAjouter:
     path: /professeur/ajouter
     controller: App\Controller\ProfesseurController::ajouter
