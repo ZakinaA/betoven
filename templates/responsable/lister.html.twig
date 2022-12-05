@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+		
+		LISTE DES ELEVES</br>
+		<table>
+		{% for e in pEleves %}
+		<tr>
+			<td><a href="{{ path('eleveConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
+			<td>{{ e.prenom }}</a></td>
+			<td>{{ e.dateNaiss|date('d/m/Y') }}</td>
+			<td>{{ e.adresse }}</a></td>
+			<td>{{ e.ville }}</a></td>
+			<td>{{ e.codePostal }}</a></td>
+			<td>{{ e.email }}</a></td>
+			<td>{{ e.tel1 }}</a></td>
+			<td>{{ e.tel2 }}</a></td>
+			<td>{{ e.tel3 }}</a></td>
+			<td>{{ e.quotientFamillial }}</a></td>
+	{% else %}
+		<tr>
+		<td>Aucun eleve n'a été trouvé.</td>
+		</tr>
+	{% endfor %}
+</table>
+    </body>
+</html>

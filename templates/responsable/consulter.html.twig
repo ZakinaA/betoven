@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>       
+		<h5>PAGE DE CONSULTATION D'UN RESPONSABLE</h5>
+ <p>
+  <table >
+     <tr><td>Id : </td><td>{{responsable.id}} </td></tr>
+	<tr><td>Nom : </td><td>{{responsable.nom}}</td>
+	<td  rowspan="8" class="imgEtu">
+					{% set photo = 'img/responsable/'~ responsable.id ~'.jpg' %}
+					<span class="zoom"><img src="{{ asset(photo | trans )}}" title="{{ responsable.prenom ~ " " ~ responsable.nom }}" alt="{{ responsable.prenom ~ " " ~ responsable.nom }}"/></span></td></tr> </td>
+   <tr><td>Prénom : </td><td>{{responsable.prenom}}</td></tr></tr>
+   <tr><td>Adresse : </td><td>{{responsable.adresse|date("d/m/Y")}}</td></tr>
+   <tr><td>Ville : </td><td>{{responsable.ville}}</td></tr></tr>
+   <tr><td>Code Postal : </td><td>{{responsable.codePostal}}</td></tr></tr>
+   <tr><td>Email : </td><td>{{responsable.email}}</td></tr></tr>
+   <tr><td>Tel1 : </td><td>{{responsable.tel1}}</td></tr></tr>
+   <tr><td>Tel2 : </td><td>{{responsable.tel2}}</td></tr></tr>
+   <tr><td>Tel3 : </td><td>{{responsable.tel3}}</td></tr></tr>
+   <tr><td>Quotient Famillial : </td><td>{{responsable.quotientFamillial}}</td></tr></tr>
+ </table>
+	
+	 
+    </body>
+</html>
