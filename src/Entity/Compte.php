@@ -53,7 +53,6 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
     private ?ProfesseurCours $professeur = null;
 
-
     #[ORM\Column(length: 255)]
     private ?string $rue = null;
 
@@ -278,6 +277,18 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->mail;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(string $rue): self
+    {
+        $this->rue = $rue;
+
+        return $this;
     }
 
 
