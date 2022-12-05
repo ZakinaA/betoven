@@ -2,37 +2,56 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 {% block body %}
-    <div class="card card-body mt-4">
-        <h4>Professeur : </h4>{{cours.professeur.compte.nom|upper}} {{cours.professeur.compte.prenom}}
-        <h4>Libelle du cours : </h4>{{cours.libelle}}
-        <h4>Âge requis : </h4>{{cours.ageMini}} 
-        <h4>Date : </h4>{{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}}
-    </div>
-        <div class="table-responsive">
-        <table class="table table-striped bg-white mt-2">
-            <thead class="bg-black text-white">
-            <tr>
-                <th scope="col">Participants</th>
-                <th scope="col">Rue</th>
-                <th scope="col">Ville</th>
-                <th scope="col">Contact</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for p in participants %}
-                <tr>
-                    <td><a href="{{ path('routeAdherentConsultationInformation', { 'id': p.eleve.compte.id }) }}" class="text-decoration-none">{{p.eleve.compte.nom|upper}} {{p.eleve.compte.prenom}}</a></td>
-                    <td>{{p.eleve.compte.numRue}} {{p.eleve.compte.rue}}</td>
-                    <td>{{p.eleve.compte.copos}} - {{p.eleve.compte.ville}}</td>
-                    <td>{{p.eleve.compte.tel}} - {{p.eleve.compte.mail}}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td>Aucun participants n'a été trouvé.</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card card-body">
+                <div class="card card-body bg-light shadow-sm mb-2">
+                    <h4 class="mb-0">{{cours.libelle}}</h4>
+                </div>
+                <div class="card card-body bg-light shadow-sm mb-2">
+                    <h4>{{cours.professeur.compte.nom|upper}} {{cours.professeur.compte.prenom}}</h4>
+                    <h6 class="mb-0">Professeur</h6>
+                </div>
+                <div class="card card-body bg-light shadow-sm mb-2">
+                    <h4>{{cours.ageMini}} </h4>
+                    <h6 class="mb-0">Âge requis</h6>
+                </div>
+                <div class="card card-body bg-light shadow-sm mb-2">
+                    <h4>{{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}}</h4>
+                    <h6 class="mb-0">Date</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table table-striped bg-white mt-0 mb-0 rounded">
+                        <thead class="bg-black text-white">
+                        <tr>
+                            <th scope="col">Participants</th>
+                            <th scope="col">Rue</th>
+                            <th scope="col">Ville</th>
+                            <th scope="col">Contact</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in participants %}
+                            <tr>
+                                <td><a href="{{ path('routeAdherentConsultationInformation', { 'id': p.eleve.compte.id }) }}" class="text-decoration-none">{{p.eleve.compte.nom|upper}} {{p.eleve.compte.prenom}}</a></td>
+                                <td>{{p.eleve.compte.numRue}} {{p.eleve.compte.rue}}</td>
+                                <td>{{p.eleve.compte.copos}} - {{p.eleve.compte.ville}}</td>
+                                <td>{{p.eleve.compte.tel}} - {{p.eleve.compte.mail}}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Aucun participants n'a été trouvé.</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}
