@@ -35,6 +35,9 @@ class Cours
     #[ORM\JoinColumn(nullable: false)]
     private ?ProfesseurCours $professeur = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
 
     public function __construct()
     {
@@ -133,6 +136,18 @@ class Cours
     public function setProfesseur(?ProfesseurCours $professeur): self
     {
         $this->professeur = $professeur;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
