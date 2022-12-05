@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EleveRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EleveRepository::class)]
@@ -14,68 +15,113 @@ class Eleve
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $Nom = null;
+    #[ORM\OneToOne(inversedBy: 'eleve', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Compte $compte = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $Prenom = null;
+    #[ORM\ManyToOne(inversedBy: 'enfants')]
+    private ?Compte $responsable = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $Date_Naiss = null;
+    #[ORM\OneToMany(mappedBy: 'inscriptions', targetEntity: Inscription::class, orphanRemoval: false)]
+    private Collection $inscriptions;
 
-    #[ORM\ManyToOne(inversedBy: 'eleves')]
-    private ?Responsable $eleve = null;
+    #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: PretInstrument::class)]
+    private Collection $pretinstrumentseleve;
+
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+        $this->pretinstrumentseleve = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getCompte(): ?Compte
     {
-        return $this->Nom;
+        return $this->compte;
     }
 
-    public function setNom(string $Nom): self
+    public function setCompte(Compte $compte): self
     {
-        $this->Nom = $Nom;
+        $this->compte = $compte;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getResponsable(): ?Compte
     {
-        return $this->Prenom;
+        return $this->responsable;
     }
 
-    public function setPrenom(string $Prenom): self
+    public function setResponsable(?Compte $responsable): self
     {
-        $this->Prenom = $Prenom;
+        $this->responsable = $responsable;
 
         return $this;
     }
 
-    public function getDateNaiss(): ?\DateTimeInterface
+    /**
+     * @return Collection<int, Inscription>
+     */
+    public function getInscriptions(): Collection
     {
-        return $this->Date_Naiss;
+        return $this->inscriptions;
     }
 
-    public function setDateNaiss(\DateTimeInterface $Date_Naiss): self
+    public function addInscription(Inscription $inscription): self
     {
-        $this->Date_Naiss = $Date_Naiss;
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions->add($inscription);
+            $inscription->setEleve($this);
+        }
 
         return $this;
     }
 
-    public function getEleve(): ?Responsable
+    public function removeInscription(Inscription $inscription): self
     {
-        return $this->eleve;
-    }
-
-    public function setEleve(?Responsable $eleve): self
-    {
-        $this->eleve = $eleve;
+        if ($this->inscriptions->removeElement($inscription)) {
+            // set the owning side to null (unless already changed)
+            if ($inscription->getEleve() === $this) {
+                $inscription->setEleve(null);
+            }
+        }
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, PretInstrument>
+     */
+    public function getPretinstrumentseleve(): Collection
+    {
+        return $this->pretinstrumentseleve;
+    }
+
+    public function addPretinstrumentseleve(PretInstrument $pretinstrumentseleve): self
+    {
+        if (!$this->pretinstrumentseleve->contains($pretinstrumentseleve)) {
+            $this->pretinstrumentseleve->add($pretinstrumentseleve);
+            $pretinstrumentseleve->setEleve($this);
+        }
+
+        return $this;
+    }
+
+    public function removePretinstrumentseleve(PretInstrument $pretinstrumentseleve): self
+    {
+        if ($this->pretinstrumentseleve->removeElement($pretinstrumentseleve)) {
+            // set the owning side to null (unless already changed)
+            if ($pretinstrumentseleve->getEleve() === $this) {
+                $pretinstrumentseleve->setEleve(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

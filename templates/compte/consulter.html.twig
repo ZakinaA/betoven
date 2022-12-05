@@ -1,0 +1,40 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+    <div class="card card-body mt-4">
+        <h4>Prenom : </h4>{{compte.prenom}}
+
+        <h4>Nom : </h4>{{compte.nom}}
+        <hr>
+        <h1>(Mise en forme non contractuel)</h1>
+
+        <h4>Type :</h4>
+        {% if compte.eleve != null %}
+            est eleve<br>
+        {% elseif compte.professeur != null %}
+            est professeur<br>
+        {% endif %}
+        {% if compte.eleve != null and  compte.eleve.responsable != null %}
+        <h4>Prenom du responsable : </h4>{{compte.eleve.responsable.prenom}}
+        <h4>Nom du responsable : </h4>{{compte.eleve.responsable.nom}}
+
+        {% endif %}
+        <h4>Cours :</h4>
+        {% for courOrder in inscription %}
+        <b>Date inscription :</b> {{courOrder.date_inscription|date('d/m/Y')}}
+            <b>Libelle cour :</b>  {{courOrder.libelle}}
+            <br>
+        {% endfor %}
+        {% if compte.eleve != null and  compte.eleve.responsable != null %}
+            <hr>
+            <h4>Pret instruments :</h4>
+            {% for pretInstrumentOrder in pretsInstruments %}
+                <b>Nom de l'instrument : </b> {{pretInstrumentOrder.libelleInstrument}}
+                <b>(num serie) : </b>{{pretInstrumentOrder.num_serie}}
+                <br>
+            {% endfor %}
+        {% endif %}
+    </div><br>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

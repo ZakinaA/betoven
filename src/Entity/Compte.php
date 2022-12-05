@@ -3,10 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\CompteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[ORM\Entity(repositoryClass: CompteRepository::class)]
-class Compte
+#[UniqueEntity(fields: ['mail'], message: 'There is already an account with this email')]
+class Compte implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,26 +26,44 @@ class Compte
     #[ORM\Column(length: 50)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 3)]
     private ?string $numRue = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 50)]
     private ?string $copos = null;
 
     #[ORM\Column(length: 50)]
     private ?string $ville = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 50)]
     private ?string $tel = null;
 
     #[ORM\Column(length: 50)]
     private ?string $mail = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 70)]
     private ?string $motDePasse = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
+    private ?Eleve $eleve = null;
+
+    #[ORM\OneToMany(mappedBy: 'responsable', targetEntity: Eleve::class)]
+    private Collection $enfants;
+
+    #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
+    private ?ProfesseurCours $professeur = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $rue = null;
+
+    #[ORM\Column]
+    private array $roles = [];
+
+    /*public function __construct()
+    {
+        $this->eleve = new ArrayCollection();
+        $this->enfants = new ArrayCollection();
+    }*/
 
     public function getId(): ?int
     {
@@ -128,7 +153,9 @@ class Compte
 
         return $this;
     }
-
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
     public function getMotDePasse(): ?string
     {
         return $this->motDePasse;
@@ -139,6 +166,128 @@ class Compte
         $this->motDePasse = $motDePasse;
 
         return $this;
+    }
+
+    public function getEleve(): ?Eleve
+    {
+        return $this->eleve;
+    }
+
+    public function setEleve(Eleve $eleve): self
+    {
+        // set the owning side of the relation if necessary
+        if ($eleve->getCompte() !== $this) {
+            $eleve->setCompte($this);
+        }
+
+        $this->eleve = $eleve;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Eleve>
+     */
+    public function getEnfants(): Collection
+    {
+        return $this->enfants;
+    }
+
+    public function addEnfant(Eleve $enfant): self
+    {
+        if (!$this->enfants->contains($enfant)) {
+            $this->enfants->add($enfant);
+            $enfant->setResponsable($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnfant(Eleve $enfant): self
+    {
+        if ($this->enfants->removeElement($enfant)) {
+            // set the owning side to null (unless already changed)
+            if ($enfant->getResponsable() === $this) {
+                $enfant->setResponsable(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProfesseur(): ?ProfesseurCours
+    {
+        return $this->professeur;
+    }
+
+    public function setProfesseur(ProfesseurCours $professeur): self
+    {
+        // set the owning side of the relation if necessary
+        if ($professeur->getCompte() !== $this) {
+            $professeur->setCompte($this);
+        }
+
+        $this->professeur = $professeur;
+
+        return $this;
+    }
+    /**
+     * @see UserInterface
+     */
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = [];
+
+        return $this;
+    }
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setPassword(string $password): self
+    {
+
+        $this->motDePasse = $password;
+        return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->mail;
+    }
+
+
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getRue(): ?string

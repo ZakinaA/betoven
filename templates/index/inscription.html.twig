@@ -1,10 +1,13 @@
+{# templates/index/inscription.html.twig #}
+
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link href="./dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>
@@ -29,7 +32,10 @@
                                 <div class="text-center">
                                     <div class="h5 text-gray-900 mb-4 fw-bold">Inscription</div>
                                 </div>
-                                <div class="mb-3">
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                {{ form_end(form) }}
+                                <!--<div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Adresse mail</label>
                                     <input type="email" class="form-control rounded-pill" id="exampleInputPassword1">
                                 </div>
@@ -40,7 +46,7 @@
                                 <div class="mb-3">
                                     <label for="prenomInput" class="form-label">Prénom</label>
                                     <input type="text" class="form-control rounded-pill" id="prenomInput">
-                                </div>
+                                </div>-->
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Adresse (numéro et rue)</label>
                                     <div class="row">

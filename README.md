@@ -28,3 +28,11 @@ Bootstrap 5.2
 ``` 
 #ID ISSUE - NOM
 ```
+
+## Comptes de test : 
+
+(Compte ...)
+```
+Adresse mail : benjamin@e-music.fr
+Mot de passe : mpBenjamin
+```
