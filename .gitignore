@@ -22,3 +22,5 @@
 ###< symfony/phpunit-bridge ###
 /deploy.bat
 /migrations/old/
+
+/src/Entity/COURS.php

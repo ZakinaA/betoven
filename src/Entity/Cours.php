@@ -3,9 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CoursRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
@@ -20,27 +17,13 @@ class Cours
     private ?string $libelle = null;
 
     #[ORM\Column]
-    private ?int $ageMini = null;
+    private ?int $agemini = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $heureDebut = null;
+    #[ORM\Column]
+    private ?int $agemaxi = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $heureFin = null;
-
-    #[ORM\OneToMany(mappedBy: 'cour', targetEntity: Inscription::class)]
-    private Collection $inscriptions;
-
-    #[ORM\ManyToOne(inversedBy: 'profCours')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?ProfesseurCours $professeur = null;
-
-
-    public function __construct()
-    {
-        $this->inscriptions = new ArrayCollection();
-        $this->professeur = new ArrayCollection();
-    }
+    #[ORM\Column]
+    private ?int $nbplaces = null;
 
     public function getId(): ?int
     {
@@ -59,80 +42,38 @@ class Cours
         return $this;
     }
 
-    public function getAgeMini(): ?int
+    public function getAgemini(): ?int
     {
-        return $this->ageMini;
+        return $this->agemini;
     }
 
-    public function setAgeMini(int $ageMini): self
+    public function setAgemini(int $agemini): self
     {
-        $this->ageMini = $ageMini;
+        $this->agemini = $agemini;
 
         return $this;
     }
 
-    public function getHeureDebut(): ?\DateTimeInterface
+    public function getAgemaxi(): ?int
     {
-        return $this->heureDebut;
+        return $this->agemaxi;
     }
 
-    public function setHeureDebut(\DateTimeInterface $heureDebut): self
+    public function setAgemaxi(int $agemaxi): self
     {
-        $this->heureDebut = $heureDebut;
+        $this->agemaxi = $agemaxi;
 
         return $this;
     }
 
-    public function getHeureFin(): ?\DateTimeInterface
+    public function getNbplaces(): ?int
     {
-        return $this->heureFin;
+        return $this->nbplaces;
     }
 
-    public function setHeureFin(\DateTimeInterface $heureFin): self
+    public function setNbplaces(int $nbplaces): self
     {
-        $this->heureFin = $heureFin;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Inscription>
-     */
-    public function getInscriptions(): Collection
-    {
-        return $this->inscriptions;
-    }
-
-    public function addInscription(Inscription $inscription): self
-    {
-        if (!$this->inscriptions->contains($inscription)) {
-            $this->inscriptions->add($inscription);
-            $inscription->setCour($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInscription(Inscription $inscription): self
-    {
-        if ($this->inscriptions->removeElement($inscription)) {
-            // set the owning side to null (unless already changed)
-            if ($inscription->getCour() === $this) {
-                $inscription->setCour(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getProfesseur(): ?ProfesseurCours
-    {
-        return $this->professeur;
-    }
-
-    public function setProfesseur(?ProfesseurCours $professeur): self
-    {
-        $this->professeur = $professeur;
+        $this->nbplaces = $nbplaces;
 
         return $this;
     }
