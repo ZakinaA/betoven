@@ -31,15 +31,21 @@ class Instrument
     #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: Accessoire::class)]
     private Collection $accessoires;
 
-    #[ORM\OneToMany(mappedBy: 'instrument', targetEntity: PretInstrument::class)]
-    private Collection $pretsinstrument;
+    #[ORM\ManyToOne(inversedBy: 'instruments')]
+    private ?TypeInstrument $typeIntrument = null;
+
+    #[ORM\ManyToOne(inversedBy: 'instruments')]
+    private ?Marque $marque = null;
+
+    #[ORM\ManyToMany(targetEntity: couleur::class, inversedBy: 'instruments')]
+    private Collection $couleur;
 
 
     public function __construct()
     {
         $this->couleurs = new ArrayCollection();
         $this->accessoires = new ArrayCollection();
-        $this->pretsinstrument = new ArrayCollection();
+        $this->couleur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,33 +146,35 @@ class Instrument
         return $this;
     }
 
+    public function getTypeIntrument(): ?TypeInstrument
+    {
+        return $this->typeIntrument;
+    }
+
+    public function setTypeIntrument(?TypeInstrument $typeIntrument): self
+    {
+        $this->typeIntrument = $typeIntrument;
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marque $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
     /**
-     * @return Collection<int, PretInstrument>
+     * @return Collection<int, couleur>
      */
-    public function getPretsinstrument(): Collection
+    public function getCouleur(): Collection
     {
-        return $this->pretsinstrument;
-    }
-
-    public function addPretsinstrument(PretInstrument $pretsinstrument): self
-    {
-        if (!$this->pretsinstrument->contains($pretsinstrument)) {
-            $this->pretsinstrument->add($pretsinstrument);
-            $pretsinstrument->setInstrument($this);
-        }
-
-        return $this;
-    }
-
-    public function removePretsinstrument(PretInstrument $pretsinstrument): self
-    {
-        if ($this->pretsinstrument->removeElement($pretsinstrument)) {
-            // set the owning side to null (unless already changed)
-            if ($pretsinstrument->getInstrument() === $this) {
-                $pretsinstrument->setInstrument(null);
-            }
-        }
-
-        return $this;
+        return $this->couleur;
     }
 }
