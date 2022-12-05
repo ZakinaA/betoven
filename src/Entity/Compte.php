@@ -6,9 +6,14 @@ use App\Repository\CompteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[ORM\Entity(repositoryClass: CompteRepository::class)]
-class Compte
+#[UniqueEntity(fields: ['mail'], message: 'There is already an account with this email')]
+class Compte implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -48,11 +53,18 @@ class Compte
     #[ORM\OneToOne(mappedBy: 'compte', cascade: ['persist', 'remove'])]
     private ?ProfesseurCours $professeur = null;
 
-    public function __construct()
+
+    #[ORM\Column(length: 255)]
+    private ?string $rue = null;
+
+    #[ORM\Column]
+    private array $roles = [];
+
+    /*public function __construct()
     {
         $this->eleve = new ArrayCollection();
         $this->enfants = new ArrayCollection();
-    }
+    }*/
 
     public function getId(): ?int
     {
@@ -142,7 +154,9 @@ class Compte
 
         return $this;
     }
-
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
     public function getMotDePasse(): ?string
     {
         return $this->motDePasse;
@@ -218,6 +232,73 @@ class Compte
 
         return $this;
     }
+    /**
+     * @see UserInterface
+     */
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = [];
+
+        return $this;
+    }
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->motDePasse;
+    }
+
+    public function setPassword(string $password): self
+    {
+
+        $this->motDePasse = $password;
+        return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->mail;
+    }
 
 
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(string $rue): self
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
 }

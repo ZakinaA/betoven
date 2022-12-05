@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-
+use App\Form\InscriptionType;
 
 class IndexController extends AbstractController
 {
@@ -13,12 +13,5 @@ class IndexController extends AbstractController
     public function index()
     {
         return $this->render('index/index.html.twig');
-    }
-
-    public function inscriptionPage()
-    {
-        return $this->render('index/inscription.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
     }
 }

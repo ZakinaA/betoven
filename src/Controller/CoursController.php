@@ -37,7 +37,6 @@ class CoursController extends AbstractController
     public function listerCours(ManagerRegistry $doctrine){
 
         $listeCours = $doctrine->getRepository(Cours::class)->findAll();
-
         //var_dump($instruments);
         return $this->render('cours/lister.html.twig', [
             'pCours' => $listeCours,]);
