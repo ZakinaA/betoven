@@ -103,11 +103,13 @@
                 {% endif %}
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0 text-end">
-            {% if app.user.Roles[0] == "ROLE_ADMIN" %}
-                <li class="nav-item">
-                    <a class="nav-link {% if app.request.attributes.get('_route') == 'adminIndexPage' %}active{% endif %}" href="{{ path('adminIndexPage') }}">Pannel de configuration</a>
-                </li>
-            {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    {% if app.user.Roles[0] == "ROLE_ADMIN" %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'adminIndexPage' %}active{% endif %}" href="{{ path('adminIndexPage') }}">Pannel de configuration</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
             </ul>
         </div>
     </div>

@@ -85,3 +85,6 @@ professeurLister:
 adminIndexPage:
     path: /admin/index
     controller: App\Controller\AdminController::indexAdmin
+adminListerUtilisateurs:
+    path: /admin/listerUtilisateurs
+    controller: App\Controller\AdminController::listerUtilisateurs

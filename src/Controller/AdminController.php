@@ -14,4 +14,12 @@ class AdminController extends AbstractController
             'controller_name' => 'AdminController',
         ]);
     }
+
+    public function listerUtilisateurs(): Response
+    {
+        return $this->render('admin/listerUtilisateurs.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
+    }
 }
+
