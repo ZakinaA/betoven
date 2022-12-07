@@ -50,7 +50,8 @@ class AdminController extends AbstractController
 
     public function updateAccountUser(ManagerRegistry $doctrine,$id, Request $request) {
         //récupération de l'étudiant dont l'id est passé en paramètre
-        $compte = $doctrine->getRepository(Compte::class)->find($id);
+        $entityManager = $doctrine->getManager();
+        $compte = $entityManager->getRepository(Compte::class)->find($id);
 
         if (!$compte) {
             throw $this->createNotFoundException('Aucun compte trouvé avec le numéro '.$id);
@@ -63,7 +64,6 @@ class AdminController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
 
                 $etudiant = $form->getData();
-                $entityManager = $doctrine()->getManager();
                 $entityManager->persist($etudiant);
                 $entityManager->flush();
 
@@ -75,7 +75,7 @@ class AdminController extends AbstractController
             }
             else{
                 //var_dump($form);
-                return $this->render('admin/modifier-utilisateur.html.twig', array('form' => $form->createView(),));
+                return $this->render('admin/modifier-utilisateur.html.twig', array('form' => $form->createView(),'compteinfo' => $compte));
             }
         }
     }

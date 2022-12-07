@@ -91,12 +91,6 @@
                         Les cours
                     </a>
                 </li>
-                <li class="nav-item border-start ">
-                    <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': 2 }) }}">Information Loiseau Benjamin (mode dev)</a>
-                </li>
-                <li class="nav-item border-start">
-                    <a class="nav-link  {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': 1 }) }}">Information LEMOINE Julien (mode dev)</a>
-                </li>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li class="nav-item border-start ">
                     <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': app.user.id }) }}">Mes informations</a>
@@ -107,7 +101,7 @@
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {% if app.user.Roles[0] == "ROLE_ADMIN" %}
                         <li class="nav-item">
-                            <a class="nav-link {% if app.request.attributes.get('_route') == 'adminIndexPage' %}active{% endif %}" href="{{ path('adminIndexPage') }}">Pannel de configuration</a>
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'adminIndexPage' or  app.request.attributes.get('_route') == 'accessAccount' or  app.request.attributes.get('_route') == 'adminListerUtilisateurs' or  app.request.attributes.get('_route') == 'adminUpdateAccount' %}active{% endif %}" href="{{ path('adminIndexPage') }}">Panel de configuration</a>
                         </li>
                     {% endif %}
                 {% endif %}
@@ -131,6 +125,5 @@
     </div>
 </div>
 {% block footer %}{% endblock %}
-
 </body>
 </html>
