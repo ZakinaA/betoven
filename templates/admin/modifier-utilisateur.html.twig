@@ -1,0 +1,105 @@
+{% block title %}{{ 'e-Music : Modifier un utilisateur (Admin)' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+{# templates/etudiant/ajouter.html.twig #}
+    {{ form_start(form) }}
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card card-body shadow-none">
+                <p class="fw-bold">Informations générales</p>
+                {{ form_row(form.mail) }}
+                {{ form_row(form.nom) }}
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.tel) }}
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Adresse (numéro et rue)</label>
+                    <div class="row">
+                        {{ form_row(form.numRue) }}
+                        {{ form_row(form.rue) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ form_row(form.copos) }}
+                    </div>
+                    <div class="col-md-8">
+                        <label for="exampleInputPassword1" class="form-label">Ville</label>
+                        {{ form_row(form.ville) }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Responsable</label>
+                    <select class="form-select rounded-pill">
+                        <option value="">Aucun responsable</option>
+                        <option value="">Test</option>
+                    </select>
+                </div>
+
+                {{ form_row(form.update) }}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-body shadow-none">
+                <p class="fw-bold">Gérer ses inscriptions</p>
+                <div class="table-responsive mb-0">
+                    <table class="table table-striped border shadow-none mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Cours</th>
+                            <th scope="col" class="text-end">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="align-middle">
+                            <td>rr</td>
+                            <td><button type="button" class="btn btn-danger float-end btn-sm rounded-pill" onclick="deleteInscription()">Supprimer l'inscription</button></td>
+                        </tr>
+                        <tr class="align-middle">
+                            <td>rr</td>
+                            <td><button type="button" class="btn btn-danger float-end btn-sm rounded-pill" onclick="deleteInscription()">Supprimer l'inscription</button></td>
+                        </tr>
+                        <tr class="align-middle">
+                            <td>rr</td>
+                            <td><button type="button" class="btn btn-danger float-end btn-sm rounded-pill" onclick="deleteInscription()">Supprimer l'inscription</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card card-body shadow-none mt-2">
+                <p class="fw-bold">Gestion des paiements</p>
+                <div class="table-responsive mb-0">
+                    <table class="table table-striped border shadow-none mb-0">
+                        <thead>
+                        <tr>
+                            <th scope="col">Date de paiement</th>
+                            <th scope="col">Statut du paiement</th>
+                            <th scope="col" class="text-end">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="align-middle">
+                            <td>2022-12-07</td>
+                            <td>En attente de validation</td>
+                            <td><button type="button" class="btn btn-danger float-end btn-sm rounded-pill" onclick="deleteInscription()">Supprimer l'inscription</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function deleteInscription() {
+            $('#liveToastJSContent').text('L\'inscription à ce cours a bien été supprimé');
+            $("#liveToastJS").toast({delay: 3500});
+            $("#liveToastJS").toast('show');
+        };
+    </script>
+
+
+{{ form_end(form) }}
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

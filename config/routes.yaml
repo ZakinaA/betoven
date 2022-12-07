@@ -91,3 +91,6 @@ adminListerUtilisateurs:
 accessAccount:
     path: /compte/updateAccess
     controller: App\Controller\AdminController::cartUpdateAction
+adminUpdateAccount:
+    path: /admin/modifierutilisateur/{id}
+    controller: App\Controller\AdminController::updateAccountUser

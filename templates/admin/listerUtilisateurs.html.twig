@@ -20,7 +20,7 @@
                 <td class="align-middle">{{ compteOrder.nom }}</td>
                 <td class="align-middle">{{ compteOrder.prenom }}</td>
                 <td class="align-middle">
-                    <button class="btn btn-info rounded-pill float-end btn-sm">Modifier les informations</button>
+                    <a href="{{ path('adminUpdateAccount', { 'id': compteOrder.id }) }}" class="btn btn-info rounded-pill float-end btn-sm">Modifier les informations</a>
                     <div id="buttonActivateAccount{{ compteOrder.id }}">
 
                         {% if compteOrder.actif == 0 %}

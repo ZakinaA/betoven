@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Compte;
-
+use App\Form\EditUtilisateurAdminType;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -46,6 +46,38 @@ class AdminController extends AbstractController
         $entityManager->flush();
 
         return new JsonResponse(['result' => 'ok', 'actiftype' => $compte->getActif()]);
+    }
+
+    public function updateAccountUser(ManagerRegistry $doctrine,$id, Request $request) {
+        //récupération de l'étudiant dont l'id est passé en paramètre
+        $compte = $doctrine->getRepository(Compte::class)->find($id);
+
+        if (!$compte) {
+            throw $this->createNotFoundException('Aucun compte trouvé avec le numéro '.$id);
+        }
+        else
+        {
+            $form = $this->createForm(EditUtilisateurAdminType::class, $compte);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $etudiant = $form->getData();
+                $entityManager = $doctrine()->getManager();
+                $entityManager->persist($etudiant);
+                $entityManager->flush();
+
+                $listerUtilisateurs = $doctrine->getRepository(Compte::class)->findAll();
+                //var_dump($listerUtilisateurs);
+                return $this->render('admin/listerUtilisateurs.html.twig', [
+                    'pListerUtilisateurs' => $listerUtilisateurs
+                ]);
+            }
+            else{
+                //var_dump($form);
+                return $this->render('admin/modifier-utilisateur.html.twig', array('form' => $form->createView(),));
+            }
+        }
     }
 }
 
