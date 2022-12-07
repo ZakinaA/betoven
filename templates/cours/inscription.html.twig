@@ -17,7 +17,53 @@
                         <option value="4">Quatre fois</option>
                     </select>
                 </div>
+                <style>
+                    .form-group .form-control {
+                        padding-left: 2.375rem;
+
+                    }
+
+                    .form-group .form-control-icon {
+                        position: absolute;
+                        z-index: 2;
+                        display: block;
+                        width: 2.375rem;
+                        height: 2.375rem;
+                        line-height: 2.375rem;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #aaa;
+                    }
+                </style>
                 <div id="datesPaiements"></div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Numéro de carte bleue</label>
+                    <div class="form-group">
+                        <span class="bi bi-credit-card form-control-icon"></span>
+                        <input type="text" class="form-control rounded-pill" placeholder="CB NUM">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Date d'expiration</label>
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <input type="number" class="form-control rounded-pill" maxlength="2" value="1">
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-select rounded-pill text-center">
+                                <option>22</option>
+                                <option>23</option>
+                                <option>24</option>
+                                <option>25</option>
+                                <option>26</option>
+                                <option>27</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <img src="https://s2.qwant.com/thumbr/700x0/f/6/98a1f7703d1b31b8b8e50016dd304cbe63b41718474bd6793777d54150dfeb/cb_visa_mastercard_logo-1.png?u=https%3A%2F%2Fwww.modeetmastour.com%2Fimg%2Fcms%2Fcb_visa_mastercard_logo-1.png&q=0&b=1&p=0&a=0" width="220">
 
             </div>
 
@@ -25,6 +71,8 @@
         <div class="col-md-3">
 
         </div>
+
+
     </div>
     <script>
         function facilitePaiementFunc(){
@@ -42,7 +90,7 @@
                     }
                 };
             }
-
+            $('#datesPaiements').append('<button class="btn btn-primary rounded-pill float-end">Valider mon inscription</button>');
         };
     </script>
 {% endblock %}
