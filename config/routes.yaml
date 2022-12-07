@@ -88,3 +88,6 @@ adminIndexPage:
 adminListerUtilisateurs:
     path: /admin/listerUtilisateurs
     controller: App\Controller\AdminController::listerUtilisateurs
+accessAccount:
+    path: /compte/updateAccess
+    controller: App\Controller\AdminController::cartUpdateAction

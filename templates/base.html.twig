@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% block stylesheets %}{% endblock %}
 </head>
 <style>
@@ -118,6 +119,18 @@
 <div class="container-fluid">
     {% block body %}{% endblock %}
 </div>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11;">
+    <div id="liveToastJS" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <div class="rounded" style="width: 1rem;height: 1rem;margin-right: 1.3em;" id="liveToastJSStatusColor"> </div>
+            <strong class="me-auto">Alerte Pop Up</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="liveToastJSContent">
+        </div>
+    </div>
+</div>
 {% block footer %}{% endblock %}
+
 </body>
 </html>
