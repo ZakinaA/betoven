@@ -94,3 +94,6 @@ accessAccount:
 adminUpdateAccount:
     path: /admin/modifierutilisateur/{id}
     controller: App\Controller\AdminController::updateAccountUser
+coursInscription:
+    path: /cours/inscription/{id}
+    controller: App\Controller\CoursController::inscriptionCours

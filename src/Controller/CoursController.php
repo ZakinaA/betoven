@@ -46,4 +46,11 @@ class CoursController extends AbstractController
         return $this->render('cours/lister.html.twig', [
             'pCours' => $listeCours,]);
     }
+
+    public function inscriptionCours(ManagerRegistry $doctrine){
+
+       // $listeCours = $doctrine->getRepository(Cours::class)->findAll();
+        return $this->render('cours/inscription.html.twig', []);
+    }
+
 }

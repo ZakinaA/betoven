@@ -1,0 +1,49 @@
+{% block title %}{{ 'e-Music : Consultation du cour' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.css') }}">{% endblock %}
+{% block body %}
+    <div class="row mt-4">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <div class="card card-body shadow-sm border-0">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Facilité de paiement*</label>
+                    <select class="form-select rounded-pill" id="selectFacilitePaiement" onchange="facilitePaiementFunc()" required>
+                        <option value="1">Une fois</option>
+                        <option value="2">Deux fois</option>
+                        <option value="3">Trois fois</option>
+                        <option value="4">Quatre fois</option>
+                    </select>
+                </div>
+                <div id="datesPaiements"></div>
+
+            </div>
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+    <script>
+        function facilitePaiementFunc(){
+            let facilitePaiementVal = parseInt($('#selectFacilitePaiement').find(":selected").val());
+            $('#datesPaiements').html('');
+            if(facilitePaiementVal == 1) {
+                $('#datesPaiements').append('<div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Date de paiement</label><input class="form-control rounded-pill" type="date" value=""></div>');
+            } else {
+                for (let facilitePaiement = 0; facilitePaiement < facilitePaiementVal; facilitePaiement++) {
+
+                    if(facilitePaiement == 0) {
+                        $('#datesPaiements').append('<div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Date de 1er paiement</label><input class="form-control rounded-pill" type="date" value=""></div>');
+                    } else {
+                        $('#datesPaiements').append('<div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Date de '+(facilitePaiement+1)+'ème paiement</label><input class="form-control rounded-pill" type="date" value=""></div>');
+                    }
+                };
+            }
+
+        };
+    </script>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}
