@@ -39,6 +39,21 @@ class InscriptionRepository extends ServiceEntityRepository
         }
     }
 
+    public function trouverInscriptionID(int $eleveID, int $coursID) : array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT id FROM inscription 
+            WHERE cour_id = '.$coursID.' && eleve_id = '.$eleveID.' GROUP by eleve_id
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Inscription[] Returns an array of Inscription objects
 //     */

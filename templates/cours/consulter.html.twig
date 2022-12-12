@@ -1,39 +1,61 @@
-{% block title %}{{ 'e-Music : Consultation du cour' }}{% endblock %}
+{% block title %}{{ 'e-Music : Consultation du cours' }}{% endblock %}
 {% extends 'base.html.twig' %}
-{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.css') }}">{% endblock %}
 {% block body %}
-    <div class="card card-body mt-4">
-        <h4>Professeur : </h4>{{cours.professeur.compte.nom|upper}} {{cours.professeur.compte.prenom}}
-        <h4>Libelle du cours : </h4>{{cours.libelle}}
-        <h4>Âge requis : </h4>{{cours.ageMini}} 
-        <h4>Heure de début : </h4>{{cours.heureDebut|date('H:i')}}
-        <h4>Heure de Fin : </h4>{{cours.heureDebut|date('H:i')}}
-    </div>
-        <div class="table-responsive">
-        <table class="table table-striped bg-white mt-2">
-            <thead class="bg-black text-white">
-            <tr>
-                <th scope="col">Participants</th>
-                <th scope="col">Rue</th>
-                <th scope="col">Ville</th>
-                <th scope="col">Contact</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for p in participants %}
-                <tr>
-                    <td><a href="{{ path('routeAdherentConsultationInformation', { 'id': p.eleve.compte.id }) }}" class="text-decoration-none">{{p.eleve.compte.nom|upper}} {{p.eleve.compte.prenom}}</a></td>
-                    <td>{{p.eleve.compte.numRue}} {{p.eleve.compte.rue}}</td>
-                    <td>{{p.eleve.compte.copos}} - {{p.eleve.compte.ville}}</td>
-                    <td>{{p.eleve.compte.tel}} - {{p.eleve.compte.mail}}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td>Aucun participants n'a été trouvé.</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card card-body border-0 shadow-sm">
+                <h4 class="fw-bold mb-0">{{cours.libelle}}</h4>
+            </div>
+            <div class="list-group mt-2 shadow-sm">
+                <a href="{{ path('routeAdherentConsultationInformation', { 'id': cours.professeur.compte.id }) }}" class="list-group-item list-group-item-action">
+                    {{cours.professeur.compte.nom|upper}} {{cours.professeur.compte.prenom}} (Professeur)
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    {{cours.ageMini}} ans (Age requis)
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    {{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}} (Date du cours) (Dans : 04 jours 16h)
+                </a>
+            </div>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                {% if verificationInscription == null %}
+                    <a href="{{ path('coursInscription', { 'id': cours.id }) }}" class="btn btn-primary mt-2 w-100 shadow-sm">M'inscrire à ce cours</a>
+                {% else %}
+                    <button class="btn btn-success mt-2 w-100 shadow-sm" disabled><i class="bi bi-check-circle-fill"></i> Vous êtes inscrit</button>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm">
+                <div class="table-responsive border-0">
+                    <table class="table table-striped bg-white mt-0 mb-0 rounded table-bordered ">
+                        <thead class="bg-light text-dark">
+                        <tr>
+                            <th scope="col">Participants</th>
+                            <th scope="col">Rue</th>
+                            <th scope="col">Ville</th>
+                            <th scope="col">Contact</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in participants %}
+                            <tr>
+                                <td><a href="{{ path('routeAdherentConsultationInformation', { 'id': p.eleve.compte.id }) }}" class="text-decoration-none">{{p.eleve.compte.nom|upper}} {{p.eleve.compte.prenom}}</a></td>
+                                <td>{{p.eleve.compte.numRue}} {{p.eleve.compte.rue}}</td>
+                                <td>{{p.eleve.compte.copos}} - {{p.eleve.compte.ville}}</td>
+                                <td>{{p.eleve.compte.tel}} - {{p.eleve.compte.mail}}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>Aucun participants n'a été trouvé.</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

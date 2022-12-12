@@ -59,11 +59,10 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    public function __construct()
-    {
-        $this->enfants = new ArrayCollection();
-    }
+    #[ORM\Column]
+    private ?int $actif = null;
 
+    
     /*public function __construct()
     {
         $this->eleve = new ArrayCollection();
@@ -303,6 +302,18 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRue(string $rue): self
     {
         $this->rue = $rue;
+
+        return $this;
+    }
+
+    public function getActif(): ?int
+    {
+        return $this->actif;
+    }
+
+    public function setActif(int $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }
