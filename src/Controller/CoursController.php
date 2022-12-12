@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Form\CoursType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ use App\Entity\Inscription;
 use App\Entity\ProfesseurCours;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+
 class CoursController extends AbstractController
 {
     #[Route('/cours', name: 'app_cours')]
@@ -34,7 +36,7 @@ class CoursController extends AbstractController
             $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
         }
         //
-
+        $verificationInscription  = "";
         //var_dump($user);
         if (!$cours) {
             throw $this->createNotFoundException(
@@ -124,5 +126,30 @@ class CoursController extends AbstractController
         $entityManager->flush();
 
         return new JsonResponse(['result' => 'ok', 'coursid' => (int) $coursid, 'eleveid' =>(int) $eleveid, 'datepaiement' => $datePaiement]);
+    }
+
+    public function ajouter(ManagerRegistry $doctrine,Request $request){
+        
+        $cours = new Cours();
+	    $form = $this->createForm(CoursType::class, $cours);
+	    $form->handleRequest($request);
+ 
+        if ($form->isSubmitted() && $form->isValid()) {
+    
+            $cours = $form->getData();
+    
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($cours);
+            $entityManager->flush();
+            
+            return $this->forward('App\Controller\CoursController::consulterCours', 
+            [
+                'id'  => $cours->getId(),
+            ]);
+        }
+        else
+        {
+            return $this->render('cours/ajouter.html.twig', array('form' => $form->createView(),));
+        }
     }
 }
