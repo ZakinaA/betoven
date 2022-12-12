@@ -80,8 +80,8 @@ professeurConsulter:
     path: /professeur/consulter/{id}
     controller: App\Controller\AdministrateurController::consulterProfesseur
 professeurLister:
-    path: /professeur/lister/
-    controller: App\Controller\AdministrateurController::listerProfesseur
+    path: /professeur/lister/{id}
+    controller: App\Controller\ProfesseurController::listerprofesseur
 adminIndexPage:
     path: /admin/index
     controller: App\Controller\AdminController::indexAdmin
@@ -91,3 +91,15 @@ adminListerUtilisateurs:
 accessAccount:
     path: /compte/updateAccess
     controller: App\Controller\AdminController::cartUpdateAction
+adminUpdateAccount:
+    path: /admin/modifierutilisateur/{id}
+    controller: App\Controller\AdminController::updateAccountUser
+coursInscription:
+    path: /cours/inscription/{id}
+    controller: App\Controller\CoursController::inscriptionCours
+ajouterInscriptionCours:
+    path: /cours/ajouterInscription
+    controller: App\Controller\CoursController::ajouterInscription
+inscriptionCours:
+    path: /cours/inscriptionCours
+    controller: App\Controller\CoursController::inscriptionCoursFunc

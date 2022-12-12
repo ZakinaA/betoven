@@ -1,0 +1,65 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{%  block extraMenu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="table-responsive mt-2">
+        <table class="table table-striped bg-light border shadow-sm">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col" class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for compteOrder in pListerUtilisateurs %}
+            <tr>
+                <td class="align-middle">{{ compteOrder.nom }}</td>
+                <td class="align-middle">{{ compteOrder.prenom }}</td>
+                <td class="align-middle">
+                    <a href="{{ path('adminUpdateAccount', { 'id': compteOrder.id }) }}" class="btn btn-info rounded-pill float-end btn-sm">Modifier les informations</a>
+                    <div id="buttonActivateAccount{{ compteOrder.id }}">
+
+                        {% if compteOrder.actif == 0 %}
+                            <button class="btn btn-success rounded-pill float-end me-2 btn-sm" onclick="accountAccessFunc({{ compteOrder.actif }}, {{ compteOrder.id }})" type="button">Activer le compte</button>
+                        {% else %}
+                            <button class="btn btn-danger rounded-pill float-end me-2 btn-sm" onclick="accountAccessFunc({{ compteOrder.actif }}, {{ compteOrder.id }})" type="button">Désactiver le compte</button>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+                <tr>
+                    <td>Aucun utilisateur n'a été trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function accountAccessFunc(actifID, accountID) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('accessAccount') }}',
+                async: false,
+                dataType: 'JSON',
+                data: {accountid: accountID, actifID: actifID},
+                success: function (data) {
+                    if(data.actiftype == 1) {
+                        $('#buttonActivateAccount'+accountID).html('<button class="btn btn-danger rounded-pill float-end me-2 btn-sm" onclick="accountAccessFunc(1, '+accountID+')" type="button">Désactiver le compte</button>');
+                    } else {
+                        $('#buttonActivateAccount'+accountID).html('<button class="btn btn-success rounded-pill float-end me-2 btn-sm" onclick="accountAccessFunc(0, '+accountID+')" type="button">Activer le compte</button>');
+                    }
+
+                    $('#liveToastJSContent').text('Le compte a été mis à jour');
+                    $("#liveToastJS").toast({delay: 3500});
+                    $("#liveToastJS").toast('show');
+                }
+            });
+        };
+    </script>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}
