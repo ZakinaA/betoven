@@ -1,0 +1,56 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{%  block extraMenu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="float-end mt-2">
+        <button class="btn rounded-pill btn-sm border-0" style="background-color: #aed6dc;">Ajouter un instrument</button>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="table-responsive mt-2">
+        <table class="table table-striped bg-light border shadow-sm">
+            <thead>
+            <tr>
+                <th scope="col">Instrument</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Prix d'achat</th>
+                <th scope="col">Disponible en prêt</th>
+                <th scope="col" class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in pListerInstruments %}
+            <tr class="align-middle">
+                <td>{{ i.typeIntrument.libelle }}</td>
+                <td>{{i.marque.libelle}}</td>
+                <td>39.99€</td>
+                <td><span class="badge bg-success rounded-pill"><i class="bi bi-check-circle-fill"></i> Disponible</span></td>
+                <td class="text-end">
+                    <button class="btn btn-warning text-dark btn-sm rounded-pill"><i class="bi bi-hammer"></i> Envoyer en intervention</button>
+                    <button class="btn btn-info text-dark btn-sm rounded-pill"><i class="bi bi-info"></i> Modifier les informations</button>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr class="align-middle">
+                <td>Aucun instrument n'a été trouvé.</td>
+                <td>TEST MARQUE</td>
+                <td>39.99€</td>
+                <td><span class="badge bg-warning rounded-pill text-dark"><i class="bi bi-exclamation-circle-fill"></i> Indisponible (en intervention)</span></td>
+                <td class="text-end">
+                    <button class="btn btn-success btn-sm rounded-pill">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-fill-check" viewBox="0 0 16 16">
+                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
+                            <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7.256A4.493 4.493 0 0 0 12.5 8a4.493 4.493 0 0 0-3.59 1.787A.498.498 0 0 0 9 9.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .39-.187A4.476 4.476 0 0 0 8.027 12H6.5a.5.5 0 0 0-.5.5V16H3a1 1 0 0 1-1-1V1Zm2 1.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5Zm3 0v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+                        </svg>
+                        Mettre fin à l'intervention
+                    </button>
+                    <button class="btn btn-info text-dark btn-sm rounded-pill"><i class="bi bi-info"></i> Modifier les informations</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

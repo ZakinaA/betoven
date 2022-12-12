@@ -29,9 +29,12 @@ class CoursController extends AbstractController
         $participants = $doctrine->getRepository(Inscription::class)->findByCour($id);
         $cours = $doctrine->getRepository(Cours::class)->find($id);
         $user = $this->getUser();
-        $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
+        if($user != null) {
+            $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
+            $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
+        }
         //
-        $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
+
         //var_dump($user);
         if (!$cours) {
             throw $this->createNotFoundException(
@@ -40,12 +43,21 @@ class CoursController extends AbstractController
         }
         //var_dump($cours);
         //return new Response('cours : '.$cours->getNom());
-        return $this->render('cours/consulter.html.twig', 
-        [
-            'cours' => $cours,
-            'participants' => $participants,
-            'verificationInscription' => $verificationInscription
-        ]);
+        if($user != null) {
+            return $this->render('cours/consulter.html.twig',
+                [
+                    'cours' => $cours,
+                    'participants' => $participants,
+                    'verificationInscription' => $verificationInscription
+                ]);
+        } else {
+            return $this->render('cours/consulter.html.twig',
+                [
+                    'cours' => $cours,
+                    'participants' => $participants
+
+                ]);
+        }
     }
 
 
@@ -56,6 +68,12 @@ class CoursController extends AbstractController
             'pCours' => $listeCours,]);
     }
 
+    public function monPlanning(ManagerRegistry $doctrine, int $id){
+        $mesCours = $doctrine->getRepository(Cours::class)->getMonPlanning($id);
+        return $this->render('cours/planning.html.twig', [
+            'pCours' => $mesCours,
+        ]);
+    }
     public function inscriptionCours(ManagerRegistry $doctrine, int $id){
 
        // $listeCours = $doctrine->getRepository(Cours::class)->findAll();

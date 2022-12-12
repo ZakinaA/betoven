@@ -21,6 +21,9 @@ class Marque
     #[ORM\OneToMany(mappedBy: 'marque', targetEntity: Instrument::class)]
     private Collection $instruments;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $logo = null;
+
     public function __construct()
     {
         $this->instruments = new ArrayCollection();
@@ -69,6 +72,18 @@ class Marque
                 $instrument->setMarque(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }

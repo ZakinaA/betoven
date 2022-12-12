@@ -63,4 +63,29 @@ class CoursRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function getMonPlanning(int $compteID): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT compte.nom, compte.prenom, cours.id, cours.professeur_id, cours.libelle, cours.age_mini, cours.agemaxi, cours.heure_debut, cours.heure_fin, cours.date, cours.nbplaces
+        FROM cours, professeur_cours, compte
+        WHERE compte.id = professeur_cours.compte_id
+        AND professeur_cours.id = cours.professeur_id
+        AND compte.id = :compteID
+        UNION
+        SELECT compte.nom, compte.prenom, cours.id, cours.professeur_id, cours.libelle, cours.age_mini, cours.agemaxi, cours.heure_debut, cours.heure_fin, cours.date, cours.nbplaces
+        FROM cours, inscription, eleve, compte
+        WHERE compte.id = eleve.compte_id
+        AND eleve.id = inscription.eleve_id
+        AND inscription.cour_id = cours.id
+        AND compte.id = :compteID
+        ORDER by date
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['compteID' => $compteID]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 }

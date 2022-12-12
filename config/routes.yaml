@@ -88,6 +88,9 @@ adminIndexPage:
 adminListerUtilisateurs:
     path: /admin/listerUtilisateurs
     controller: App\Controller\AdminController::listerUtilisateurs
+consulterPlanning:
+    path: /planning/{id}
+    controller: App\Controller\CoursController::monPlanning
 accessAccount:
     path: /compte/updateAccess
     controller: App\Controller\AdminController::cartUpdateAction
@@ -103,3 +106,13 @@ ajouterInscriptionCours:
 inscriptionCours:
     path: /cours/inscriptionCours
     controller: App\Controller\CoursController::inscriptionCoursFunc
+verificationEtatCompte:
+    path: /compte/verifierEtat
+    controller: App\Controller\CompteController::verificationEtatCompte
+listerProfesseurs:
+    path: /admin/listerProfesseurs
+    controller: App\Controller\AdminController::listerProfesseurs
+adminListerInstruments:
+    path: /admin/listerInstruments
+    controller: App\Controller\AdminController::listerInstruments
+

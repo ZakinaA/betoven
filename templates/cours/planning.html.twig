@@ -1,0 +1,106 @@
+{% block title %}{{ 'e-Music : Lister les cours' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+
+    <div class="table-responsive" style="padding-left: 350px; padding-right: 350px;">
+        <table class="table table-striped bg-white mt-2">
+            <thead class="bg-black text-white">
+            <tr>
+                <th style="text-align: center;" scope="col">Lundi</th>
+                <th style="text-align: center;" scope="col">Mardi</th>
+                <th style="text-align: center;" scope="col">Mercredi</th>
+                <th style="text-align: center;" scope="col">Jeudi</th>
+                <th style="text-align: center;" scope="col">Vendredi</th>
+                <th style="text-align: center;" scope="col">Samedi</th>
+                <th style="text-align: center;" scope="col">Dimanche</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for c in pCours %}
+                <tr>
+                    <td class="align-middle">
+                    {% if c.date|date('l') == "Monday" %}
+                        <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
+                            {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
+                                <a style="color: #e74c3c;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                                {% else %}
+                                <a style="color: #009432;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    </td><td class="align-middle">
+                    {% if c.date|date('l') == "Tuesday" %}
+                        <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
+                            {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
+                                <a style="color: #e74c3c;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                                {% else %}
+                                <a style="color: #009432;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    </td><td class="align-middle">
+                    {% if c.date|date('l') == "Wednesday" %}
+                        <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
+                            {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
+                                <a style="color: #e74c3c;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                                {% else %}
+                                <a style="color: #009432;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    </td><td class="align-middle">
+                    {% if c.date|date('l') == "Thursday" %}
+                        <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
+                            {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
+                                <a style="color: #e74c3c;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                                {% else %}
+                                <a style="color: #009432;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    </td><td class="align-middle">
+                    {% if c.date|date('l') == "Friday" %}
+                        <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
+                            {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
+                                <a style="color: #e74c3c;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                                {% else %}
+                                <a style="color: #009432;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    </td><td class="align-middle">
+                    {% if c.date|date('l') == "Saturday" %}
+                        <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
+                        {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
+                                <a style="color: #e74c3c;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                                {% else %}
+                                <a style="color: #009432;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    </td><td class="align-middle">
+                    {% if c.date|date('l') == "Sunday" %}
+                        <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
+                        {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
+                                <a style="color: #e74c3c;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                                {% else %}
+                                <a style="color: #009432;">{{c.date|date('d/m')}} de {{c.heure_debut|date('H:i')}} - {{c.heure_fin|date('H:i')}}</a>
+                            {% endif %}
+                            </p>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr class="align-middle">
+                    <td colspan="12" class="text-center">Aucun cours n'a été trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+
+
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}
