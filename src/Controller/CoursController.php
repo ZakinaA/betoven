@@ -28,7 +28,11 @@ class CoursController extends AbstractController
     public function consulterCours(ManagerRegistry $doctrine, int $id){
         $participants = $doctrine->getRepository(Inscription::class)->findByCour($id);
         $cours = $doctrine->getRepository(Cours::class)->find($id);
-
+        $user = $this->getUser();
+        $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
+        //
+        $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
+        //var_dump($user);
         if (!$cours) {
             throw $this->createNotFoundException(
                 'Aucun cours trouvé avec le numéro '.$id
@@ -40,6 +44,7 @@ class CoursController extends AbstractController
         [
             'cours' => $cours,
             'participants' => $participants,
+            'verificationInscription' => $verificationInscription
         ]);
     }
 
@@ -75,6 +80,8 @@ class CoursController extends AbstractController
         $inscription->setCour($cours);
         $entityManager->persist($inscription);
         $entityManager->flush();
+        return new JsonResponse(['result' => 'ok']);
+
     }
 
     public function ajouterInscription(ManagerRegistry $doctrine, Request $request) {
@@ -92,7 +99,7 @@ class CoursController extends AbstractController
         $inscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleveid, 'cour' => $coursid]);
         //$inscription = $doctrine->getRepository(Inscription::class)->find($inscriptionID);
 
-        var_dump($inscription);
+
         $paiementInscription->setInscription($inscription);
 
         $entityManager->persist($paiementInscription);
