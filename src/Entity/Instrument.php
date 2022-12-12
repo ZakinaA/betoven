@@ -43,6 +43,7 @@ class Instrument
     #[ORM\Column(length: 50)]
     private ?string $intitule = null;
 
+
     public function __construct()
     {
         $this->couleurs = new ArrayCollection();
