@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Instrument;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +36,18 @@ class AdminController extends AbstractController
         //var_dump($listerProfesseurs);
         return $this->render('admin/listerProfesseurs.html.twig', [
             'pListerProfesseurs' => $listerProfesseurs
+        ]);
+    }
+
+    public function listerInstruments(ManagerRegistry $doctrine)
+    {
+        $listerProfesseurs = $doctrine->getRepository(ProfesseurCours::class)->findAll();
+        $instruments = $doctrine->getRepository(Instrument::class)->findAll();
+
+
+        //var_dump($listerProfesseurs);
+        return $this->render('admin/listerInstruments.html.twig', [
+            'pListerInstruments' => $instruments
         ]);
     }
 

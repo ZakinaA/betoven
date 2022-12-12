@@ -112,5 +112,7 @@ verificationEtatCompte:
 listerProfesseurs:
     path: /admin/listerProfesseurs
     controller: App\Controller\AdminController::listerProfesseurs
-
+adminListerInstruments:
+    path: /admin/listerInstruments
+    controller: App\Controller\AdminController::listerInstruments
 
