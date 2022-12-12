@@ -59,6 +59,11 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    public function __construct()
+    {
+        $this->enfants = new ArrayCollection();
+    }
+
     /*public function __construct()
     {
         $this->eleve = new ArrayCollection();
