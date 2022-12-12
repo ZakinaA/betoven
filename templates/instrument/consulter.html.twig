@@ -95,46 +95,18 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% set interventionNum = 0 %}
+                    {% for t in interInstrument %}
+                        {% set interventionNum = interventionNum + 1 %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{ interventionNum }}</th>
+                        <td>{{t.date_debut|date("d/m/Y")}}</td>
+                        <td>{{t.date_fin|date("d/m/Y")}}</td>
+                        <td>{{t.libelle_pro}}</td>
+                        <td>{{t.travaux_effectues}}</td>
+                        <td>{{t.prix}}€</td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
