@@ -29,9 +29,12 @@ class CoursController extends AbstractController
         $participants = $doctrine->getRepository(Inscription::class)->findByCour($id);
         $cours = $doctrine->getRepository(Cours::class)->find($id);
         $user = $this->getUser();
-        $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
+        if($user != null) {
+            $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
+            $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
+        }
         //
-        $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
+
         //var_dump($user);
         if (!$cours) {
             throw $this->createNotFoundException(
@@ -40,12 +43,21 @@ class CoursController extends AbstractController
         }
         //var_dump($cours);
         //return new Response('cours : '.$cours->getNom());
-        return $this->render('cours/consulter.html.twig', 
-        [
-            'cours' => $cours,
-            'participants' => $participants,
-            'verificationInscription' => $verificationInscription
-        ]);
+        if($user != null) {
+            return $this->render('cours/consulter.html.twig',
+                [
+                    'cours' => $cours,
+                    'participants' => $participants,
+                    'verificationInscription' => $verificationInscription
+                ]);
+        } else {
+            return $this->render('cours/consulter.html.twig',
+                [
+                    'cours' => $cours,
+                    'participants' => $participants
+
+                ]);
+        }
     }
 
 
