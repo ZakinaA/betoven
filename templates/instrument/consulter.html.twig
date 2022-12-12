@@ -58,10 +58,11 @@
                         <span class="badge rounded-pill bg-success">
                             Disponible en prêt
                         </span>
+                        <span class="badge rounded-pill bg-warning text-dark"><i class="bi bi-hammer"></i> Indisponible (en intervention)</span>
                     </li>
                     <li class="list-group-item">
                         <h4 class="mb-0 fw-bold">{{instrument.typeIntrument.libelle}}</h4>
-                        <h6 class="mb-0"><img src="https://s2.qwant.com/thumbr/700x0/7/f/8d98b6560a33c36143bf58fb62c2a57a6c069564a9a15774024a11674db388/Squier_by_Fender_Logo.png?u=https%3A%2F%2Flogos-download.com%2Fwp-content%2Fuploads%2F2020%2F07%2FSquier_by_Fender_Logo.png&q=0&b=1&p=0&a=0" width="40"> {{instrument.marque.libelle}}</h6>
+                        <h6 class="mb-0"><img src="{{instrument.marque.logo}}" width="40"> {{instrument.marque.libelle}}</h6>
                     </li>
                     <li class="list-group-item">
                         Date d'achat : <b>{{instrument.dateAchat.format('d/m/Y')}}</b>
@@ -95,46 +96,18 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% set interventionNum = 0 %}
+                    {% for t in interInstrument %}
+                        {% set interventionNum = interventionNum + 1 %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{ interventionNum }}</th>
+                        <td>{{t.date_debut|date("d/m/Y")}}</td>
+                        <td>{{t.date_fin|date("d/m/Y")}}</td>
+                        <td>{{t.libelle_pro}}</td>
+                        <td>{{t.travaux_effectues}}</td>
+                        <td>{{t.prix}}€</td>
                     </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -180,7 +153,22 @@
         <h4>Numéro de série : </h4>{{instrument.numSerie}}
         <h4>Date d'achat : </h4>{{instrument.dateAchat.format('d/m/Y')}}
         <h4>Prix achat : </h4>{{instrument.prixAchat}}€
-        <h4>Marque : </h4>
+        <h4>Marque : </h4>{{instrument.marque.libelle}}
+        <h4>Interventions </h4>
+        {% for t in interInstrument %}
+                    <b><a>Professionelle : 
+                    </a></b>{{t.libelle_pro}}</br>
+                    <b><a>Date de debut : 
+                    </a></b>{{t.date_debut}}
+                    </br>
+                    <b><a>Date de fin : 
+                    </a></b>{{t.date_fin}}</br>
+                    <b><a>Travaux effectués : 
+                    </a></b>{{t.travaux_effectues}}</br>
+                    <b><a>Prix : 
+                    </a></b>{{t.prix}}€</br>
+                        {% endfor %}
+
         <h4>Couleur :</h4>
                     {% for c in couleursInstrument %}
                     {{c.libelle}}</br>

@@ -62,6 +62,7 @@ class Compte implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $actif = null;
 
+    
     /*public function __construct()
     {
         $this->eleve = new ArrayCollection();

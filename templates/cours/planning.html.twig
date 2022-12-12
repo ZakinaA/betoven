@@ -19,7 +19,7 @@
             <tbody>
             {% for c in pCours %}
                 <tr>
-                    <td>
+                    <td class="align-middle">
                     {% if c.date|date('l') == "Monday" %}
                         <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
                             {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
@@ -29,7 +29,7 @@
                             {% endif %}
                         </p>
                     {% endif %}
-                    </td><td>
+                    </td><td class="align-middle">
                     {% if c.date|date('l') == "Tuesday" %}
                         <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
                             {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
@@ -39,7 +39,7 @@
                             {% endif %}
                         </p>
                     {% endif %}
-                    </td><td>
+                    </td><td class="align-middle">
                     {% if c.date|date('l') == "Wednesday" %}
                         <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
                             {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
@@ -49,7 +49,7 @@
                             {% endif %}
                         </p>
                     {% endif %}
-                    </td><td>
+                    </td><td class="align-middle">
                     {% if c.date|date('l') == "Thursday" %}
                         <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
                             {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
@@ -59,7 +59,7 @@
                             {% endif %}
                         </p>
                     {% endif %}
-                    </td><td>
+                    </td><td class="align-middle">
                     {% if c.date|date('l') == "Friday" %}
                         <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
                             {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
@@ -69,7 +69,7 @@
                             {% endif %}
                         </p>
                     {% endif %}
-                    </td><td>
+                    </td><td class="align-middle">
                     {% if c.date|date('l') == "Saturday" %}
                         <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
                         {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
@@ -79,7 +79,7 @@
                             {% endif %}
                         </p>
                     {% endif %}
-                    </td><td>
+                    </td><td class="align-middle">
                     {% if c.date|date('l') == "Sunday" %}
                         <p style="text-align: center;"><a href="{{ path('consulterCours', { 'id': c.id }) }}" class="text-decoration-none">{{ c.libelle }}</br></a>
                         {% if "now"|date('Y-m-d') > c.date|date('Y-m-d') %}
@@ -92,8 +92,8 @@
                     </td>
                 </tr>
             {% else %}
-                <tr>
-                    <td>Aucun cours n'a été trouvé.</td>
+                <tr class="align-middle">
+                    <td colspan="12" class="text-center">Aucun cours n'a été trouvé.</td>
                 </tr>
             {% endfor %}
             </tbody>

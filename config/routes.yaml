@@ -106,4 +106,13 @@ ajouterInscriptionCours:
 inscriptionCours:
     path: /cours/inscriptionCours
     controller: App\Controller\CoursController::inscriptionCoursFunc
+verificationEtatCompte:
+    path: /compte/verifierEtat
+    controller: App\Controller\CompteController::verificationEtatCompte
+listerProfesseurs:
+    path: /admin/listerProfesseurs
+    controller: App\Controller\AdminController::listerProfesseurs
+adminListerInstruments:
+    path: /admin/listerInstruments
+    controller: App\Controller\AdminController::listerInstruments
 

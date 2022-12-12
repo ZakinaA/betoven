@@ -50,23 +50,25 @@ class InstrumentController extends AbstractController
         if (!$instrument) {
             throw $this->createNotFoundException(
                 'Aucun instrument trouvé avec le numéro '.$id
-            );
-
-        } else {
-            $couleurInstrument = $doctrine->getRepository(Instrument::class)->getCouleurs($id);
-            $classeInstrument= $doctrine->getRepository(Instrument::class)->getClasseInstrument($id);
-            $accessoireInstrument = $doctrine->getRepository(Instrument::class)->getAccesoires($id);
-            $findPretsInstrumentsEleve = $doctrine->getRepository(Instrument::class)->findPretInsturment($id);
-        }
-        //return new Response('Instrument : '.$instrument->getNom());
-        //var_dump($instrument);
-        return $this->render('instrument/consulter.html.twig', [
-
-            'instrument' => $instrument,
-            'classeInstrument' => $classeInstrument,
-            'couleursInstrument' =>  $couleurInstrument,
-            'accessoireInstrument' => $accessoireInstrument,
-            'pretInstrument' => $findPretsInstrumentsEleve
+                );
+            
+            } else {
+                $couleurInstrument = $doctrine->getRepository(Instrument::class)->getCouleurs($id);
+                $intervInstrument = $doctrine->getRepository(Instrument::class)->getInterventions($id);
+                $classeInstrument= $doctrine->getRepository(Instrument::class)->getClasseInstrument($id);
+                $accessoireInstrument = $doctrine->getRepository(Instrument::class)->getAccesoires($id);
+                $findPretsInstrumentsEleve = $doctrine->getRepository(Instrument::class)->findPretInsturment($id);
+           }
+            //return new Response('Instrument : '.$instrument->getNom());
+            //var_dump($instrument);
+            return $this->render('instrument/consulter.html.twig', [
+ 
+                'instrument' => $instrument,
+                'classeInstrument' => $classeInstrument,
+                'couleursInstrument' =>  $couleurInstrument, 
+                'accessoireInstrument' => $accessoireInstrument,
+                'interInstrument' => $intervInstrument,
+                'pretInstrument' => $findPretsInstrumentsEleve
 
         ]);
     }

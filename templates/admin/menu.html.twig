@@ -12,10 +12,10 @@
                     <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': app.user.id }) }}">Gestion des cours</a>
                 </li>
                 <li class="nav-item border-start border-white">
-                    <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': app.user.id }) }}">Gestion des instruments</a>
+                    <a class="nav-link {% if app.request.attributes.get('_route') == 'adminListerInstruments' %}active{% endif %}" href="{{ path('adminListerInstruments') }}">Gestion des instruments</a>
                 </li>
                 <li class="nav-item border-start border-white">
-                    <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': app.user.id }) }}">Gestion des professeurs</a>
+                    <a class="nav-link {% if app.request.attributes.get('_route') == 'listerProfesseurs' %}active{% endif %}" href="{{ path('listerProfesseurs') }}">Gestion des professeurs</a>
                 </li>
             </ul>
         </div>
