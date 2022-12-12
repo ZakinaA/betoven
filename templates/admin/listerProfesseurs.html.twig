@@ -22,10 +22,7 @@
                     <td class="align-middle">{{ profOrder.compte.prenom }}</td>
                     <td class="align-middle">0</td>
                     <td class="align-middle">
-                        <a href="{{ path('adminUpdateAccount', { 'id': profOrder.id }) }}" class="btn btn-info rounded-pill float-end btn-sm">Modifier les informations</a>
-                        <div id="buttonActivateAccount{{ profOrder.id }}">
-
-                        </div>
+                        <a href="{{ path('adminUpdateAccount', { 'id': profOrder.compte.id }) }}" class="btn btn-info rounded-pill float-end btn-sm">Modifier les informations</a>
                     </td>
                 </tr>
             {% else %}
