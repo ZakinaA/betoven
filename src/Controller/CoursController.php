@@ -46,4 +46,11 @@ class CoursController extends AbstractController
         return $this->render('cours/lister.html.twig', [
             'pCours' => $listeCours,]);
     }
+
+    public function monPlanning(ManagerRegistry $doctrine, int $id){
+        $mesCours = $doctrine->getRepository(Cours::class)->getMonPlanning($id);
+        return $this->render('cours/planning.html.twig', [
+            'pCours' => $mesCours,
+        ]);
+    }
 }
