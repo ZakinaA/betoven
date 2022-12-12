@@ -4,6 +4,21 @@
 {% block body %}
     <div class="row mt-4">
         <div class="col-md-4">
+            <div class="card card-body border-0 shadow-sm">
+                <h4 class="fw-bold mb-0"><img src="https://s2.qwant.com/thumbr/0x380/e/5/513f9c8d93fad421eaedf2ef7c9c62c6f33de0c4771214e85a0222e9500e02/default-profile-photo.jpg?u=https%3A%2F%2Fcvhrma.org%2Fwp-content%2Fuploads%2F2015%2F07%2Fdefault-profile-photo.jpg&q=0&b=1&p=0&a=0" width="60" class="me-3 rounded-circle shadow-sm">{{compte.prenom}} {{compte.nom}}</h4>
+                <p class="mb-0 ms-2 mt-1"><span class="badge bg-info rounded text-dark mb-0" style="background: rgba(0,0,0,0.3);">Eleve</span></p>
+                <table class="table table-striped mt-3 mb-0">
+                    <tbody>
+                    {% if compte.eleve != null and  compte.eleve.responsable != null %}
+                    <tr>
+                        <td>Responsable</td>
+                        <td>{{compte.eleve.responsable.prenom}} {{compte.eleve.responsable.nom}}</td>
+                    </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <!--
             <div class="card shadow-none border-0 text-dark">
                 <div class="card-header py-4" style="background: #EF4800;color: #000">
                     <h4 class="mb-0">
@@ -23,10 +38,19 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="col-md-4">
-            <div class="card shadow-none border-0">
+            <div class="card card-body border-0 shadow-sm">
+                <h4 class="fw-bold mb-0">Inscriptions <span class="badge rounded text-dark" style="background: rgba(0,0,0,0.3);">{{ pretsInstruments|length }}</span></h4>
+                <div class="card card-body shadow-sm mt-2 bg-light">(i) Prochain cours : Initiation violon (dans 3 jours)</div>
+                <ul class="list-group mt-2">
+                    {% for courOrder in inscription %}
+                    <li class="list-group-item">{{courOrder.libelle}} ({{courOrder.date_inscription|date('d/m/Y')}})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!--<div class="card shadow-none border-0">
                 <div class="card-header py-4" style="background: #EF4800;color: #000">
                     <h4 class="mb-0">
                         Mes cours
@@ -41,16 +65,15 @@
                                 <h5 class="mb-0">{{courOrder.libelle}}</h5>
                                 <p class="badge" style="background: #EF4800;color: #000">{{courOrder.date_inscription|date('d/m/Y')}}</<p>
                             </div>
-                            <!--<p class="mb-1">Some placeholder content in a paragraph.</p>
-                            <small>And some small print.</small>-->
+
                         </a>
                     {% endfor %}
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="col-md-4">
-            {% if compte.eleve != null and  compte.eleve.responsable != null %}
+            <!--{% if compte.eleve != null and  compte.eleve.responsable != null %}
                 <div class="card shadow-none border-0">
                     <div class="card-header py-4" style="background: #EF4800;color: #000">
                         <h4 class="mb-0">
@@ -67,17 +90,16 @@
                                         <h5 class="mb-0">{{pretInstrumentOrder.libelleInstrument}} #{{pretInstrumentOrder.num_serie}}</h5>
                                         <p class="badge" style="background: #EF4800;color: #000">Date de prêt : N/A</<p>
                                     </div>
-                                    <!--<p class="mb-1">Some placeholder content in a paragraph.</p>
-                                    <small>And some small print.</small>-->
                                 </a>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-            {% endif %}
+            {% endif %}-->
         </div>
     </div>
     <br><br><br>
+    <!--
     <div class="card card-body mt-4">
         <h4>Prenom : </h4>{{compte.prenom}}
 
@@ -111,6 +133,6 @@
                 <br>
             {% endfor %}
         {% endif %}
-    </div><br>
+    </div><br>-->
 {% endblock %}
 {% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
     {% block stylesheets %}{% endblock %}
 </head>
 <style>
@@ -27,6 +29,12 @@
         width: 100%;
         height: 100%;
         content: ""; }
+
+
+    .bg-light {
+        --bs-bg-opacity: 1;
+        background-color: #FAFAFA !important;
+    }
 </style>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark text-white py-4 bgOverlay" style="background: url('https://wallpapercave.com/wp/wp1887084.jpg');background-position-y:50%;color: #000">
@@ -40,13 +48,12 @@
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="dropup-center dropdown">
                     <div class="dropdown-toggle text-dark fw-bold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.prenom }} {{ app.user.nom }}
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} {{ app.user.prenom }} {{ app.user.nom }}
                             {% if app.user.Roles[0] == "ROLE_ADMIN" %}
                                 <span class="badge bg-warning rounded text-dark">Administrateur</span>
                             {% else %}
                                 <span class="badge bg-info rounded text-dark">Eleve</span>
                             {% endif %}
-
                         {% endif %}
                     </div>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -71,10 +78,10 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item {% if app.request.attributes.get('_route') == 'accueilPage' %}active{% endif %}">
                     <a class="nav-link" aria-current="page" href="{{ path('accueilPage') }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
-                    </svg>
-                    Accueil
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                        </svg>
+                        Accueil
                     </a>
                 </li>
                 <li class="nav-item border-start">
@@ -104,12 +111,6 @@
                         Mon planning
                     </a>
                 </li>
-                <li class="nav-item border-start ">
-                    <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': 2 }) }}">Information Loiseau Benjamin (mode dev)</a>
-                </li>
-                <li class="nav-item border-start">
-                    <a class="nav-link  {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': 1 }) }}">Information LEMOINE Julien (mode dev)</a>
-                </li>
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li class="nav-item border-start ">
                     <a class="nav-link {% if app.request.attributes.get('_route') == 'routeAdherentConsultationInformation' %}active{% endif %}" href="{{ path('routeAdherentConsultationInformation', { 'id': app.user.id }) }}">Mes informations</a>
@@ -120,12 +121,12 @@
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     {% if app.user.Roles[0] == "ROLE_ADMIN" %}
                         <li class="nav-item">
-                            <a class="nav-link {% if app.request.attributes.get('_route') == 'adminIndexPage' %}active{% endif %}" href="{{ path('adminIndexPage') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
-                                <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
-                                <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
-                            </svg>
-                            Pannel de configuration
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'adminIndexPage' or  app.request.attributes.get('_route') == 'accessAccount' or  app.request.attributes.get('_route') == 'adminListerUtilisateurs' or  app.request.attributes.get('_route') == 'adminUpdateAccount' %}active{% endif %}" href="{{ path('adminIndexPage') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
+                                    <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                                    <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
+                                </svg>
+                                Panel de configuration
                             </a>
                         </li>
                     {% endif %}
@@ -137,6 +138,17 @@
 {% block extraMenu %}{% endblock %}
 <div class="container-fluid">
     {% block body %}{% endblock %}
+</div>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11;">
+    <div id="liveToastJS" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <div class="rounded" style="width: 1rem;height: 1rem;margin-right: 1.3em;" id="liveToastJSStatusColor"> </div>
+            <strong class="me-auto">Alerte Pop Up</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="liveToastJSContent">
+        </div>
+    </div>
 </div>
 {% block footer %}{% endblock %}
 </body>

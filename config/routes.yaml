@@ -75,10 +75,10 @@ coursLister:
     controller: App\Controller\CoursController::listercours
 professeurAjouter:
     path: /professeur/ajouter
-    controller: App\Controller\ProfesseurController::ajouter
+    controller: App\Controller\AdministrateurController::ajouterProfesseur
 professeurConsulter:
     path: /professeur/consulter/{id}
-    controller: App\Controller\ProfesseurController::consulterprofesseur
+    controller: App\Controller\AdministrateurController::consulterProfesseur
 professeurLister:
     path: /professeur/lister/{id}
     controller: App\Controller\ProfesseurController::listerprofesseur
@@ -91,3 +91,19 @@ adminListerUtilisateurs:
 consulterPlanning:
     path: /planning/{id}
     controller: App\Controller\CoursController::monPlanning
+accessAccount:
+    path: /compte/updateAccess
+    controller: App\Controller\AdminController::cartUpdateAction
+adminUpdateAccount:
+    path: /admin/modifierutilisateur/{id}
+    controller: App\Controller\AdminController::updateAccountUser
+coursInscription:
+    path: /cours/inscription/{id}
+    controller: App\Controller\CoursController::inscriptionCours
+ajouterInscriptionCours:
+    path: /cours/ajouterInscription
+    controller: App\Controller\CoursController::ajouterInscription
+inscriptionCours:
+    path: /cours/inscriptionCours
+    controller: App\Controller\CoursController::inscriptionCoursFunc
+

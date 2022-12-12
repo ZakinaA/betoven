@@ -41,6 +41,21 @@ class CompteRepository extends ServiceEntityRepository
         }
     }
 
+    public function getProfesseurCour(int $compteID): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT c.nom, c.prenom FROM compte c, professeur_cours pc 
+        WHERE pc.compte_id = c.id and c.id = :compteID
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['compteID' => $compteID]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
