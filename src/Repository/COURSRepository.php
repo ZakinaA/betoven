@@ -80,6 +80,7 @@ class CoursRepository extends ServiceEntityRepository
         AND eleve.id = inscription.eleve_id
         AND inscription.cour_id = cours.id
         AND compte.id = :compteID
+        ORDER by date
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['compteID' => $compteID]);
