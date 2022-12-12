@@ -4,10 +4,10 @@
 {% block body %}
     <div class="row mt-4">
         <div class="col-md-4">
-            <div class="card card-body border-0 shadow-sm">
+            <div class="card card-body border-0 shadow-none">
                 <h4 class="fw-bold mb-0">{{cours.libelle}}</h4>
             </div>
-            <div class="list-group mt-2 shadow-sm">
+            <div class="list-group mt-2 shadow-none">
                 <a href="{{ path('routeAdherentConsultationInformation', { 'id': cours.professeur.compte.id }) }}" class="list-group-item list-group-item-action">
                     {{cours.professeur.compte.nom|upper}} {{cours.professeur.compte.prenom}} (Professeur)
                 </a>
@@ -27,7 +27,7 @@
             {% endif %}
         </div>
         <div class="col-md-8">
-            <div class="card border-0 shadow-sm">
+            <div class="card border-0 shadow-none">
                 <div class="table-responsive border-0">
                     <table class="table table-striped bg-white mt-0 mb-0 rounded table-bordered ">
                         <thead class="bg-light text-dark">

@@ -14,7 +14,7 @@
 			<tbody>
 			{% for i in pInstruments %}
 				<tr>
-					<td><a href="{{ path('instrumentConsulter', { 'id': i.id }) }}">{{ i.numSerie }}</a></td>
+					<td><a href="{{ path('instrumentConsulter', { 'id': i.id }) }}">{{ i.intitule }}</a></td>
 					<td>{{i.dateAchat.format('d/m/Y')}}</td>
 					<td>{{i.prixAchat}}€</td>
 				</tr>
