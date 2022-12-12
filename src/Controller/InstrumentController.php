@@ -79,9 +79,9 @@ class InstrumentController extends AbstractController
         public function listerInstrument(ManagerRegistry $doctrine){
 
             $repository = $doctrine->getRepository(Instrument::class);
-    
+
     $instruments= $repository->findAll();
-    return $this->render('instrument/lister.html.twig', [
+    return $this->render('instrument/lister.html.twig', [ 
         'pInstruments' => $instruments,]);	
         
 }

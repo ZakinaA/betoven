@@ -6,16 +6,16 @@ routeInscription:
     controller: App\Controller\CompteController::inscriptionPage
 instrumentAjouter:
     path: /instrument/ajouter
-    controller: App\Controller\InstrumentController::ajouterInstrument 
+    controller: App\Controller\InstrumentController::ajouterInstrument
 instrumentConsulter:
     path: /instrument/consulter/{id}
-    controller: App\Controller\InstrumentController::consulterInstrument 
+    controller: App\Controller\InstrumentController::consulterInstrument
 instrumentLister:
     path: /instrument/lister
-    controller: App\Controller\InstrumentController::listerInstrument 
+    controller: App\Controller\InstrumentController::listerInstrument
 classeInstrumentConsulter:
     path: /classeInstrument/ajouter/
-    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument 
+    controller: App\Controller\ClasseInstrumentController::ajouterClasseInstrument
 routeAdherentConsultationInformation:
     path: /compte/consulter/{id}
     controller: App\Controller\CompteController::consulterInformation
@@ -26,18 +26,17 @@ listerCours:
     path: /cours/lister
     controller: App\Controller\CoursController::listerCours
 loginPage:
-    path: /accueil
+    path: /login
     controller: App\Controller\LoginController::index
+accueilPage:
+    path: /accueil
+    controller: App\Controller\IndexController::accueil
 modifierInformationCompte:
     path: /compte/modifier
     controller: App\Controller\CompteController::modifierInformationCompte
 app_logout:
     path: /logout
     methods: GET
-=======
-route_accueil:
-    path: /accueil
-    controller: App\Controller\EleveController::index
 eleveAjouter:
     path: /eleve/ajouter
     controller: App\Controller\EleveController::ajouter
@@ -74,21 +73,21 @@ coursConsulter:
 coursLister:
     path: /cours/lister/{id}
     controller: App\Controller\CoursController::listercours
-instrumentAjouter:
-    path: /instrument/ajouter
-    controller: App\Controller\InstrumentController::ajouter
-instrumentConsulter:
-    path: /instrument/consulter/{id}
-    controller: App\Controller\InstrumentController::consulterinstrument
-instrumentLister:
-    path: /instrument/lister/{id}
-    controller: App\Controller\InstrumentController::listerinstrument
 professeurAjouter:
     path: /professeur/ajouter
-    controller: App\Controller\ProfesseurController::ajouter
+    controller: App\Controller\AdministrateurController::ajouterProfesseur
 professeurConsulter:
     path: /professeur/consulter/{id}
-    controller: App\Controller\ProfesseurController::consulterprofesseur
+    controller: App\Controller\AdministrateurController::consulterProfesseur
 professeurLister:
-    path: /professeur/lister/{id}
-    controller: App\Controller\ProfesseurController::listerprofesseur
+    path: /professeur/lister/
+    controller: App\Controller\AdministrateurController::listerProfesseur
+adminIndexPage:
+    path: /admin/index
+    controller: App\Controller\AdminController::indexAdmin
+adminListerUtilisateurs:
+    path: /admin/listerUtilisateurs
+    controller: App\Controller\AdminController::listerUtilisateurs
+accessAccount:
+    path: /compte/updateAccess
+    controller: App\Controller\AdminController::cartUpdateAction

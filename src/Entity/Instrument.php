@@ -40,6 +40,9 @@ class Instrument
     #[ORM\ManyToMany(targetEntity: couleur::class, inversedBy: 'instruments')]
     private Collection $couleur;
 
+    #[ORM\Column(length: 50)]
+    private ?string $intitule = null;
+
 
     public function __construct()
     {
@@ -176,5 +179,17 @@ class Instrument
     public function getCouleur(): Collection
     {
         return $this->couleur;
+    }
+
+    public function getIntitule(): ?string
+    {
+        return $this->intitule;
+    }
+
+    public function setIntitule(string $intitule): self
+    {
+        $this->intitule = $intitule;
+
+        return $this;
     }
 }

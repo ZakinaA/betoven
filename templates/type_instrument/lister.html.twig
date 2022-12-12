@@ -6,22 +6,22 @@
         <table class="table table-striped bg-white mt-2">
             <thead class="bg-black text-white">
             <tr>
-                <th scope="col">Nom</th>
-				<th scope="col">Prenom</th>
+                <th scope="col">Type de l'instrument</th>
             </tr>
             </thead>
             <tbody>
-		{% for p in pProfesseurs %}
-		<tr>
-			<td><a href="{{ path('professeurConsulter', { 'id': p.id }) }}">{{ p.nom }}</a></td>
-			<td>{{ p.prenom }}</a></td>
+        {% for t in pTypeIntruments %}
+            <tr>
+			    <td><a href="{{ path('instrumentConsulter', { 'id': intrument.id }) }}">{{ t.libelle }}</a></td>
+            </tr>
 
-	{% else %}
+        {% else %}
 		<tr>
-		<td>Aucun profeseur n'a été trouvé.</td>
+		    <td>Aucun instrument n'a été trouvé.</td>
 		</tr>
-	{% endfor %}
- </tbody>
+        {% endfor %}
+
+            </tbody>
         </table>
     </div>
 {% endblock %}
