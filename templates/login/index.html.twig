@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 </head>
 <style>
@@ -31,13 +32,14 @@
                                 <div class="text-center">
                                     <div class="h5 text-gray-900 mb-4 fw-bold">Connexion à votre espace membre</div>
                                 </div>
+                                <div id="alertDiv"></div>
                                 {% if error %}
                                     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                                 {% endif %}
                                 <form action="{{ path('app_login') }}" method="post">
                                     <div class="mb-3">
                                         <label for="username">Adresse mail</label>
-                                        <input type="email" class="form-control rounded-pill"  id="username" name="_username" value="{{ last_username }}">
+                                        <input type="email" class="form-control rounded-pill"  id="username" name="_username" value="{{ last_username }}" onchange="checkAccountEtat()">
                                     </div>
 
                                     <div class="mb-3">
@@ -45,9 +47,9 @@
                                         <input type="password" class="form-control rounded-pill" id="password"  name="_password">
                                     </div>
                                     <input type="hidden" name="_target_path" value="/compte/consulter/2">
-                                    <button class="btn rounded-pill w-100 text-dark" style="background-color: #aed6dc;" type="submit">Me connecter</button>
+                                    <button id="connectBtn" class="btn rounded-pill w-100 text-dark border-0" style="background-color: #aed6dc;" disabled type="submit">Me connecter</button>
                                 </form>
-                                <a href="./register" class="btn rounded-pill w-100 text-dark mt-2 mb-0" style="background-color: #ff9a8d;">Créer un compte</a>
+                                <a href="./register" class="btn rounded-pill w-100 text-dark mt-2 mb-0 border-0" style="background-color: #ff9a8d;">Créer un compte</a>
                             </div>
                         </div>
                     </div>
@@ -56,6 +58,31 @@
         </div>
     </div>
 </div>
+<script>
+    function checkAccountEtat() {
+        let adresseMail = $('#username').val();
+        console.log(adresseMail);
+        $.ajax({
+            type: 'POST',
+            url: '{{ path('verificationEtatCompte') }}',
+            async: false,
+            dataType: 'JSON',
+            data: {adressemail: adresseMail},
+            success: function (data) {
+                if(data['actif'] == 1) {
+                    $('#connectBtn').prop("disabled",false);
+                    $('#alertDiv').html('<div class="alert alert-success rounded-pill" role="alert">Votre compte est activé, vous pouvez vous connecter.</div>');
+                } else if(data['actif'] == 0) {
+                    $('#connectBtn').prop("disabled",true);
+                    $('#alertDiv').html('<div class="alert alert-danger rounded-pill" role="alert">Votre compte n\'est pas activé, vous n\'êtes pas autorisé à vous connecter.</div>');
+                } else {
+                    $('#alertDiv').html('');
+                    $('#connectBtn').prop("disabled",true);
+                }
+            }
+        });
+    };
+</script>
 <script src="./dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
