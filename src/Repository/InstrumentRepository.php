@@ -85,6 +85,21 @@ class InstrumentRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    public function getInterventions(int $instrumentID): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT * FROM instrument i, intervention it
+        WHERE i.id = it.instrument_id and i.id = :instrumentID
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['instrumentID' => $instrumentID]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
     
     public function findPretInsturment(int $instrumentID) : array
     {

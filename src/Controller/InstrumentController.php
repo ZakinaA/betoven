@@ -56,6 +56,7 @@ class InstrumentController extends AbstractController
             
             } else {
                 $couleurInstrument = $doctrine->getRepository(Instrument::class)->getCouleurs($id);
+                $intervInstrument = $doctrine->getRepository(Instrument::class)->getInterventions($id);
                 $classeInstrument= $doctrine->getRepository(Instrument::class)->getClasseInstrument($id);
                 $accessoireInstrument = $doctrine->getRepository(Instrument::class)->getAccesoires($id);
                 $findPretsInstrumentsEleve = $doctrine->getRepository(Instrument::class)->findPretInsturment($id);
@@ -68,6 +69,7 @@ class InstrumentController extends AbstractController
                 'classeInstrument' => $classeInstrument,
                 'couleursInstrument' =>  $couleurInstrument, 
                 'accessoireInstrument' => $accessoireInstrument,
+                'interInstrument' => $intervInstrument,
                 'pretInstrument' => $findPretsInstrumentsEleve
 
                 ]);

@@ -13,6 +13,20 @@
         <h4>Date d'achat : </h4>{{instrument.dateAchat.format('d/m/Y')}}
         <h4>Prix achat : </h4>{{instrument.prixAchat}}€
         <h4>Marque : </h4>{{instrument.marque.libelle}}
+        <h4>Interventions </h4>
+        {% for t in interInstrument %}
+                    <b><a>Professionelle : 
+                    </a></b>{{t.libelle_pro}}</br>
+                    <b><a>Date de debut : 
+                    </a></b>{{t.date_debut}}
+                    </br>
+                    <b><a>Date de fin : 
+                    </a></b>{{t.date_fin}}</br>
+                    <b><a>Travaux effectués : 
+                    </a></b>{{t.travaux_effectues}}</br>
+                    <b><a>Prix : 
+                    </a></b>{{t.prix}}€</br>
+                        {% endfor %}
         <h4>Couleur :</h4>
                     {% for c in couleursInstrument %}
                     {{c.libelle}}</br>
