@@ -109,5 +109,8 @@ inscriptionCours:
 verificationEtatCompte:
     path: /compte/verifierEtat
     controller: App\Controller\CompteController::verificationEtatCompte
+listerProfesseurs:
+    path: /admin/listerProfesseurs
+    controller: App\Controller\AdminController::listerProfesseurs
 
 

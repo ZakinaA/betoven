@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Compte;
 use App\Form\EditUtilisateurAdminType;
 use Symfony\Component\HttpFoundation\Request;
-
+use App\Entity\ProfesseurCours;
 
 class AdminController extends AbstractController
 {
@@ -22,8 +22,6 @@ class AdminController extends AbstractController
 
     public function listerUtilisateurs(ManagerRegistry $doctrine)
     {
-
-
         $listerUtilisateurs = $doctrine->getRepository(Compte::class)->findAll();
         //var_dump($listerUtilisateurs);
         return $this->render('admin/listerUtilisateurs.html.twig', [
@@ -31,6 +29,14 @@ class AdminController extends AbstractController
         ]);
     }
 
+    public function listerProfesseurs(ManagerRegistry $doctrine)
+    {
+        $listerProfesseurs = $doctrine->getRepository(ProfesseurCours::class)->findAll();
+        //var_dump($listerProfesseurs);
+        return $this->render('admin/listerProfesseurs.html.twig', [
+            'pListerProfesseurs' => $listerProfesseurs
+        ]);
+    }
 
     public function cartUpdateAction(ManagerRegistry $doctrine, Request $request) {
         $requestData = $request->request->all();

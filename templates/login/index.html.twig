@@ -61,7 +61,6 @@
 <script>
     function checkAccountEtat() {
         let adresseMail = $('#username').val();
-        console.log(adresseMail);
         $.ajax({
             type: 'POST',
             url: '{{ path('verificationEtatCompte') }}',
