@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Inscription;
@@ -19,50 +20,50 @@ class InscriptionController extends AbstractController
     }
 
     public function ajouter(ManagerRegistry $doctrine){
-		
+
         // récupère le manager d'entités
-            $entityManager = $doctrine->getManager();
-    
-            // instanciation d'un objet Inscription
-            $inscription = new inscription();
-            $inscription->setNom('Douiou');
-            $inscription->setPrenom('Sofiane');
-            $inscription->setDateNaiss(new \DateTime(date('2001-06-24')));
-    
-            // Indique à Doctrine de persister l'objet
-            $entityManager->persist($inscription);
-    
-            // Exécue l'instruction sql permettant de persister lobjet, ici un INSERT INTO
-            $entityManager->flush();
-    
-            // renvoie vers la vue de consultation de l'éleve en passant l'objet inscription en paramètre
-           return $this->render('inscription/consulter.html.twig', [
-                'inscription' => $inscription,]);
-            
-        }
+        $entityManager = $doctrine->getManager();
 
-        public function consulterinscription(ManagerRegistry $doctrine, int $id){
+        // instanciation d'un objet Inscription
+        $inscription = new inscription();
+        $inscription->setNom('Douiou');
+        $inscription->setPrenom('Sofiane');
+        $inscription->setDateNaiss(new \DateTime(date('2001-06-24')));
 
-            $inscription= $doctrine->getRepository(Inscription::class)->find($id);
-    
-            if (!$inscription) {
-                throw $this->createNotFoundException(
+        // Indique à Doctrine de persister l'objet
+        $entityManager->persist($inscription);
+
+        // Exécue l'instruction sql permettant de persister lobjet, ici un INSERT INTO
+        $entityManager->flush();
+
+        // renvoie vers la vue de consultation de l'éleve en passant l'objet inscription en paramètre
+        return $this->render('inscription/consulter.html.twig', [
+            'inscription' => $inscription,]);
+
+    }
+
+    public function consulterinscription(ManagerRegistry $doctrine, int $id){
+
+        $inscription= $doctrine->getRepository(Inscription::class)->find($id);
+
+        if (!$inscription) {
+            throw $this->createNotFoundException(
                 'Aucun inscription trouvé avec le numéro '.$id
-                );
-            }
-    
-            //return new Response('Inscription : '.$inscription->getNom());
-            return $this->render('inscription/consulter.html.twig', [
-                'inscription' => $inscription,]);
+            );
         }
 
-        public function listerInscription(ManagerRegistry $doctrine){
+        //return new Response('Inscription : '.$inscription->getNom());
+        return $this->render('inscription/consulter.html.twig', [
+            'inscription' => $inscription,]);
+    }
 
-            $repository = $doctrine->getRepository(Inscription::class);
-    
-    $inscriptions= $repository->findAll();
-    return $this->render('inscription/lister.html.twig', [
-        'pInscriptions' => $inscriptions,]);	
-        
-}
+    public function listerInscription(ManagerRegistry $doctrine){
+
+        $repository = $doctrine->getRepository(Inscription::class);
+
+        $inscriptions= $repository->findAll();
+        return $this->render('inscription/lister.html.twig', [
+            'pInscriptions' => $inscriptions,]);
+
+    }
 }

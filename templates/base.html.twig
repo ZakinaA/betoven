@@ -48,13 +48,12 @@
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <div class="dropup-center dropdown">
                     <div class="dropdown-toggle text-dark fw-bold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}{{ app.user.prenom }} {{ app.user.nom }}
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %} {{ app.user.prenom }} {{ app.user.nom }}
                             {% if app.user.Roles[0] == "ROLE_ADMIN" %}
                                 <span class="badge bg-warning rounded text-dark">Administrateur</span>
                             {% else %}
                                 <span class="badge bg-info rounded text-dark">Eleve</span>
                             {% endif %}
-
                         {% endif %}
                     </div>
                     <ul class="dropdown-menu dropdown-menu-end">

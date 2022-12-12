@@ -22,6 +22,8 @@ class AdminController extends AbstractController
 
     public function listerUtilisateurs(ManagerRegistry $doctrine)
     {
+
+
         $listerUtilisateurs = $doctrine->getRepository(Compte::class)->findAll();
         //var_dump($listerUtilisateurs);
         return $this->render('admin/listerUtilisateurs.html.twig', [
@@ -52,6 +54,10 @@ class AdminController extends AbstractController
         //récupération de l'étudiant dont l'id est passé en paramètre
         $entityManager = $doctrine->getManager();
         $compte = $entityManager->getRepository(Compte::class)->find($id);
+
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('No access for you!');
+        }
 
         if (!$compte) {
             throw $this->createNotFoundException('Aucun compte trouvé avec le numéro '.$id);

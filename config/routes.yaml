@@ -97,3 +97,9 @@ adminUpdateAccount:
 coursInscription:
     path: /cours/inscription/{id}
     controller: App\Controller\CoursController::inscriptionCours
+ajouterInscriptionCours:
+    path: /cours/ajouterInscription
+    controller: App\Controller\CoursController::ajouterInscription
+inscriptionCours:
+    path: /cours/inscriptionCours
+    controller: App\Controller\CoursController::inscriptionCoursFunc
