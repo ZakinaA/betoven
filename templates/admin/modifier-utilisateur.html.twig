@@ -31,15 +31,6 @@
                         {{ form_row(form.ville) }}
                     </div>
                 </div>
-                {% if compteinfo.eleve != null %}
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Responsable</label>
-                        <select class="form-select rounded-pill">
-                            <option value="">Aucun responsable</option>
-                            <option value="">Test</option>
-                        </select>
-                    </div>
-                {% endif %}
 
                 {{ form_row(form.update) }}
             </div>
