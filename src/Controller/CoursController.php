@@ -85,6 +85,8 @@ class CoursController extends AbstractController
     }
     public function inscriptionCours(ManagerRegistry $doctrine, int $id){
        // $listeCours = $doctrine->getRepository(Cours::class)->findAll();
+        $compte = $doctrine->getRepository(Compte::class)->find($id);
+        //var_dump($compte);
         return $this->render('cours/inscription.html.twig', [
             'idCours' => $id
         ]);

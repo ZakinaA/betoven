@@ -7,24 +7,24 @@
         <div class="col-md-6">
             <div class="card card-body shadow-sm border-0">
                 <div id="alertPaiement">
-                  <div class="mb-3">
-                    <label for="selectChild" class="form-label">Séléction d'un de vos enfants</label>
-                    <select class="form-select rounded-pill" id="selectChild" required>
-                        <option value="" disabled selected>Veuillez sélectionner une facilité de paiement</option>
+                    <!--<div class="mb-3">
+                      <label for="selectChild" class="form-label">Séléction d'un de vos enfants</label>
+                      <select class="form-select rounded-pill" id="selectChild" required>
+                          <option value="" disabled selected>Veuillez sélectionner une facilité de paiement</option>
 
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Facilité de paiement*</label>
-                    <select class="form-select rounded-pill" id="selectFacilitePaiement" onchange="facilitePaiementFunc({{ idCours }}, {{ app.user.id  }})" required>
-                        <option value="" disabled selected>Veuillez sélectionner une facilité de paiement</option>
-                        <option value="1">Une fois</option>
-                        <option value="2">Deux fois</option>
-                        <option value="3">Trois fois</option>
-                        <option value="4">Quatre fois</option>
-                    </select>
-                </div>
-                <div  id="datesPaiements"></div>
+                      </select>
+                  </div>-->
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Facilité de paiement*</label>
+                        <select class="form-select rounded-pill" id="selectFacilitePaiement" onchange="facilitePaiementFunc({{ idCours }}, {{ app.user.id  }})" required>
+                            <option value="" disabled selected>Veuillez sélectionner une facilité de paiement</option>
+                            <option value="1">Une fois</option>
+                            <option value="2">Deux fois</option>
+                            <option value="3">Trois fois</option>
+                            <option value="4">Quatre fois</option>
+                        </select>
+                    </div>
+                    <div  id="datesPaiements"></div>
                 </div>
                 <style>
                     .form-group .form-control {

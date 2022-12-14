@@ -5,8 +5,8 @@
     <div class="row mt-4">
         <div class="col-md-4">
             <div class="card card-body border-0 shadow-sm">
-                <h4 class="fw-bold mb-0"><img src="https://s2.qwant.com/thumbr/0x380/e/5/513f9c8d93fad421eaedf2ef7c9c62c6f33de0c4771214e85a0222e9500e02/default-profile-photo.jpg?u=https%3A%2F%2Fcvhrma.org%2Fwp-content%2Fuploads%2F2015%2F07%2Fdefault-profile-photo.jpg&q=0&b=1&p=0&a=0" width="60" class="me-3 rounded-circle shadow-sm">{{compte.prenom}} {{compte.nom}}</h4>
-                <p class="mb-0 ms-2 mt-1"><span class="badge bg-info rounded text-dark mb-0" style="background: rgba(0,0,0,0.3);">Eleve</span></p>
+                <h4 class="fw-bold mb-0"><!--<img src="https://s2.qwant.com/thumbr/0x380/e/5/513f9c8d93fad421eaedf2ef7c9c62c6f33de0c4771214e85a0222e9500e02/default-profile-photo.jpg?u=https%3A%2F%2Fcvhrma.org%2Fwp-content%2Fuploads%2F2015%2F07%2Fdefault-profile-photo.jpg&q=0&b=1&p=0&a=0" width="60" class="me-3 rounded-circle shadow-sm">-->{{compte.prenom}} {{compte.nom}}</h4>
+                <p class="mb-0 mt-1"><span class="badge bg-info rounded text-dark mb-0" style="background: rgba(0,0,0,0.3);">Eleve</span></p>
                 <table class="table table-striped mt-3 mb-0">
                     <tbody>
                     {% if compte.eleve != null and  compte.eleve.responsable != null %}
@@ -42,8 +42,8 @@
         </div>
         <div class="col-md-4">
             <div class="card card-body border-0 shadow-sm">
-                <h4 class="fw-bold mb-0">Inscriptions <span class="badge rounded text-dark" style="background: rgba(0,0,0,0.3);">{{ pretsInstruments|length }}</span></h4>
-                <div class="card card-body shadow-sm mt-2 bg-light">(i) Prochain cours : Initiation violon (dans 3 jours)</div>
+                <h4 class="fw-bold mb-0">Inscriptions ({{ inscription|length }})</h4>
+                <!--<div class="card card-body shadow-sm mt-2 bg-light">(i) Prochain cours : Initiation violon (dans 3 jours)</div>-->
                 <ul class="list-group mt-2">
                     {% for courOrder in inscription %}
                     <li class="list-group-item">{{courOrder.libelle}} ({{courOrder.date_inscription|date('d/m/Y')}})</li>
