@@ -24,7 +24,7 @@
                 <div class="card-body p-0  rounded">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block rounded bg-light"><img src="./dist/img/eMusic_anybg.png" class="mt-4" style="filter: drop-shadow(0 0 1rem #5000ff);"></div>
+                        <div class="col-lg-6 d-none d-lg-block rounded bg-light"><img src="./dist/img/eMusic_anybg.png" class="mt-4"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
@@ -57,10 +57,18 @@
                                         {{ form_row(registrationForm.numRue) }}
                                         {{ form_row(registrationForm.rue) }}
                                     </div>
-
                                 </div>
-                                {{ form_row(registrationForm.copos) }}
-                                {{ form_row(registrationForm.ville) }}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {{ form_row(registrationForm.copos) }}
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="exampleInputPassword1" class="form-label">Ville</label>
+                                        {{ form_row(registrationForm.ville) }}
+                                    </div>
+                                </div>
+
+
                                 {{ form_row(registrationForm.tel) }}
 
                                 <!--<div class="mb-3">
