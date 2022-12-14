@@ -114,6 +114,18 @@ class InstrumentRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
+
+    public function getIsInIntervention(int $instrumentID) : array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT * FROM intervention WHERE instrument_id = :instrumentID and date_debut <= :dateToday and date_fin >= :dateToday';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['instrumentID' => $instrumentID, 'dateToday' => date('Y-m-d')]);
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Instrument[] Returns an array of Instrument objects
 //     */

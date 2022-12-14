@@ -55,10 +55,13 @@
             <div class="card card-body shadow-none border-0">
                 <ul class="list-group mt-2 shadow-none">
                     <li class="list-group-item">
-                        <span class="badge rounded-pill bg-success">
+                        {% if isInIntervention == null %}
+                            <span class="badge rounded-pill bg-success">
                             Disponible en prêt
                         </span>
-                        <span class="badge rounded-pill bg-warning text-dark"><i class="bi bi-hammer"></i> Indisponible (en intervention)</span>
+                        {% else %}
+                            <span class="badge rounded-pill bg-warning text-dark"><i class="bi bi-hammer"></i> Indisponible (en intervention)</span>
+                        {% endif %}
                     </li>
                     <li class="list-group-item">
                         <h4 class="mb-0 fw-bold">{{instrument.typeIntrument.libelle}}</h4>
