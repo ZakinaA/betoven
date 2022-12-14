@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Compte;
+use App\Form\CoursModifierType;
 use App\Form\EditUtilisateurAdminType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ProfesseurCours;
@@ -114,6 +115,36 @@ class AdminController extends AbstractController
             else{
                 //var_dump($form);
                 return $this->render('admin/modifier-utilisateur.html.twig', array('form' => $form->createView(),'compteinfo' => $compte));
+            }
+        }
+    }
+
+    public function modifierCours(ManagerRegistry $doctrine, $id, Request $request){
+
+        //récupération de l'étudiant dont l'id est passé en paramètre
+        $cours = $doctrine->getRepository(Cours::class)->find($id);
+
+        if (!$cours) {
+            throw $this->createNotFoundException('Aucun cours trouvé avec le numéro '.$id);
+        }
+        else
+        {
+            $form = $this->createForm(CoursModifierType::class, $cours);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $cours = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($cours);
+                $entityManager->flush();
+                return $this->forward('App\Controller\CoursController::consulterCours',
+                    [
+                        'id'  => $cours->getId(),
+                    ]);
+            }
+            else
+            {
+                return $this->render('cours/ajouter.html.twig', array('form' => $form->createView(),));
             }
         }
     }

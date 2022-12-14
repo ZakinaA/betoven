@@ -120,4 +120,4 @@ adminListerCours:
     controller: App\Controller\AdminController::listerCours
 modifierCours:
     path: /admin/modifierCours/{id}
-    controller: App\Controller\CoursController::modifierCours
+    controller: App\Controller\AdminController::modifierCours

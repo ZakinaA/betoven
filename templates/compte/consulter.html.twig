@@ -43,6 +43,7 @@
             </div>-->
         </div>
         <div class="col-md-4">
+            {% if compte.eleve != null %}
             <div class="card card-body border-0 shadow-sm">
                 <h4 class="fw-bold mb-0">Inscriptions ({{ inscription|length }})</h4>
                 <!--<div class="card card-body shadow-sm mt-2 bg-light">(i) Prochain cours : Initiation violon (dans 3 jours)</div>-->
@@ -52,6 +53,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
             <!--<div class="card shadow-none border-0">
                 <div class="card-header py-4" style="background: #EF4800;color: #000">
                     <h4 class="mb-0">

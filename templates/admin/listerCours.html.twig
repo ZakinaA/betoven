@@ -26,6 +26,10 @@
                     <td>{{c.professeur.compte.nom|upper}} {{c.professeur.compte.prenom}}</td>
                     <td>{{c.ageMini}} </td>
                     <td>{{c.date|date('d/m/Y')}} | {{c.heureDebut|date('H:i')}} - {{c.heureFin|date('H:i')}}</td>
+                    <td class="align-middle">
+                        <a href="{{ path('modifierCours', { 'id': c.id }) }}" class="btn btn-info rounded-pill float-end btn-sm">Modifier les informations</a>
+                    </td>
+
                 </tr>
             {% else %}
                 <tr>
