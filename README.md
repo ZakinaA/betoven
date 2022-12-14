@@ -1,10 +1,9 @@
 # BETOVEN
 # Initialisation du projet e-Music
 
-```
+### Lien vers la version prod : [e-Music](http://172.20.177.77/betoven/public/)
 
- ```
-Liste des membres : 
+Liste des membres :
 
 ```
 JLE.Git = Julien Lemoine
@@ -45,3 +44,4 @@ Mot de passe : mpBenjamin
 Adresse mail : julien@e-music.fr
 Mot de passe : mpJulien
 ```
+
