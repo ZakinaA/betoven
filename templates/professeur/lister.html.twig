@@ -1,27 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-		
-		LISTE DES PROFESSEURS</br>
-		<table>
-		{% for e in pProfesseurs %}
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{% block body %}
+    <div class="table-responsive">
+        <table class="table table-striped bg-white mt-2">
+            <thead class="bg-black text-white">
+            <tr>
+                <th scope="col">Nom</th>
+				<th scope="col">Prenom</th>
+            </tr>
+            </thead>
+            <tbody>
+		{% for p in pProfesseurs %}
 		<tr>
 			<td><a href="{{ path('professeurConsulter', { 'id': p.id }) }}">{{ p.nom }}</a></td>
 			<td>{{ p.prenom }}</a></td>
-			<td>{{ p.dateNaiss|date('d/m/Y') }}</td>
+
 	{% else %}
 		<tr>
 		<td>Aucun profeseur n'a été trouvé.</td>
 		</tr>
 	{% endfor %}
-</table>
-	 
-    </body>
-</html>
+ </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>{% endblock %}

@@ -45,7 +45,7 @@ class EleveRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT libelle, date_inscription FROM cours c, inscription i, eleve e
+            SELECT libelle, date_inscription, c.id as courID FROM cours c, inscription i, eleve e
             WHERE c.id = i.cour_id and i.eleve_id = e.id and compte_id = :compteID
             ';
         $stmt = $conn->prepare($sql);
@@ -60,7 +60,7 @@ class EleveRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT t.libelle AS libelleInstrument, num_serie FROM instrument i, pret_instrument p, eleve e, type_instrument t
+            SELECT t.libelle AS libelleInstrument, num_serie, i.id as instrumentID FROM instrument i, pret_instrument p, eleve e, type_instrument t
             WHERE t.id = i.type_intrument_id and i.id = p.instrument_id and p.eleve_id = e.id and e.compte_id = :compteID
             ';
         $stmt = $conn->prepare($sql);

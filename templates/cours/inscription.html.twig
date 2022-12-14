@@ -1,0 +1,96 @@
+{% block title %}{{ 'e-Music : Inscription à un cours' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.css') }}">{% endblock %}
+{% block body %}
+    <div class="row mt-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card card-body shadow-sm border-0">
+                <div id="alertPaiement">
+                    <!--<div class="mb-3">
+                      <label for="selectChild" class="form-label">Séléction d'un de vos enfants</label>
+                      <select class="form-select rounded-pill" id="selectChild" required>
+                          <option value="" disabled selected>Veuillez sélectionner une facilité de paiement</option>
+
+                      </select>
+                  </div>-->
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Facilité de paiement*</label>
+                        <select class="form-select rounded-pill" id="selectFacilitePaiement" onchange="facilitePaiementFunc({{ idCours }}, {{ app.user.id  }})" required>
+                            <option value="" disabled selected>Veuillez sélectionner une facilité de paiement</option>
+                            <option value="1">Une fois</option>
+                            <option value="2">Deux fois</option>
+                            <option value="3">Trois fois</option>
+                            <option value="4">Quatre fois</option>
+                        </select>
+                    </div>
+                    <div  id="datesPaiements"></div>
+                </div>
+                <style>
+                    .form-group .form-control {
+                        padding-left: 2.375rem;
+
+                    }
+
+                    .form-group .form-control-icon {
+                        position: absolute;
+                        z-index: 2;
+                        display: block;
+                        width: 2.375rem;
+                        height: 2.375rem;
+                        line-height: 2.375rem;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #aaa;
+                    }
+                </style>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <script>
+        function ajouterInscription(coursID, eleveID, facilitePaiementVal) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('inscriptionCours') }}',
+                async: false,
+                dataType: 'JSON',
+                data: {coursid: coursID, eleveID: eleveID},
+                success: function (data) {
+                }
+            });
+            for (let facilitePaiement = 0; facilitePaiement < facilitePaiementVal; facilitePaiement++) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ path('ajouterInscriptionCours') }}',
+                    async: false,
+                    dataType: 'JSON',
+                    data: {coursid: coursID, eleveID: eleveID, datepaiement: $('#inputFaciltePaiement'+facilitePaiement).val()},
+                    success: function (data) {
+                        $('#alertPaiement').html('<div class="alert alert-success mb-0" role="alert"><h4 class="alert-heading">Paiement validé!</h4><p>Le paiement a été validé, ainsi l\'inscription est de même validé. <a href="../consulter/'+coursID+'" class="text-decoration-none fw-bold text-success">Retour vers la page précédente</a></p></div>');
+
+                    }
+                });
+            }
+        };
+        function facilitePaiementFunc(coursID, eleveID){
+            let facilitePaiementVal = parseInt($('#selectFacilitePaiement').find(":selected").val());
+            $('#datesPaiements').html('');
+            if(facilitePaiementVal == 1) {
+                $('#datesPaiements').append('<div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Date de paiement</label><input class="form-control rounded-pill" type="date" value=""></div>');
+            } else {
+                for (let facilitePaiement = 0; facilitePaiement < facilitePaiementVal; facilitePaiement++) {
+                    if(facilitePaiement == 0) {
+                        $('#datesPaiements').append('<div class="mb-3"><label for="inputFaciltePaiement0" class="form-label">Date de 1er paiement</label><input class="form-control rounded-pill" id="inputFaciltePaiement0" type="date" value=""></div>');
+                    } else {
+                        $('#datesPaiements').append('<div class="mb-3"><label for="inputFaciltePaiement'+facilitePaiement+'" class="form-label">Date de '+(facilitePaiement+1)+'ème paiement</label><input class="form-control rounded-pill" type="date" id="inputFaciltePaiement'+facilitePaiement+'" value=""></div>');
+                    }
+                };
+            }
+            $('#datesPaiements').append('<div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Numéro de carte bleue</label><div class="form-group"><span class="bi bi-credit-card form-control-icon"></span><input type="text" class="form-control rounded-pill" placeholder="CB NUM"></div></div><div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Date d\'expiration</label><div class="row"><div class="col-md-2"><input type="number" class="form-control rounded-pill" maxlength="2" value="1"></div><div class="col-md-2"><select class="form-select rounded-pill text-center"><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option></select></div></div></div><img src="https://s2.qwant.com/thumbr/700x0/f/6/98a1f7703d1b31b8b8e50016dd304cbe63b41718474bd6793777d54150dfeb/cb_visa_mastercard_logo-1.png?u=https%3A%2F%2Fwww.modeetmastour.com%2Fimg%2Fcms%2Fcb_visa_mastercard_logo-1.png&q=0&b=1&p=0&a=0" width="220"></div></div>');
+            $('#datesPaiements').append('<button class="btn btn-primary rounded-pill float-end" onclick="ajouterInscription('+coursID+','+eleveID+', '+facilitePaiementVal+')">Valider mon inscription</button>');
+        };
+    </script>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>{% endblock %}

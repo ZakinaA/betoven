@@ -2,17 +2,176 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 {% block body %}
+    <style>
+        .containerImage {
+            position: relative;
+            font-family: Arial;
+        }
+        .containerImage::after {
+            background-color: rgba(0, 0, 0, 0.23);
+        }
+        .text-block {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+        }
+
+        .text-block-top {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+        }
+        .text-block-top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+        }
+        .text-block-bottom {
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+            color: white;
+        }
+
+        .img-gradient {
+            position:relative;
+        }
+
+        .img-gradient::after {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 80%; height: 80%;
+            background: rgba(0,0,0,0.80);
+            z-index: -2;
+        }
+
+    </style>
+    <div class="row  mt-4">
+        <div class="col-md-8">
+            <div class="card card-body shadow-none border-0">
+                <ul class="list-group mt-2 shadow-none">
+                    <li class="list-group-item">
+                        {% if isInIntervention == null %}
+                            <span class="badge rounded-pill bg-success">
+                            Disponible en prêt
+                        </span>
+                        {% else %}
+                            <span class="badge rounded-pill bg-warning text-dark"><i class="bi bi-hammer"></i> Indisponible (en intervention)</span>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <h4 class="mb-0 fw-bold">{{instrument.typeIntrument.libelle}}</h4>
+                        <h6 class="mb-0"><img src="{{instrument.marque.logo}}" width="40"> {{instrument.marque.libelle}}</h6>
+                    </li>
+                    <li class="list-group-item">
+                        Date d'achat : <b>{{instrument.dateAchat.format('d/m/Y')}}</b>
+                    </li>
+                    <li class="list-group-item">
+                        Prix d'achat : <b>{{instrument.prixAchat}}€</b>
+                    </li>
+                    <li class="list-group-item">
+                        {{instrument.typeIntrument.libelle}}
+                    </li>
+                    <li class="list-group-item">
+                        <i class="bi bi-palette-fill"></i> {% for c in couleursInstrument %}{{c.libelle}}{% endfor %}
+                    </li>
+                </ul>
+            </div>
+            <div class="card card-body shadow-none border-0 mt-2">
+            <div class="table-responsive mb-0">
+                <table class="table table-striped mb-0  table-borderless">
+                    <thead class="bg-light">
+
+                    <tr>
+                        <th scope="col" class="text-center" colspan="6">Intervention(s)</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Date début</th>
+                        <th scope="col">Date fin</th>
+                        <th scope="col">Professionnel</th>
+                        <th scope="col">Travaux effectués</th>
+                        <th scope="col">Prix</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set interventionNum = 0 %}
+                    {% for t in interInstrument %}
+                        {% set interventionNum = interventionNum + 1 %}
+                    <tr>
+                        <th scope="row">{{ interventionNum }}</th>
+                        <td>{{t.date_debut|date("d/m/Y")}}</td>
+                        <td>{{t.date_fin|date("d/m/Y")}}</td>
+                        <td>{{t.libelle_pro}}</td>
+                        <td>{{t.travaux_effectues}}</td>
+                        <td>{{t.prix}}€</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-body shadow-none border-0 mb-2">
+                <p class="mb-0">Accessoires de l'instrument</p>
+                <ul class="list-group mt-2 shadow-none">
+                    {% for a in accessoireInstrument %}
+                    <li class="list-group-item">
+                        {{a.libelle}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card card-body shadow-none border-0">
+                <p class="mb-0">Instruments de la même classe ({% for ci in classeInstrument %}<b>{{ci.libelle}}</b>{% endfor %})</p>
+                <!--<ul class="list-group mt-2 shadow-none">
+                    <li class="list-group-item">
+                        {{instrument.typeIntrument.libelle}}
+                    </li>
+                    <li class="list-group-item">
+                        Date d'achat : <b>{{instrument.typeIntrument.libelle}}</b>
+                    </li>
+                    <li class="list-group-item">
+                        Prix d'achat : <b>{{instrument.typeIntrument.libelle}}</b>
+                    </li>
+                    <li class="list-group-item">
+                        {{instrument.typeIntrument.libelle}}
+                    </li>
+                </ul>-->
+            </div>
+
+        </div>
+    </div>
+    <!--
+
     <div class="card card-body mt-4">
 
         <h4>Instrument : </h4>{{instrument.typeIntrument.libelle}}
-        <h4>Classe de l'instrument : </h4>
-                    {% for ci in classeInstrument %}
-                    {{ci.libelle}}</br>
-                        {% endfor %}
+
         <h4>Numéro de série : </h4>{{instrument.numSerie}}
         <h4>Date d'achat : </h4>{{instrument.dateAchat.format('d/m/Y')}}
         <h4>Prix achat : </h4>{{instrument.prixAchat}}€
         <h4>Marque : </h4>{{instrument.marque.libelle}}
+        <h4>Interventions </h4>
+        {% for t in interInstrument %}
+                    <b><a>Professionelle : 
+                    </a></b>{{t.libelle_pro}}</br>
+                    <b><a>Date de debut : 
+                    </a></b>{{t.date_debut}}
+                    </br>
+                    <b><a>Date de fin : 
+                    </a></b>{{t.date_fin}}</br>
+                    <b><a>Travaux effectués : 
+                    </a></b>{{t.travaux_effectues}}</br>
+                    <b><a>Prix : 
+                    </a></b>{{t.prix}}€</br>
+                        {% endfor %}
+
         <h4>Couleur :</h4>
                     {% for c in couleursInstrument %}
                     {{c.libelle}}</br>
@@ -27,12 +186,10 @@
                 Date de prêt : {{p.date_pret|date('d/m/Y')}}</br>
                         {% endfor %}
 
- 
 
 
 
 
-
-    </div>
+    </div>-->
 {% endblock %}
-{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>{% endblock %}

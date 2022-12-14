@@ -1,0 +1,15 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{%  block extraMenu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="bg-light p-5 rounded mt-4">
+        <div class="col-sm-8 mx-auto">
+            <h1>Bienvenue sur votre espace administrateur pour le site <b>e-Music</b></h1>
+            <p class="mb-0">Cet espace est uniquement réservé aux personnes pouvant administrer le site. Diverses actions vous sont exclusives.</p>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>{% endblock %}

@@ -6,6 +6,7 @@
     <title>Bootstrap demo</title>
     {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <style>
     body {
@@ -23,7 +24,7 @@
                 <div class="card-body p-0  rounded">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block rounded bg-light"><img src="./dist/img/eMusic_anybg.png" class="mt-4"></div>
+                        <div class="col-lg-6 d-none d-lg-block rounded bg-light"><img src="./dist/img/eMusic_anybg.png" class="mt-4" style="filter: drop-shadow(0 0 1rem #5000ff);"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
@@ -59,7 +60,9 @@
 
                                 </div>
                                 {{ form_row(registrationForm.copos) }}
+                                {{ form_row(registrationForm.ville) }}
                                 {{ form_row(registrationForm.tel) }}
+
                                 <!--<div class="mb-3">
                                     <label for="passwordInput" class="form-label">Mot de passe</label>
                                     <input type="password" class="form-control rounded-pill" id="passwordInput">
@@ -111,6 +114,6 @@
         });
     }
 </script>
-<script src="./dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="./dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

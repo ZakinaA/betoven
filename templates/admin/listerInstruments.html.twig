@@ -1,0 +1,40 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{%  block extraMenu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="float-end mt-2">
+        <button class="btn rounded-pill btn-sm border-0" style="background-color: #aed6dc;">Ajouter un instrument</button>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="table-responsive mt-2">
+        <table class="table table-striped bg-light border shadow-sm">
+            <thead>
+            <tr>
+                <th scope="col">Instrument</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Prix d'achat</th>
+                <!--<th scope="col">Disponible en prêt</th>
+                <th scope="col" class="text-end">Actions</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in pListerInstruments %}
+            <tr class="align-middle">
+                <td>{{ i.typeIntrument.libelle }}</td>
+                <td>{{i.marque.libelle}}</td>
+                <td>{{i.prixAchat}}€</td>
+                <!--<td><span class="badge bg-success rounded-pill"><i class="bi bi-check-circle-fill"></i> Disponible</span></td>
+                <td class="text-end">
+                    <button class="btn btn-warning text-dark btn-sm rounded-pill"><i class="bi bi-hammer"></i> Envoyer en intervention</button>
+                    <button class="btn btn-info text-dark btn-sm rounded-pill"><i class="bi bi-info"></i> Modifier les informations</button>
+                </td>-->
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

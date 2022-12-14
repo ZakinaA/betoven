@@ -1,0 +1,37 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{%  block extraMenu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="table-responsive mt-2">
+        <table class="table table-striped bg-light border shadow-sm">
+            <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nombres de cours</th>
+                <th scope="col" class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for profOrder in pListerProfesseurs %}
+                <tr>
+                    <td class="align-middle">{{ profOrder.compte.nom }}</td>
+                    <td class="align-middle">{{ profOrder.compte.prenom }}</td>
+                    <td class="align-middle">0</td>
+                    <td class="align-middle">
+                        <a href="{{ path('adminUpdateAccount', { 'id': profOrder.compte.id }) }}" class="btn btn-info rounded-pill float-end btn-sm">Modifier les informations</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>Aucun utilisateur n'a été trouvé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

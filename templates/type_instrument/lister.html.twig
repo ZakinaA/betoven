@@ -6,17 +6,13 @@
         <table class="table table-striped bg-white mt-2">
             <thead class="bg-black text-white">
             <tr>
-                <th scope="col">Intitulé</th>
                 <th scope="col">Type de l'instrument</th>
-                <th scope="col">Marque</th>
             </tr>
             </thead>
             <tbody>
-        {% for i in pInstruments %}
+        {% for t in pTypeIntruments %}
             <tr>
-			    <td><a href="{{ path('instrumentConsulter', { 'id': i.id }) }}">{{ i.intitule }}</a></td>
-                <td>{{ i.typeIntrument.libelle }}</td>
-			    <td>{{i.marque.libelle}}</td>
+			    <td><a href="{{ path('instrumentConsulter', { 'id': intrument.id }) }}">{{ t.libelle }}</a></td>
             </tr>
 
         {% else %}
