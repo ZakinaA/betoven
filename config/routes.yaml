@@ -28,6 +28,9 @@ listerCours:
 loginPage:
     path: /login
     controller: App\Controller\LoginController::index
+indexPage:
+    path: /
+    controller: App\Controller\IndexController::accueil
 accueilPage:
     path: /accueil
     controller: App\Controller\IndexController::accueil
