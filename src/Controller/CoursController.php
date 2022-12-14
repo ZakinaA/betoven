@@ -37,7 +37,7 @@ class CoursController extends AbstractController
             $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
 
             //var_dump($eleve);
-            if($eleve->getId() != null) {
+            if($eleve != null and $eleve->getId() != null) {
                 $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
             } else {
 

@@ -15,7 +15,7 @@
                     {{cours.ageMini}} ans (Age requis)
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    {{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}} (Date du cours) (Dans : 04 jours 16h)
+                    {{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}} (Date du cours)
                 </a>
             </div>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
