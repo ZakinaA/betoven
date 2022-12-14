@@ -32,16 +32,19 @@ class CoursController extends AbstractController
         $cours = $doctrine->getRepository(Cours::class)->find($id);
 
         $user = $this->getUser();
+        $verificationInscription  = "";
         if($user != null) {
             $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
-            if($eleve != null) {
+
+            //var_dump($eleve);
+            if($eleve->getId() != null) {
                 $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
             } else {
 
             }
         }
         //
-        $verificationInscription  = "";
+
         if (!$cours) {
             throw $this->createNotFoundException(
                 'Aucun cours trouvé avec le numéro '.$id
