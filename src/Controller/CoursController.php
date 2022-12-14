@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Cours;
 use App\Form\CoursType;
+use App\Form\CoursModifierType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -159,4 +160,34 @@ class CoursController extends AbstractController
             return $this->render('cours/ajouter.html.twig', array('form' => $form->createView(),));
         }
     }
+
+    public function modifierCours(ManagerRegistry $doctrine, $id, Request $request){
+ 
+        //récupération de l'étudiant dont l'id est passé en paramètre
+        $cours = $doctrine->getRepository(Cours::class)->find($id);
+     
+        if (!$cours) {
+            throw $this->createNotFoundException('Aucun cours trouvé avec le numéro '.$id);
+        }
+        else
+        {
+            $form = $this->createForm(CoursModifierType::class, $cours);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $cours = $form->getData();
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($cours);
+                $entityManager->flush();
+                return $this->forward('App\Controller\CoursController::consulterCours', 
+                [
+                    'id'  => $cours->getId(),
+                ]);
+               }
+               else
+               {
+                    return $this->render('cours/ajouter.html.twig', array('form' => $form->createView(),));
+               }
+            }
+     }
 }

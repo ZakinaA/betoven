@@ -30,6 +30,7 @@ class CoursModifierType extends AbstractType
             ->add('nbplaces', IntegerType::class, array('label' => 'Nombre de places disponibles','row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-control rounded-pill')))
             ->add('professeur', EntityType::class, array('class' => 'App\Entity\ProfesseurCours','choice_label' => 'Compte.nom' ,'row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-select rounded-pill')))
             ->add('enregistrer', SubmitType::class, array('label' => 'Mettre à jour le cours','row_attr' => ['class' => 'mt-3 mb-0'], 'attr' => array('class' => 'btn btn-primary shadow-none rounded-pill float-end')))
+
         ;
     }
 
