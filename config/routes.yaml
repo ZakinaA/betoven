@@ -118,3 +118,6 @@ adminListerInstruments:
 adminListerCours:
     path: /admin/listerCours
     controller: App\Controller\AdminController::listerCours
+modifierCours:
+    path: /admin/modifierCours/{id}
+    controller: App\Controller\CoursController::modifierCours

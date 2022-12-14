@@ -26,7 +26,6 @@ class CoursType extends AbstractType
             ->add('ageMini', IntegerType::class, array('label' => 'Age minimum','row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-control rounded-pill')))
             ->add('heureDebut',TimeType ::class,array('label' => 'Heure de début','row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-control rounded-pill')))
             ->add('heureFin',TimeType ::class,array('label' => 'Heure de fin','row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-control rounded-pill')))
-
             ->add('date',DateType::class,array('label' => 'Date du cours','row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-control rounded-pill')))
             ->add('agemaxi', IntegerType::class, array('label' => 'Age maximum','row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-control rounded-pill')))
             ->add('nbplaces', IntegerType::class, array('label' => 'Nombre de places disponibles','row_attr' => ['class' => 'mb-3'],'label_attr' => ['class' => 'form-label'], 'attr' => array('class' => 'form-control rounded-pill')))
