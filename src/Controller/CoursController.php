@@ -30,14 +30,18 @@ class CoursController extends AbstractController
     public function consulterCours(ManagerRegistry $doctrine, int $id){
         $participants = $doctrine->getRepository(Inscription::class)->findByCour($id);
         $cours = $doctrine->getRepository(Cours::class)->find($id);
+
         $user = $this->getUser();
         if($user != null) {
             $eleve = $doctrine->getRepository(Eleve::class)->findOneBy(['compte' => $user->getId()]);
-            $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
+            if($eleve != null) {
+                $verificationInscription = $doctrine->getRepository(Inscription::class)->findOneBy(['eleve' => $eleve->getId(), 'cour' => $cours->getId()]);
+            } else {
+
+            }
         }
         //
         $verificationInscription  = "";
-        //var_dump($user);
         if (!$cours) {
             throw $this->createNotFoundException(
                 'Aucun cours trouvé avec le numéro '.$id
@@ -50,7 +54,8 @@ class CoursController extends AbstractController
                 [
                     'cours' => $cours,
                     'participants' => $participants,
-                    'verificationInscription' => $verificationInscription
+                    'verificationInscription' => $verificationInscription,
+                    'eleve' => $eleve
                 ]);
         } else {
             return $this->render('cours/consulter.html.twig',
@@ -64,7 +69,6 @@ class CoursController extends AbstractController
 
 
     public function listerCours(ManagerRegistry $doctrine){
-
         $listeCours = $doctrine->getRepository(Cours::class)->findAll();
         return $this->render('cours/lister.html.twig', [
             'pCours' => $listeCours,]);
@@ -77,7 +81,6 @@ class CoursController extends AbstractController
         ]);
     }
     public function inscriptionCours(ManagerRegistry $doctrine, int $id){
-
        // $listeCours = $doctrine->getRepository(Cours::class)->findAll();
         return $this->render('cours/inscription.html.twig', [
             'idCours' => $id
@@ -101,7 +104,6 @@ class CoursController extends AbstractController
         $entityManager->persist($inscription);
         $entityManager->flush();
         return new JsonResponse(['result' => 'ok']);
-
     }
 
     public function ajouterInscription(ManagerRegistry $doctrine, Request $request) {
