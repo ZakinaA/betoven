@@ -31,8 +31,17 @@ Bootstrap 5.2
 
 ## Comptes de test : 
 
-(Compte ...)
+(Compte Eleve)
+
 ```
 Adresse mail : benjamin@e-music.fr
 Mot de passe : mpBenjamin
+```
+
+
+(Compte Administrateur)
+
+```
+Adresse mail : julien@e-music.fr
+Mot de passe : mpJulien
 ```

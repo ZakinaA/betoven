@@ -115,4 +115,6 @@ listerProfesseurs:
 adminListerInstruments:
     path: /admin/listerInstruments
     controller: App\Controller\AdminController::listerInstruments
-
+adminListerCours:
+    path: /admin/listerCours
+    controller: App\Controller\AdminController::listerCours

@@ -15,14 +15,16 @@
                     {{cours.ageMini}} ans (Age requis)
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    {{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}} (Date du cours) (Dans : 04 jours 16h)
+                    {{cours.date|date('d/m/Y')}} | {{cours.heureDebut|date('H:i')}} - {{cours.heureFin|date('H:i')}} (Date du cours)
                 </a>
             </div>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
-                {% if verificationInscription == null %}
-                    <a href="{{ path('coursInscription', { 'id': cours.id }) }}" class="btn btn-primary mt-2 w-100 shadow-sm">M'inscrire à ce cours</a>
-                {% else %}
-                    <button class="btn btn-success mt-2 w-100 shadow-sm" disabled><i class="bi bi-check-circle-fill"></i> Vous êtes inscrit</button>
+                {% if eleve != null %}
+                    {% if verificationInscription == null %}
+                        <a href="{{ path('coursInscription', { 'id': cours.id }) }}" class="btn btn-primary mt-2 w-100 shadow-sm">M'inscrire à ce cours</a>
+                    {% else %}
+                        <button class="btn btn-success mt-2 w-100 shadow-sm" disabled><i class="bi bi-check-circle-fill"></i> Vous êtes inscrit</button>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </div>
@@ -48,7 +50,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td>Aucun participants n'a été trouvé.</td>
+                                <td colspan="4" class="text-center">Aucun participants n'a été trouvé.</td>
                             </tr>
                         {% endfor %}
                         </tbody>

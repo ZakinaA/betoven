@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cours;
 use App\Entity\Instrument;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,12 +46,24 @@ class AdminController extends AbstractController
         $instruments = $doctrine->getRepository(Instrument::class)->findAll();
 
 
+        //var_dump($instruments);
         //var_dump($listerProfesseurs);
         return $this->render('admin/listerInstruments.html.twig', [
             'pListerInstruments' => $instruments
         ]);
     }
 
+    public function listerCours(ManagerRegistry $doctrine)
+    {
+        $listeCours = $doctrine->getRepository(Cours::class)->findAll();
+
+
+        //var_dump($instruments);
+        //var_dump($listerProfesseurs);
+        return $this->render('admin/listerCours.html.twig', [
+            'pCours' => $listeCours
+        ]);
+    }
     public function cartUpdateAction(ManagerRegistry $doctrine, Request $request) {
         $requestData = $request->request->all();
         $accountid  = $requestData['accountid'];

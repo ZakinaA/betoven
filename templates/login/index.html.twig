@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>e-Music : formulaire de connexion</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
 </head>
@@ -46,7 +46,7 @@
                                         <label for="password" class="form-label">Mot de passe</label>
                                         <input type="password" class="form-control rounded-pill" id="password"  name="_password">
                                     </div>
-                                    <input type="hidden" name="_target_path" value="/compte/consulter/2">
+                                    <input type="hidden" name="_target_path" value="/accueil">
                                     <button id="connectBtn" class="btn rounded-pill w-100 text-dark border-0" style="background-color: #aed6dc;" disabled type="submit">Me connecter</button>
                                 </form>
                                 <a href="./register" class="btn rounded-pill w-100 text-dark mt-2 mb-0 border-0" style="background-color: #ff9a8d;">Créer un compte</a>
