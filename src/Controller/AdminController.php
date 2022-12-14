@@ -45,6 +45,7 @@ class AdminController extends AbstractController
         $instruments = $doctrine->getRepository(Instrument::class)->findAll();
 
 
+        //var_dump($instruments);
         //var_dump($listerProfesseurs);
         return $this->render('admin/listerInstruments.html.twig', [
             'pListerInstruments' => $instruments
