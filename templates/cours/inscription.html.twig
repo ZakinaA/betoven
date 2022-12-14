@@ -47,9 +47,7 @@
             </div>
         </div>
         <div class="col-md-3">
-
         </div>
-
     </div>
     <script>
         function ajouterInscription(coursID, eleveID, facilitePaiementVal) {
@@ -78,7 +76,6 @@
         };
         function facilitePaiementFunc(coursID, eleveID){
             let facilitePaiementVal = parseInt($('#selectFacilitePaiement').find(":selected").val());
-            console.log(facilitePaiementVal);
             $('#datesPaiements').html('');
             if(facilitePaiementVal == 1) {
                 $('#datesPaiements').append('<div class="mb-3"><label for="exampleFormControlInput1" class="form-label">Date de paiement</label><input class="form-control rounded-pill" type="date" value=""></div>');
