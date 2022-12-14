@@ -10,7 +10,7 @@
     <div class="row mt-4">
         <div class="col-md-4">
             <div class="card card-body shadow-none">
-                <p class="fw-bold">Informations générales de {{ compteinfo.prenom }} {{ compteinfo.nom }} ({% if compteinfo.eleve != null %}<span class="badge bg-info rounded text-dark me-0 ms-0">Eleve</span>{% elseif compteinfo.professeur != null %}{% endif %})</p>
+                <p class="fw-bold">Informations générales de {{ compteinfo.prenom }} {{ compteinfo.nom }} <!--({% if compteinfo.eleve != null %}<span class="badge bg-info rounded text-dark me-0 ms-0">Eleve</span>{% elseif compteinfo.professeur != null %}{% endif %})--></p>
                 {{ form_row(form.mail) }}
                 {{ form_row(form.nom) }}
                 {{ form_row(form.prenom) }}
@@ -45,6 +45,7 @@
             </div>
         </div>
         <div class="col-md-4">
+            <!--
             {% if compteinfo.eleve != null %}
             <div class="card card-body shadow-none mb-2">
                 <p class="fw-bold">Gérer ses inscriptions</p>
@@ -155,7 +156,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <script>

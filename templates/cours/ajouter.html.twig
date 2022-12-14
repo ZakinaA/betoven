@@ -4,13 +4,9 @@
 {% block body %}
 
 {{ form_start(form) }}
-<div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card card-body shadow-none">
-                {{ form_widget(form) }}
-            </div>
+    <div class="card card-body shadow-none mt-2">
+        {{ form_widget(form) }}
     </div>
-</div>
 {{ form_end(form) }}
 
 {% endblock %}
