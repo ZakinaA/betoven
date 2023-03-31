@@ -1,4 +1,4 @@
-<?php
+heureDebut<?php
 
 namespace App\Entity;
 
@@ -43,6 +43,9 @@ class Cours
 
     #[ORM\Column]
     private ?int $nbplaces = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $Periodicite = null;
 
     public function __construct()
     {
@@ -177,6 +180,18 @@ class Cours
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getPeriodicite(): ?int
+    {
+        return $this->Periodicite;
+    }
+
+    public function setPeriodicite(int $Periodicite): self
+    {
+        $this->Periodicite = $Periodicite;
 
         return $this;
     }
