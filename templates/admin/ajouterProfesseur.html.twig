@@ -1,0 +1,19 @@
+{% block title %}{{ 'e-Music : Consulter mon profil' }}{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('dist/css/bootstrap.min.css') }}">{% endblock %}
+{%  block extraMenu %}
+    {% include 'admin/menu.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="card shadow-none card-body mt-2 mb-2">
+        <div class="mt-1 mb-2">
+            <label class="form-label" for="selectProf">Sélection de l'utilisateur</label>
+            <select class="form-select rounded-pill" id="selectProf">
+                {% for compteOrder in pListerUtilisateurs %}
+                <option>{{ compteOrder.prenom }} {{ compteOrder.nom }}</option>
+                {%  endfor %}
+            </select>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}<script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>{% endblock %}

@@ -77,8 +77,8 @@ coursLister:
     path: /cours/lister/{id}
     controller: App\Controller\CoursController::listercours
 professeurAjouter:
-    path: /professeur/ajouter
-    controller: App\Controller\AdministrateurController::ajouterProfesseur
+    path: /admin/ajouterProfesseur
+    controller: App\Controller\AdminController::ajouterProfesseur
 professeurConsulter:
     path: /professeur/consulter/{id}
     controller: App\Controller\AdministrateurController::consulterProfesseur

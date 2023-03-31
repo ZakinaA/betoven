@@ -148,5 +148,17 @@ class AdminController extends AbstractController
             }
         }
     }
+
+
+
+    public function ajouterProfesseur(ManagerRegistry $doctrine)
+    {
+        $listerUtilisateurs = $doctrine->getRepository(Compte::class)->findAll();
+        //var_dump($listerProfesseurs);
+        return $this->render('admin/ajouterProfesseur.html.twig', [
+            'pListerUtilisateurs' => $listerUtilisateurs
+        ]);
+    }
+
 }
 
